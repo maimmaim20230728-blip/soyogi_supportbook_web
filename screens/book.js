@@ -17,7 +17,9 @@
           btn.appendChild(api.el('span', 'ico', s.ico));
           var box = api.el('span', 'sb-sec-text');
           box.appendChild(api.el('span', 'lbl', T('screen.secs.' + s.id + '.t')));
-          box.appendChild(api.el('span', 'cnt', T('screen.book.filled').replace('{n}', String(S.countSec(b, s.id))).replace('{m}', String(s.qs.length))));
+          /* 書いた数だけ(分母は出さない=達成率・点数にしない)。0 のときは「まだ」 */
+          var n = S.countSec(b, s.id);
+          box.appendChild(api.el('span', 'cnt', n ? T('screen.book.filled').split('{n}').join(String(n)) : T('screen.book.filledNone')));
           btn.appendChild(box);
           api.Tap.bind(btn, function(){ S.cur = s.id; api.go('sec'); });
           c.appendChild(btn);

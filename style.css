@@ -262,6 +262,17 @@ body[data-theme="dark"] .ov-close, body[data-theme="dark"] .three-num{ color:#10
   border:3px solid var(--brand); border-radius:14px; padding:14px; margin:14px 0; overflow-wrap:anywhere;
 }
 .three-num{ flex:none; display:inline-flex; align-items:center; justify-content:center; width:1.6em; height:1.6em; border-radius:50%; background:var(--brand); color:#fff; font-size:.85em; }
+/* 文字用の緑(--brand-ink): 白い字を載せる緑の地と、緑そのものを文字色に使う所は 濃い緑にする(明るい3テーマで 4.5:1 以上)。
+   枠・線・飾りは --brand のまま。くろ は緑の地に濃い色の字(上の #10231a)なので --brand と同じ。
+   あわせて 記入例(placeholder)の字の色も どのテーマでも 4.5:1 以上に(ブラウザ既定の #757575 は しろ 4.36・くろ 3.18 だった) */
+:root{ --brand-ink:#237a52; --ph:#6e6e6e; }
+body[data-theme="aqua"]{ --brand-ink:#1f6f8f; }
+body[data-theme="white"]{ --brand-ink:#237a52; }
+body[data-theme="dark"]{ --brand-ink:var(--brand); --ph:#9a9a9a; }
+header#hd, .big-btn.primary, .btn.primary, .chip.on, .ov-close, .three-num{ background:var(--brand-ink); }
+.big-btn.primary, .btn.primary, .chip.on{ border-color:var(--brand-ink); } /* 塗りの縁も地と同じ色に(明るい緑の細い輪を出さない・8本でそろえる) */
+.nav-btn.active, .credit a{ color:var(--brand-ink); }
+.field textarea::placeholder, .field input::placeholder{ color:var(--ph); opacity:1; }
 
 /* 印刷: 見せる画面(.ov)の本文だけを紙に出す */
 @media print{

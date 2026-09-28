@@ -10,7 +10,7 @@
      変えたら README の「シェルの変更点」に書く */
 (function(){
 
-var VER = '0.4.1';               // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
+var VER = '0.4.2';               // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
 var APP_KEY = 'soyogi_supportbook';        // バックアップの識別(別アプリのファイルを読まない)
 var LS = 'sbook.';
 var LS_PREF = LS + 'pref.v1';
@@ -143,8 +143,11 @@ var IS_NATIVE = (function(){
 var NATIVE_TTS = (function(){
   try{
     var c = window.Capacitor;
-    if(IS_NATIVE && typeof c.registerPlugin === 'function'){
-      return c.registerPlugin('TextToSpeech');
+    if(c && typeof c.isNativePlatform === 'function' && c.isNativePlatform()){
+      /* 🔴 取得は Capacitor.Plugins.TextToSpeech(ネイティブが注入する)。registerPlugin は @capacitor/core の関数で WebView には無い(2026-09-29) */
+      var p = c.Plugins && c.Plugins.TextToSpeech;
+      if(p && typeof p.speak === 'function') return p;
+      if(typeof c.registerPlugin === 'function') return c.registerPlugin('TextToSpeech');
     }
   }catch(_){}
   return null;
@@ -263,20 +266,49 @@ function exportBackup(){
   setTimeout(function(){ URL.revokeObjectURL(a.href); }, 3000);
   toast(T('set.exported'));
 }
+/* よみこむ = 丸ごと入れ替え。置き換える前に window.confirm で確かめる(Play版の WebView はネイティブのダイアログで出る)
+   ・形の確かめ(このアプリのファイルか・data が {} か)を先に。通らなければ確認を出さずに「よみこめませんでした」
+   ・キャンセルなら何も変えない。OK なら ファイルに無い「sbook.」のキーを消してから ファイルの中身を書く(ほかのアプリのキーは触らない)
+   ・途中で入りきらなかったら 元の「sbook.」のキーに戻す
+   ・もしもカードの控えの読み込み(screens/book.js・空の欄だけ埋める)は別の動きなので、この確認の対象外 */
+function askConfirm(msg){
+  try{ if(typeof window.confirm === 'function') return !!window.confirm(msg); }catch(_){ return false; }
+  return true;   // confirm の無い環境(疑似DOMのスモーク)だけ。ブラウザと Play版の WebView には必ずある
+}
+function ownKeys(){
+  var ks = [];
+  for(var i = 0; i < localStorage.length; i++){ var k = localStorage.key(i); if(k && k.indexOf(LS) === 0) ks.push(k); }
+  return ks;
+}
+function replaceData(data){
+  var keep = {}, has = Object.prototype.hasOwnProperty;
+  try{ ownKeys().forEach(function(k){ keep[k] = localStorage.getItem(k); }); }catch(_){ return false; }
+  try{
+    for(var k in keep){ if(k !== LS_PREF && !has.call(data, k.slice(LS.length))) localStorage.removeItem(k); }
+    for(var d in data){ if(has.call(data, d) && !saveJSON(LS + d, data[d])) throw new Error('save'); }
+    return true;
+  }catch(_){
+    try{ ownKeys().forEach(function(k){ localStorage.removeItem(k); }); for(var b in keep) localStorage.setItem(b, keep[b]); }catch(__){}
+    return false;
+  }
+}
 function importBackup(e){
   var f = e.target.files && e.target.files[0];
   if(!f) return;
   var r = new FileReader();
   r.onload = function(){
+    var d;
     try{
-      var d = JSON.parse(r.result);
-      if(d.app !== APP_KEY) throw new Error('different app');
-      if(d.data && typeof d.data === 'object'){ for(var k in d.data){ saveJSON(LS + k, d.data[k]); } }
-      pref = sanitizePref(d.pref);
-      savePref();
-      applyAll(true);
-      toast(T('set.imported'));
-    }catch(err){ toast(T('set.importFail')); }
+      d = JSON.parse(r.result);
+      if(!d || d.app !== APP_KEY) throw new Error('different app');
+      if(!d.data || typeof d.data !== 'object' || Array.isArray(d.data)) throw new Error('no data');
+    }catch(err){ toast(T('set.importFail')); return; }
+    if(!askConfirm(T('set.importConfirm'))) return;
+    if(!replaceData(d.data)){ toast(T('set.importFail')); return; }
+    pref = sanitizePref(d.pref);
+    savePref();
+    applyAll(true);
+    toast(T('set.imported'));
   };
   r.readAsText(f);
   e.target.value = '';

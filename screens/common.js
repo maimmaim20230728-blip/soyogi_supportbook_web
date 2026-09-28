@@ -193,7 +193,8 @@
     var font = '"Hiragino Sans","Yu Gothic UI","Noto Sans JP",system-ui,sans-serif';
     var uiDir = api.rtl ? 'rtl' : 'ltr';
     var name = getVal(b, 'profile', 'name').trim();
-    var qs = [['never', '#d43f3f'], ['contact', '#2e9e6b']];
+    /* [欄, 枠の色, 見出しの字の色]。緑の見出しの字は画面の --brand-ink と同じ濃い緑(白地で 5.3:1)。枠は --brand のまま */
+    var qs = [['never', '#d43f3f', '#d43f3f'], ['contact', '#2e9e6b', '#237a52']];
 
     /* 1) 先に行を割り付けて、要る高さを出す(長く書いても 本文が下の免責に重ならず、画像の外に切れない。最小は 1528) */
     ctx.font = 'bold 52px ' + font;
@@ -246,7 +247,7 @@
       ctx.strokeStyle = qs[k][1]; ctx.lineWidth = 6;
       /* 枠線(strokeRect でなく線で描く=疑似DOMの canvas でも通る) */
       ctx.beginPath(); ctx.moveTo(M, y); ctx.lineTo(W - M, y); ctx.lineTo(W - M, y + boxH); ctx.lineTo(M, y + boxH); ctx.lineTo(M, y); ctx.stroke();
-      ctx.fillStyle = qs[k][1]; ctx.font = 'bold 36px ' + font;
+      ctx.fillStyle = qs[k][2]; ctx.font = 'bold 36px ' + font;
       line(label, M + 30, y + 60, uiDir);
       ctx.fillStyle = '#1a1a1a'; ctx.font = 'bold ' + bodyPx + 'px ' + font;
       var vDir = textDir(v, uiDir);

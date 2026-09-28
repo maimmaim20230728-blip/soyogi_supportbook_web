@@ -29,7 +29,8 @@
       } else {
         c.appendChild(api.el('p', 'note', T('screen.home.firstEmpty')));
       }
-      c.appendChild(api.el('p', 'hint sb-progress', T('screen.home.progress').replace('{n}', String(cnt.n)).replace('{m}', String(cnt.m))));
+      /* 書いた欄の数だけ(分母は出さない=達成率・点数にしない) */
+      c.appendChild(api.el('p', 'hint sb-progress', T('screen.home.progress').split('{n}').join(String(cnt.n))));
 
       var w = bigBtn(api, '✏️', T('screen.home.write'), 'primary'); api.Tap.bind(w, function(){ api.go('book'); }); c.appendChild(w);
       var g = bigBtn(api, '📤', T('screen.home.give')); api.Tap.bind(g, function(){ api.go('give'); }); c.appendChild(g);

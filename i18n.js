@@ -41,6 +41,7 @@ var ja = {
     bkHint:'あたらしい スマホに うつるときは、「かきだす」で ファイルを ほぞんして、あたらしい スマホで「よみこむ」を おしてください。サポートブックの 控え(JSON)も これと おなじです。',
     bkExport:'かきだす', bkImport:'よみこむ',
     exported:'かきだしました ✓', imported:'よみこみました ✓', importFail:'よみこめませんでした',
+    importConfirm:'いまの ないようは、ファイルの ないように おきかわります。よみこみますか?',
     note:'書いたことは すべて この端末の中だけに ほぞんされます。どこにも 送られません。',
     privacy:'プライバシーポリシー',
     credit:'アプリ開発：介護と支援の相談どころ そよぎ'
@@ -53,7 +54,7 @@ var ja = {
       give:'わたす(相手に あわせて 出す)',
       three:'きょう いちばん 大事な 3つ',
       about:'「説明書です」の ページ',
-      progress:'書いた らん: {n} / {m}',
+      progress:'書いた らん: {n}',
       firstEmpty:'まず「1まいめ」から どうぞ。ぜんぶ 書かなくて だいじょうぶです。',
       firstHead:'1まいめ(いちばん さきに 読んでほしいこと)',
       privacyNote:'書いたことは この端末の中だけに あります。渡すときは 取り扱いに 気をつけてください。'
@@ -61,7 +62,7 @@ var ja = {
     book: {
       title:'かく',
       intro:'せつを ひとつ えらんで、質問に こたえます。あとから いつでも なおせます。',
-      filled:'{n} / {m} 書いた',
+      filled:'{n}こ 書いた', filledNone:'まだ',
       moshimo:'もしもカードの ファイルを よみこむ',
       moshimoHint:'もしもカードで「かきだす」した JSON を よみこむと、名前・連絡先・アレルギーなどを 空いている らんに 入れます(二度 書かなくて すみます)。',
       moshimoDone:'{n} こ 入れました ✓',
@@ -258,6 +259,7 @@ var en = {
     bkHint:'When you move to a new phone, tap "Export" to save a file, then tap "Import" on the new phone. The JSON copy of the support book is the same file.',
     bkExport:'Export', bkImport:'Import',
     exported:'Exported ✓', imported:'Imported ✓', importFail:'Could not import',
+    importConfirm:'Your current entries will be replaced with the file\'s contents. Import it?',
     note:'Everything you write is stored only on this device. Nothing is sent anywhere.',
     privacy:'Privacy policy',
     credit:'Developed by SOYOGI, a care and support consultation service'
@@ -270,7 +272,7 @@ var en = {
       give:'Hand over (choose what to show)',
       three:'Today\'s 3 most important things',
       about:'The "this is a manual" page',
-      progress:'Fields written: {n} / {m}',
+      progress:'Fields written: {n}',
       firstEmpty:'Start with "Page one". You do not have to fill in everything.',
       firstHead:'Page one (read this first)',
       privacyNote:'Everything stays on this device. Take care when you hand it over.'
@@ -278,7 +280,7 @@ var en = {
     book: {
       title:'Write',
       intro:'Pick a section and answer the questions. You can change anything later.',
-      filled:'{n} / {m} written',
+      filled:'{n} written', filledNone:'Not yet',
       moshimo:'Load a Moshimo Card file',
       moshimoHint:'Load the JSON exported from Moshimo Card to fill empty fields (name, contact, allergy...) without typing twice.',
       moshimoDone:'Filled {n} fields ✓',
@@ -532,6 +534,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Exportiert ✓",
     "imported": "Importiert ✓",
     "importFail": "Import nicht möglich",
+    "importConfirm": "Ihre aktuellen Einträge werden durch den Inhalt der Datei ersetzt. Jetzt importieren?",
     "note": "Alles, was Sie schreiben, wird nur auf diesem Gerät gespeichert. Nichts wird irgendwohin gesendet.",
     "privacy": "Datenschutzerklärung",
     "credit": "App-Entwicklung: SOYOGI, Beratungsstelle für Pflege und Unterstützung"
@@ -544,7 +547,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "give": "Weitergeben (je nach Empfänger)",
       "three": "Die 3 wichtigsten Dinge für heute",
       "about": "Die Seite „Das ist ein Leitfaden“",
-      "progress": "Ausgefüllte Felder: {n} / {m}",
+      "progress": "Ausgefüllte Felder: {n}",
       "firstEmpty": "Beginnen Sie gern mit „Seite 1“. Sie müssen nicht alles ausfüllen.",
       "firstHead": "Seite 1 (bitte zuerst lesen)",
       "privacyNote": "Was Sie schreiben, bleibt nur auf diesem Gerät. Bitte gehen Sie beim Weitergeben sorgsam damit um."
@@ -552,7 +555,8 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "book": {
       "title": "Schreiben",
       "intro": "Wählen Sie einen Abschnitt und beantworten Sie die Fragen. Sie können alles später jederzeit ändern.",
-      "filled": "{n} / {m} ausgefüllt",
+      "filled": "{n} ausgefüllt",
+      "filledNone": "Noch nichts",
       "moshimo": "Datei der Moshimo-Karte laden",
       "moshimoHint": "Wenn Sie die mit der Moshimo-Karte exportierte JSON-Datei laden, werden Name, Kontakt, Allergien usw. in leere Felder eingetragen (so müssen Sie nichts doppelt schreiben).",
       "moshimoDone": "{n} Felder eingetragen ✓",
@@ -987,6 +991,7 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Exporté ✓",
     "imported": "Importé ✓",
     "importFail": "Impossible d'importer",
+    "importConfirm": "Ce que vous avez écrit sera remplacé par le contenu du fichier. Importer ?",
     "note": "Tout ce que vous écrivez reste uniquement sur cet appareil. Rien n'est envoyé nulle part.",
     "privacy": "Politique de confidentialité",
     "credit": "Application développée par SOYOGI, espace de conseil en aide et accompagnement"
@@ -999,7 +1004,7 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "give": "Remettre (adapter au destinataire)",
       "three": "Les 3 choses les plus importantes aujourd'hui",
       "about": "La page \"C'est un mode d'emploi\"",
-      "progress": "Champs remplis : {n} / {m}",
+      "progress": "Champs remplis : {n}",
       "firstEmpty": "Commencez par la \"Page 1\". Pas besoin de tout remplir.",
       "firstHead": "Page 1 (à lire en premier)",
       "privacyNote": "Ce que vous écrivez reste uniquement sur cet appareil. Quand vous le remettez, prenez soin de ces informations."
@@ -1007,7 +1012,8 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "book": {
       "title": "Écrire",
       "intro": "Choisissez une section et répondez aux questions. Vous pourrez tout modifier plus tard.",
-      "filled": "{n} / {m} remplis",
+      "filled": "Remplis : {n}",
+      "filledNone": "Pas encore",
       "moshimo": "Charger un fichier de la carte Moshimo",
       "moshimoHint": "En chargeant le fichier JSON exporté (\"Exporter\") depuis la carte Moshimo, le nom, les contacts, les allergies, etc. sont ajoutés dans les champs vides (pas besoin de les écrire deux fois).",
       "moshimoDone": "Champs remplis : {n} ✓",
@@ -1442,6 +1448,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Exportado ✓",
     "imported": "Importado ✓",
     "importFail": "No se pudo importar",
+    "importConfirm": "Lo que está escrito ahora se sustituirá por el contenido del archivo. ¿Importar?",
     "note": "Todo lo escrito se guarda solo en este dispositivo. No se envía a ninguna parte.",
     "privacy": "Política de privacidad",
     "credit": "App desarrollada por SOYOGI, servicio de consulta sobre cuidados y apoyo"
@@ -1454,7 +1461,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "give": "Entregar (adaptado a quien lo recibe)",
       "three": "Las 3 cosas más importantes de hoy",
       "about": "La página «Esto es un manual»",
-      "progress": "Campos escritos: {n} / {m}",
+      "progress": "Campos escritos: {n}",
       "firstEmpty": "Para empezar, la «Primera página». No hace falta escribirlo todo.",
       "firstHead": "Primera página (para leer antes que nada)",
       "privacyNote": "Lo escrito está solo en este dispositivo. Al entregarlo, conviene tratarlo con cuidado."
@@ -1462,7 +1469,8 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "book": {
       "title": "Escribir",
       "intro": "Elegir una sección y responder a las preguntas. Se puede corregir en cualquier momento.",
-      "filled": "{n} / {m} escritos",
+      "filled": "Escritos: {n}",
+      "filledNone": "Aún no",
       "moshimo": "Cargar un archivo de MOSHIMO Card",
       "moshimoHint": "Al cargar el JSON exportado con «Exportar» en MOSHIMO Card, se completan los campos vacíos (nombre, contacto, alergias, etc.). Así no hay que escribir dos veces.",
       "moshimoDone": "{n} campos completados ✓",
@@ -1897,6 +1905,7 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Esportato ✓",
     "imported": "Importato ✓",
     "importFail": "Impossibile importare",
+    "importConfirm": "Il contenuto attuale verrà sostituito da quello del file. Importare?",
     "note": "Tutto ciò che scrive viene salvato solo su questo dispositivo. Non viene inviato da nessuna parte.",
     "privacy": "Informativa sulla privacy",
     "credit": "App sviluppata da SOYOGI, servizio di consulenza su assistenza e sostegno"
@@ -1909,7 +1918,7 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "give": "Consegnare (adattato a chi lo riceve)",
       "three": "Le 3 cose più importanti di oggi",
       "about": "La pagina «Questa è una guida»",
-      "progress": "Campi compilati: {n} / {m}",
+      "progress": "Campi compilati: {n}",
       "firstEmpty": "Cominci dalla «Prima pagina». Non è necessario compilare tutto.",
       "firstHead": "Prima pagina (da leggere prima di tutto)",
       "privacyNote": "Ciò che scrive resta solo su questo dispositivo. Quando lo consegna, lo tratti con cura."
@@ -1917,7 +1926,8 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "book": {
       "title": "Scrivere",
       "intro": "Scelga una sezione e risponda alle domande. Può modificare tutto in qualsiasi momento.",
-      "filled": "{n} / {m} compilati",
+      "filled": "Compilati: {n}",
+      "filledNone": "Non ancora",
       "moshimo": "Carica un file di Moshimo Card",
       "moshimoHint": "Caricando il JSON creato con «Esporta» in Moshimo Card, nome, contatti, allergie ecc. vengono inseriti nei campi vuoti (così non serve scriverli due volte).",
       "moshimoDone": "Campi inseriti: {n} ✓",
@@ -2352,6 +2362,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Exportado ✓",
     "imported": "Importado ✓",
     "importFail": "Não foi possível importar",
+    "importConfirm": "O que está escrito agora será substituído pelo conteúdo da cópia. Importar?",
     "note": "Tudo o que for escrito fica guardado apenas neste aparelho. Nada é enviado.",
     "privacy": "Política de privacidade",
     "credit": "Desenvolvimento: SOYOGI, serviço de consulta sobre cuidados e apoio"
@@ -2364,7 +2375,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "give": "Entregar (mostrar conforme quem vai ler)",
       "three": "As 3 coisas mais importantes de hoje",
       "about": "A página \"Isto é um manual\"",
-      "progress": "Campos escritos: {n} / {m}",
+      "progress": "Campos escritos: {n}",
       "firstEmpty": "Começar pela \"Primeira página\". Não é preciso preencher tudo.",
       "firstHead": "Primeira página (o que ler antes de tudo)",
       "privacyNote": "O que for escrito fica apenas neste aparelho. Ao entregar, tratar estas informações com cuidado."
@@ -2372,7 +2383,8 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "book": {
       "title": "Escrever",
       "intro": "Escolher uma parte e responder às perguntas. Tudo pode ser alterado depois.",
-      "filled": "{n} / {m} escritos",
+      "filled": "Escritos: {n}",
+      "filledNone": "Ainda não",
       "moshimo": "Importar dados do Moshimo Card",
       "moshimoHint": "Ao importar o JSON exportado no Moshimo Card, o nome, a quem avisar, as alergias etc. vão para os campos vazios (sem escrever duas vezes).",
       "moshimoDone": "{n} campos preenchidos ✓",
@@ -2807,6 +2819,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Geëxporteerd ✓",
     "imported": "Geïmporteerd ✓",
     "importFail": "Importeren is niet gelukt",
+    "importConfirm": "Wat u nu hebt ingevuld, wordt vervangen door de inhoud van het bestand. Wilt u importeren?",
     "note": "Alles wat u schrijft, wordt alleen op dit apparaat bewaard. Er wordt niets verstuurd.",
     "privacy": "Privacybeleid",
     "credit": "App ontwikkeld door SOYOGI, adviespunt voor zorg en ondersteuning"
@@ -2819,7 +2832,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "give": "Meegeven (aangepast aan de ontvanger)",
       "three": "De 3 belangrijkste dingen van vandaag",
       "about": "De pagina “Dit is een handleiding”",
-      "progress": "Ingevulde velden: {n} / {m}",
+      "progress": "Ingevulde velden: {n}",
       "firstEmpty": "Begin gerust met “Pagina 1”. U hoeft niet alles in te vullen.",
       "firstHead": "Pagina 1 (graag als eerste lezen)",
       "privacyNote": "Wat u schrijft, staat alleen op dit apparaat. Ga zorgvuldig om met wat u meegeeft."
@@ -2827,7 +2840,8 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "book": {
       "title": "Schrijven",
       "intro": "Kies een onderdeel en beantwoord de vragen. U kunt alles later altijd aanpassen.",
-      "filled": "{n} / {m} ingevuld",
+      "filled": "{n} ingevuld",
+      "filledNone": "Nog niet",
       "moshimo": "Moshimo Card-bestand laden",
       "moshimoHint": "Laadt u de JSON die u in Moshimo Card met “Exporteren” hebt bewaard, dan komen naam, contactgegevens, allergieën en dergelijke in de lege velden (zo hoeft u niets twee keer te schrijven).",
       "moshimoDone": "{n} veld(en) ingevuld ✓",
@@ -3262,6 +3276,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Exporterat ✓",
     "imported": "Importerat ✓",
     "importFail": "Det gick inte att importera",
+    "importConfirm": "Det du har skrivit nu ersätts med innehållet i filen. Vill du importera?",
     "note": "Allt du skriver sparas bara i den här enheten. Inget skickas någonstans.",
     "privacy": "Integritetspolicy",
     "credit": "Utvecklad av SOYOGI, en rådgivning om omsorg och stöd"
@@ -3274,7 +3289,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "give": "Lämna över (anpassa efter mottagaren)",
       "three": "Dagens 3 viktigaste saker",
       "about": "Sidan ”Det här är en bruksanvisning”",
-      "progress": "Ifyllda fält: {n} / {m}",
+      "progress": "Ifyllda fält: {n}",
       "firstEmpty": "Börja gärna med ”Första sidan”. Du behöver inte fylla i allt.",
       "firstHead": "Första sidan (det vi vill att du läser först)",
       "privacyNote": "Det du skriver finns bara i den här enheten. Var försiktig när du lämnar över det."
@@ -3282,7 +3297,8 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "book": {
       "title": "Skriv",
       "intro": "Välj ett avsnitt och svara på frågorna. Du kan ändra när du vill.",
-      "filled": "{n} / {m} ifyllda",
+      "filled": "Ifyllda: {n}",
+      "filledNone": "Inte än",
       "moshimo": "Läs in en fil från Moshimo Card",
       "moshimoHint": "Läs in JSON-filen som du har exporterat från Moshimo Card. Då fylls tomma fält som namn, kontaktuppgifter och allergier i, så att du slipper skriva två gånger.",
       "moshimoDone": "{n} fält ifyllda ✓",
@@ -3717,6 +3733,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "내보냈어요 ✓",
     "imported": "불러왔어요 ✓",
     "importFail": "불러오지 못했어요",
+    "importConfirm": "지금 적은 내용이 파일의 내용으로 바뀌어요. 불러올까요?",
     "note": "적은 내용은 모두 이 기기 안에만 저장돼요. 어디에도 보내지지 않아요.",
     "privacy": "개인정보 처리방침",
     "credit": "앱 개발: 돌봄과 지원 상담소 SOYOGI"
@@ -3729,7 +3746,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "give": "건네기 (상대에 맞춰 보여 주기)",
       "three": "오늘 가장 중요한 3가지",
       "about": "“설명서예요” 페이지",
-      "progress": "적은 칸: {n} / {m}",
+      "progress": "적은 칸: {n}",
       "firstEmpty": "먼저 “첫 장”부터 시작해 보세요. 모두 적지 않아도 괜찮아요.",
       "firstHead": "첫 장 (가장 먼저 읽어 주었으면 하는 것)",
       "privacyNote": "적은 내용은 이 기기 안에만 있어요. 건넬 때는 취급에 주의해 주세요."
@@ -3737,7 +3754,8 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "book": {
       "title": "쓰기",
       "intro": "항목을 하나 골라 질문에 답해요. 나중에 언제든지 고칠 수 있어요.",
-      "filled": "{n} / {m} 작성",
+      "filled": "{n}개 작성",
+      "filledNone": "아직",
       "moshimo": "모시모 카드 파일 불러오기",
       "moshimoHint": "모시모 카드에서 “내보내기”한 JSON을 불러오면 이름·연락처·알레르기 등을 비어 있는 칸에 넣어요(두 번 적지 않아도 돼요).",
       "moshimoDone": "{n}개 넣었어요 ✓",
@@ -4172,6 +4190,7 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "已导出 ✓",
     "imported": "已导入 ✓",
     "importFail": "无法导入",
+    "importConfirm": "现在的内容会被文件里的内容替换。要导入吗？",
     "note": "写下的内容全部只保存在这台设备里，不会发送到任何地方。",
     "privacy": "隐私政策",
     "credit": "应用开发：护理与支援咨询处 SOYOGI"
@@ -4184,7 +4203,7 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "give": "交给（按对方调整内容）",
       "three": "今天最重要的3件事",
       "about": "“这是说明书”页面",
-      "progress": "已填写的栏：{n} / {m}",
+      "progress": "已填写的栏：{n}",
       "firstEmpty": "请先从“第1页”开始。不必全部填写，也没关系。",
       "firstHead": "第1页（最希望先读的内容）",
       "privacyNote": "写下的内容只在这台设备里。交给别人时，请注意妥善处理。"
@@ -4192,7 +4211,8 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "book": {
       "title": "填写",
       "intro": "选择一个部分，回答问题。之后随时都可以修改。",
-      "filled": "已写 {n} / {m}",
+      "filled": "已写 {n} 栏",
+      "filledNone": "还没写",
       "moshimo": "读取 MOSHIMO Card 的文件",
       "moshimoHint": "读取从 MOSHIMO Card（紧急卡片）“导出”的 JSON，就能把姓名、联系方式、过敏等填入空着的栏里（不用写两遍）。",
       "moshimoDone": "已填入 {n} 栏 ✓",
@@ -4627,6 +4647,7 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "تم التصدير ✓",
     "imported": "تم الاستيراد ✓",
     "importFail": "تعذّر الاستيراد",
+    "importConfirm": "سيُستبدل المحتوى الحالي بمحتوى الملف. هل تريد الاستيراد؟",
     "note": "كل ما تكتبه يُحفظ على هذا الجهاز فقط، ولا يُرسل إلى أي مكان.",
     "privacy": "سياسة الخصوصية",
     "credit": "تطوير التطبيق: SOYOGI، خدمة استشارات في الرعاية والدعم"
@@ -4639,7 +4660,7 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "give": "تسليم (اختيار ما يُعرض حسب الجهة)",
       "three": "أهم 3 أشياء اليوم",
       "about": "صفحة «هذا دليل»",
-      "progress": "الخانات المكتوبة: {n} / {m}",
+      "progress": "الخانات المكتوبة: {n}",
       "firstEmpty": "ابدأ من «الصفحة الأولى». لا داعي لكتابة كل شيء.",
       "firstHead": "الصفحة الأولى (أهم ما نرجو قراءته أولًا)",
       "privacyNote": "ما تكتبه موجود على هذا الجهاز فقط. عند التسليم، يُرجى الانتباه إلى طريقة التعامل معه."
@@ -4647,7 +4668,8 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "book": {
       "title": "كتابة",
       "intro": "اختر قسمًا وأجب عن الأسئلة. يمكنك التعديل في أي وقت لاحقًا.",
-      "filled": "المكتوب: {n} / {m}",
+      "filled": "المكتوب: {n}",
+      "filledNone": "ليس بعد",
       "moshimo": "استيراد ملف Moshimo Card",
       "moshimoHint": "عند استيراد ملف JSON الذي صدّرته من Moshimo Card عبر «تصدير»، تُملأ الخانات الفارغة مثل الاسم وجهة الاتصال والحساسية (فلا تحتاج إلى الكتابة مرتين).",
       "moshimoDone": "تمت تعبئة الخانات: {n} ✓",
