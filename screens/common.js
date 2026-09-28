@@ -182,14 +182,17 @@
     if(!m) return fallback;
     return RE_RTL.test(m[0]) ? 'rtl' : 'ltr';
   }
-  function drawFirstPng(api){
+  /* done(r)(2026-09-29): r = 'ok'(ほぞんした・送り先を選べた)/ 'quiet'(共有の画面を閉じた)/ 'fail'。知らせは呼ぶ側が出す。
+     もどり値は今までどおり(false = 画像にできなかった) */
+  function drawFirstPng(api, done){
+    function fin(r){ if(typeof done === 'function') done(r); return r !== 'fail'; }
     var T = api.T, b = loadBook(api);
     var W = 1080, H = 1528, M = 70;
     var MAXH = 15000;               // canvas の高さの上限(iPhone の canvas は約1677万画素まで。1080×15000 はその内側)
     var cv = document.createElement('canvas');
     cv.width = W; cv.height = H;
     var ctx = cv.getContext('2d');
-    if(!ctx) return false;
+    if(!ctx) return fin('fail');
     var font = '"Hiragino Sans","Yu Gothic UI","Noto Sans JP",system-ui,sans-serif';
     var uiDir = api.rtl ? 'rtl' : 'ltr';
     var name = getVal(b, 'profile', 'name').trim();
@@ -260,16 +263,23 @@
     for(var f = 0; f < foot.length; f++) line(foot[f], M, fy + f * 36, uiDir);
     for(var g = 0; g < by.length; g++) line(by[g], M, byY + g * 36, uiDir);
     var url;
-    try{ url = cv.toDataURL('image/png'); }catch(_){ return false; }
-    if(!url || url === 'data:,') return false;       // 'data:,' = 大きすぎて画像にできなかった
-    var a = document.createElement('a');
+    try{ url = cv.toDataURL('image/png'); }catch(_){ return fin('fail'); }
+    if(!url || url === 'data:,') return fin('fail');       // 'data:,' = 大きすぎて画像にできなかった
     var d = new Date();
+    var fname = 'supportbook-page1-' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + '.png';
+    /* Play版(2026-09-29): <a download> は WebView では何も保存されない。data URL の base64 を一時フォルダに書いて共有の画面を出し、保存先は利用者が選ぶ */
+    if(api.native){
+      if(typeof api.saveFile !== 'function') return fin('fail');
+      api.saveFile(fname, url.slice(url.indexOf(',') + 1), false, T('screen.give.png'), fin);
+      return true;
+    }
+    var a = document.createElement('a');
     a.href = url;
-    a.download = 'supportbook-page1-' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + '.png';
+    a.download = fname;
     document.body.appendChild(a);
     a.click();
     setTimeout(function(){ if(a.parentNode) a.parentNode.removeChild(a); }, 1000);
-    return true;
+    return fin('ok');
   }
 
   window.SBOOK = {

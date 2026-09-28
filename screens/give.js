@@ -95,7 +95,11 @@
         if(!hasAny()){ api.toast(T('screen.give.nothing')); return; }
         /* 1枚目が空のときは「-」だけの画像を作らず、1枚目へ案内する */
         if(S.countSec(b, 'first') === 0){ api.toast(T('screen.home.firstEmpty')); return; }
-        if(S.drawFirstPng(api)) api.toast(T('screen.give.pngDone')); else api.toast(T('common.saveFail'));
+        /* Play版は共有の画面を閉じたら何も出さない(2026-09-29) */
+        S.drawFirstPng(api, function(r){
+          if(r === 'ok') api.toast(T('screen.give.pngDone'));
+          else if(r === 'fail') api.toast(T('common.saveFail'));
+        });
       });
       c.appendChild(png);
     }
