@@ -225,7 +225,15 @@ input[type="file"].hidden{ display:none; }
 .photo-file{ display:none; }
 
 /* ======== サポートブック固有(screens/*.js が使う) ======== */
-.sb-sec-btn .sb-sec-text{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+/* くろ(dark)テーマ: ブランド色の地の上の文字は濃い色に(白だと 2.3:1 しかない。濃い色で 7:1)。ブランド色そのものは変えない */
+body[data-theme="dark"] header#hd, body[data-theme="dark"] .lang-label,
+body[data-theme="dark"] .big-btn.primary, body[data-theme="dark"] .btn.primary, body[data-theme="dark"] .chip.on,
+body[data-theme="dark"] .ov-close, body[data-theme="dark"] .three-num{ color:#10231a; }
+/* 大ボタンの文字: 一語が長い言語(nl/en/fr/it/sv)で 幅がせまく字が大きいとき、枠の外へ出さずに折り返す */
+.big-btn .lbl{ min-width:0; overflow-wrap:break-word; hyphens:auto; }
+/* 押せない まえ/つぎ は うすく(押せるほうと見分ける) */
+.btn:disabled{ opacity:.35; }
+.sb-sec-btn .sb-sec-text{ display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; }
 .sb-sec-btn .cnt{ font-size:.85em; color:var(--sub); font-weight:700; }
 .sb-mini-label{ font-size:.85em; color:var(--sub); font-weight:700; margin-top:6px; }
 .sb-pre{ white-space:pre-wrap; overflow-wrap:anywhere; }
@@ -239,6 +247,8 @@ input[type="file"].hidden{ display:none; }
 .sb-about p{ margin:0 0 12px; }
 .sb-about-head{ font-weight:800; font-size:1.15em; }
 .show-sec{ font-size:1.15em; font-weight:800; margin:22px 0 6px; border-left:6px solid var(--brand); padding-left:10px; }
+/* 空白の無い長い呼び名・見出しでも 枠の右で切れない(印刷も同じ) */
+.show-head, .show-sec, .show-label{ overflow-wrap:anywhere; }
 .show-first{ border:3px solid var(--alert); border-radius:12px; padding:12px; margin-top:16px; }
 .show-first .show-sec{ border-left-color:var(--alert); margin-top:0; }
 .show-first .show-value{ font-size:1.6em; }

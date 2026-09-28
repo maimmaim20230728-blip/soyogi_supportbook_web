@@ -4,6 +4,7 @@
    ・ここでは全文を読め、大きく見せられる(.ov) */
 (function(){
   window.SCREENS.register('about', {
+    nav: 'home',            // ホームから来る画面なので、下ナビは「ホーム」を光らせる
     render: function(c, api){
       var T = api.T, S = window.SBOOK;
       c.appendChild(api.el('h1', 'scr-title', T('screen.about.title')));

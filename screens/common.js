@@ -97,6 +97,9 @@
     return n;
   }
 
+  /* 題名の {name} に呼び名を入れる。String.replace だと呼び名の「$&」「$1」などが特殊な意味になるので split/join */
+  function withName(tpl, name){ return String(tpl).split('{name}').join(name); }
+
   /* ---- 見せる画面(.ov・漢字・大きな字) ----
      secIds: 出す節の id 配列。opts.about=true で「説明書です」の本文を先頭に(既定 true) */
   function buildShow(api, secIds, opts){
@@ -104,7 +107,7 @@
     var ov = el('div', 'ov sb-show');
     ov.setAttribute('data-sb', 'show');
     var name = getVal(b, 'profile', 'name').trim();
-    ov.appendChild(el('div', 'show-head', name ? T('screen.show.title').replace('{name}', name) : T('screen.show.titleNoName')));
+    ov.appendChild(el('div', 'show-head', name ? withName(T('screen.show.title'), name) : T('screen.show.titleNoName')));
     if(o.about !== false){
       var lead = el('p', 'show-para sb-lead', T('screen.show.lead'));
       ov.appendChild(lead);
@@ -170,55 +173,94 @@
     }
     return lines;
   }
+  /* 書いた文字の向き(画面の dir="auto" と同じ考え=最初に出てくる文字で決める)。決められなければ fallback(画面の向き) */
+  var RE_LETTER = null, RE_RTL = null;
+  try{ RE_LETTER = new RegExp('\\p{L}', 'u'); RE_RTL = new RegExp('[\\p{Script=Arabic}\\p{Script=Hebrew}]', 'u'); }catch(_){}
+  function textDir(s, fallback){
+    if(!RE_LETTER) return fallback;
+    var m = String(s || '').match(RE_LETTER);
+    if(!m) return fallback;
+    return RE_RTL.test(m[0]) ? 'rtl' : 'ltr';
+  }
   function drawFirstPng(api){
     var T = api.T, b = loadBook(api);
     var W = 1080, H = 1528, M = 70;
+    var MAXH = 15000;               // canvas の高さの上限(iPhone の canvas は約1677万画素まで。1080×15000 はその内側)
     var cv = document.createElement('canvas');
     cv.width = W; cv.height = H;
     var ctx = cv.getContext('2d');
     if(!ctx) return false;
     var font = '"Hiragino Sans","Yu Gothic UI","Noto Sans JP",system-ui,sans-serif';
+    var uiDir = api.rtl ? 'rtl' : 'ltr';
+    var name = getVal(b, 'profile', 'name').trim();
+    var qs = [['never', '#d43f3f'], ['contact', '#2e9e6b']];
+
+    /* 1) 先に行を割り付けて、要る高さを出す(長く書いても 本文が下の免責に重ならず、画像の外に切れない。最小は 1528) */
+    ctx.font = 'bold 52px ' + font;
+    /* 題名も折り返す(長い呼び名で右にはみ出さない) */
+    var titleLines = wrapText(ctx, name ? withName(T('screen.show.title'), name) : T('screen.show.titleNoName'), W - M * 2);
+    ctx.font = '30px ' + font;
+    var leadLines = wrapText(ctx, T('app.tagline'), W - M * 2);
+    /* 下の免責と「そよぎのアプリで作成」は両方とも折り返す(英語で長くなっても右に切れない) */
+    ctx.font = '26px ' + font;
+    var foot = wrapText(ctx, T('screen.show.footer'), W - M * 2);
+    var by = wrapText(ctx, T('screen.show.by'), W - M * 2);
+    var topH = 120 + titleLines.length * 64 - 14 + leadLines.length * 40 + 40;
+    var footH = 26 + foot.length * 36 + 20 + (by.length - 1) * 36 + 40;
+    /* 本文の字は ふつう 40px。とても長くて上限の高さを越えるときだけ 段階的に小さくする */
+    var SIZES = [[40, 56], [34, 48], [28, 40]], bodyPx = 40, lineH = 56, bodies = [], need = 0;
+    for(var sz = 0; sz < SIZES.length; sz++){
+      bodyPx = SIZES[sz][0]; lineH = SIZES[sz][1];
+      ctx.font = 'bold ' + bodyPx + 'px ' + font;
+      bodies = [];
+      need = topH + footH;
+      for(var n = 0; n < qs.length; n++){
+        bodies.push(wrapText(ctx, getVal(b, 'first', qs[n][0]).trim() || '-', W - M * 2 - 60));
+        need += 90 + bodies[n].length * lineH + 30 + 50;
+      }
+      if(need <= MAXH) break;
+    }
+    H = Math.min(MAXH, Math.max(H, Math.ceil(need)));
+    if(cv.height !== H) cv.height = H;     // 高さを変えると ctx の状態(font など)は戻る。下で描く前に毎回入れ直している
+
+    /* 2) 描く。ar(右から左)は右寄せ。書いた文字は その文字の向きで(画面の dir="auto" と同じ) */
+    function line(txt, inset, yy, dir){
+      ctx.direction = dir; ctx.textAlign = 'start';
+      ctx.fillText(txt, dir === 'rtl' ? W - inset : inset, yy);
+    }
     ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = '#2e9e6b'; ctx.fillRect(0, 0, W, 22);
     var y = 120;
-    var name = getVal(b, 'profile', 'name').trim();
     ctx.fillStyle = '#1a1a1a';
     ctx.font = 'bold 52px ' + font;
-    /* 題名も折り返す(長い呼び名で右にはみ出さない) */
-    var titleLines = wrapText(ctx, name ? T('screen.show.title').replace('{name}', name) : T('screen.show.titleNoName'), W - M * 2);
-    for(var tl = 0; tl < titleLines.length; tl++){ ctx.fillText(titleLines[tl], M, y); y += 64; }
+    for(var tl = 0; tl < titleLines.length; tl++){ line(titleLines[tl], M, y, uiDir); y += 64; }
     y -= 14;
     ctx.font = '30px ' + font; ctx.fillStyle = '#555';
-    var leadLines = wrapText(ctx, T('app.tagline'), W - M * 2);
-    for(var i = 0; i < leadLines.length; i++){ ctx.fillText(leadLines[i], M, y + 30); y += 40; }
+    for(var i = 0; i < leadLines.length; i++){ line(leadLines[i], M, y + 30, uiDir); y += 40; }
     y += 40;
-    var qs = [['never', '#d43f3f'], ['contact', '#2e9e6b']];
     for(var k = 0; k < qs.length; k++){
       var v = getVal(b, 'first', qs[k][0]).trim();
       var label = T('screen.secs.first.q.' + qs[k][0] + '.s');
-      ctx.font = 'bold 40px ' + font;
-      var body = wrapText(ctx, v || '-', W - M * 2 - 60);
-      var boxH = 90 + body.length * 56 + 30;
+      var body = bodies[k];
+      var boxH = 90 + body.length * lineH + 30;
       ctx.strokeStyle = qs[k][1]; ctx.lineWidth = 6;
       /* 枠線(strokeRect でなく線で描く=疑似DOMの canvas でも通る) */
       ctx.beginPath(); ctx.moveTo(M, y); ctx.lineTo(W - M, y); ctx.lineTo(W - M, y + boxH); ctx.lineTo(M, y + boxH); ctx.lineTo(M, y); ctx.stroke();
       ctx.fillStyle = qs[k][1]; ctx.font = 'bold 36px ' + font;
-      ctx.fillText(label, M + 30, y + 60);
-      ctx.fillStyle = '#1a1a1a'; ctx.font = 'bold 40px ' + font;
-      for(var j = 0; j < body.length; j++) ctx.fillText(body[j], M + 30, y + 120 + j * 56);
+      line(label, M + 30, y + 60, uiDir);
+      ctx.fillStyle = '#1a1a1a'; ctx.font = 'bold ' + bodyPx + 'px ' + font;
+      var vDir = textDir(v, uiDir);
+      for(var j = 0; j < body.length; j++) line(body[j], M + 30, y + 120 + j * lineH, vDir);
       y += boxH + 50;
     }
-    /* 下の免責と「そよぎのアプリで作成」は両方とも折り返す(英語で長くなっても右に切れない) */
     ctx.fillStyle = '#555'; ctx.font = '26px ' + font;
-    var foot = wrapText(ctx, T('screen.show.footer'), W - M * 2);
-    var by = wrapText(ctx, T('screen.show.by'), W - M * 2);
     var byY = H - 40 - (by.length - 1) * 36;
     var fy = byY - 20 - foot.length * 36;
-    for(var f = 0; f < foot.length; f++) ctx.fillText(foot[f], M, fy + f * 36);
-    for(var g = 0; g < by.length; g++) ctx.fillText(by[g], M, byY + g * 36);
+    for(var f = 0; f < foot.length; f++) line(foot[f], M, fy + f * 36, uiDir);
+    for(var g = 0; g < by.length; g++) line(by[g], M, byY + g * 36, uiDir);
     var url;
     try{ url = cv.toDataURL('image/png'); }catch(_){ return false; }
-    if(!url) return false;
+    if(!url || url === 'data:,') return false;       // 'data:,' = 大きすぎて画像にできなかった
     var a = document.createElement('a');
     var d = new Date();
     a.href = url;

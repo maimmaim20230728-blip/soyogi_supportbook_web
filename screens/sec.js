@@ -5,6 +5,7 @@
    ・まえ/つぎ で節を渡り歩く。ナビには置かず、book から来る */
 (function(){
   window.SCREENS.register('sec', {
+    nav: 'book',            // 下ナビは「かく」を光らせる
     render: function(c, api){
       var T = api.T, S = window.SBOOK;
       var s = S.secById(S.cur) || S.SECS[0];

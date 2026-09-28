@@ -2,6 +2,7 @@
 /* 画面: わたす(相手に あわせて 出す)
    ・相手プリセット4つ(学校/預け先/医療/家族)ごとに「出す節」を選ぶ(初期値=1枚目+伝え方+パニックの対応の最小限)
    ・みせる(.ov・漢字・大きな字) / いんさつ(window.print・印刷用CSSは style.css の @media print) / 1枚目を PNG(canvas)
+   ・いんさつ は Web版だけ(Play版の WebView では window.print が何もしないので、api.native のときはボタンを作らない)
    ・出すたびに取り扱い注意の文を出す */
 (function(){
   var curPreset = 'school';
@@ -76,20 +77,24 @@
       });
       c.appendChild(show);
 
-      var pr = api.el('button', 'big-btn'); pr.id = 'sb-give-print';
-      pr.appendChild(api.el('span', 'ico', '🖨')); pr.appendChild(api.el('span', 'lbl', T('screen.give.print')));
-      api.Tap.bind(pr, function(){
-        if(!canShow()) return;
-        S.openOv(S.buildShow(api, out[curPreset]));
-        api.toast(T('screen.give.printHint'));
-        setTimeout(function(){ try{ if(typeof window.print === 'function') window.print(); }catch(_){} }, 350);
-      });
-      c.appendChild(pr);
+      if(!api.native){
+        var pr = api.el('button', 'big-btn'); pr.id = 'sb-give-print';
+        pr.appendChild(api.el('span', 'ico', '🖨')); pr.appendChild(api.el('span', 'lbl', T('screen.give.print')));
+        api.Tap.bind(pr, function(){
+          if(!canShow()) return;
+          S.openOv(S.buildShow(api, out[curPreset]));
+          api.toast(T('screen.give.printHint'));
+          setTimeout(function(){ try{ if(typeof window.print === 'function') window.print(); }catch(_){} }, 350);
+        });
+        c.appendChild(pr);
+      }
 
       var png = api.el('button', 'big-btn'); png.id = 'sb-give-png';
       png.appendChild(api.el('span', 'ico', '🖼')); png.appendChild(api.el('span', 'lbl', T('screen.give.png')));
       api.Tap.bind(png, function(){
         if(!hasAny()){ api.toast(T('screen.give.nothing')); return; }
+        /* 1枚目が空のときは「-」だけの画像を作らず、1枚目へ案内する */
+        if(S.countSec(b, 'first') === 0){ api.toast(T('screen.home.firstEmpty')); return; }
         if(S.drawFirstPng(api)) api.toast(T('screen.give.pngDone')); else api.toast(T('common.saveFail'));
       });
       c.appendChild(png);

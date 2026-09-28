@@ -4,12 +4,13 @@
    ・click禁止: 操作は全て Tap.bind(tap.js)。select / file input だけはネイティブイベント
    ・画面は screens/<id>.js が window.SCREENS.register('<id>', { render(container, api) }) で登録する
      (会話補助ノートと同じ取り決め。画面同士・シェルの内部状態は共有しない)
-   ・api = { T, el, pref, toast, go, Tap, Photo, load, save, remove, getExtra, setExtra, speak, stopSpeak, vibrate, lang, rtl, ver, appKey }
+   ・api = { T, el, pref, toast, go, Tap, Photo, load, save, remove, getExtra, setExtra, speak, stopSpeak, vibrate, lang, rtl, native, ver, appKey }
+   ・画面の登録に nav:'<画面id>' を持たせると、ナビに無い画面(節の入力など)を開いたとき その親のナビが光る(選ばれた状態になる)
    ・🔴 BUILDER: アプリ固有の処理は screens/*.js に書く。このファイルは共通部分なので最小限の変更にとどめ、
      変えたら README の「シェルの変更点」に書く */
 (function(){
 
-var VER = '0.4.0';               // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
+var VER = '0.4.1';               // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
 var APP_KEY = 'soyogi_supportbook';        // バックアップの識別(別アプリのファイルを読まない)
 var LS = 'sbook.';
 var LS_PREF = LS + 'pref.v1';
@@ -133,11 +134,16 @@ function el(tag, cls, txt){
   return e;
 }
 
+/* ---- Play版(Capacitor の WebView)かどうか。WebView では window.print・navigator.share が効かないので、画面側は api.native で道を分ける ---- */
+var IS_NATIVE = (function(){
+  try{ var c = window.Capacitor; return !!(c && typeof c.isNativePlatform === 'function' && c.isNativePlatform()); }catch(_){ return false; }
+})();
+
 /* ---- 読み上げ(任意。Play版のWebViewはWeb Speech API非対応なのでネイティブへ橋渡し) ---- */
 var NATIVE_TTS = (function(){
   try{
     var c = window.Capacitor;
-    if(c && typeof c.isNativePlatform === 'function' && c.isNativePlatform() && typeof c.registerPlugin === 'function'){
+    if(IS_NATIVE && typeof c.registerPlugin === 'function'){
       return c.registerPlugin('TextToSpeech');
     }
   }catch(_){}
@@ -204,6 +210,7 @@ function screenApi(){
     speak: speak, stopSpeak: stopSpeak, canSpeak: canSpeak, vibrate: vibrate,
     lang: pref.lang,
     rtl: RTL_LANGS.indexOf(pref.lang) >= 0,
+    native: IS_NATIVE,
     ver: VER,
     appKey: APP_KEY
   };
@@ -227,9 +234,12 @@ function showScreen(id){
   for(var i = 0; i < secs.length; i++){
     secs[i].classList.toggle('hidden', secs[i].getAttribute('data-scr') !== id);
   }
+  /* 下ナビの選ばれた状態: ナビに無い画面は、登録の nav(親の画面id)を光らせる */
+  var mod = window.SCREENS && window.SCREENS.get(id);
+  var navId = (mod && typeof mod.nav === 'string') ? mod.nav : id;
   var navs = document.querySelectorAll('.nav-btn');
   for(var j = 0; j < navs.length; j++){
-    navs[j].classList.toggle('active', navs[j].getAttribute('data-scr') === id);
+    navs[j].classList.toggle('active', navs[j].getAttribute('data-scr') === navId);
   }
   if(id !== 'set') renderScreen(id);
   try{ if($('main')) $('main').scrollTop = 0; }catch(_){}
