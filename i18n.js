@@ -1,4 +1,4 @@
-/* そよぎ式サポートブック(仮) 多言語テーブル(そよぎアプリ・キット v1・12言語)
+/* 知って欲しい事ブック・そよぎ 多言語テーブル(そよぎアプリ・キット v1・12言語)
    ・window.SBOOK_I18N = { ja, en, de, fr, es, it, pt, nl, sv, ko, zh, ar }
    ・キー構造は全言語で完全一致(_check.js が ja を正として構造・配列要素数を機械照合)
    ・🔴 BUILDER: 文言は ja と en の両方に同じキーで足す。画面固有は screen.<画面id>.* に置く。
@@ -15,7 +15,7 @@
 
 /* ============ ja(正) ============ */
 var ja = {
-  app: { name:'そよぎ式サポートブック(仮)', tagline:'要求ではなく、説明書です。' },
+  app: { name:'知って欲しい事ブック・そよぎ', short:'知って欲しい事ブック', tagline:'要求ではなく、説明書です。' },
   nav: { home:'ホーム', book:'かく', give:'わたす', three:'きょうの3つ', set:'せってい' },
   common: {
     ok:'OK', cancel:'やめる', save:'ほぞんする', del:'けす', back:'もどる', close:'とじる',
@@ -47,7 +47,7 @@ var ja = {
   },
   screen: {
     home: {
-      title:'そよぎ式サポートブック(仮)',
+      title:'知って欲しい事ブック',
       intro:'本人と 家族で 書く、本人の「説明書」です。学校・預け先・病院・家族に、相手に あわせて 出せます。',
       write:'かく(11の せつに こたえる)',
       give:'わたす(相手に あわせて 出す)',
@@ -232,7 +232,7 @@ var ja = {
 
 /* ============ en ============ */
 var en = {
-  app: { name:'Support Book - SOYOGI (draft)', tagline:'Not a list of demands. A manual for the people who meet us.' },
+  app: { name:'Good-to-Know Book - SOYOGI', short:'Good-to-Know Book', tagline:'Not a list of demands. A manual for the people who meet us.' },
   nav: { home:'Home', book:'Write', give:'Hand over', three:'Today\'s 3', set:'Settings' },
   common: {
     ok:'OK', cancel:'Cancel', save:'Save', del:'Delete', back:'Back', close:'Close',
@@ -264,7 +264,7 @@ var en = {
   },
   screen: {
     home: {
-      title:'Support Book - SOYOGI (draft)',
+      title:'Good-to-Know Book',
       intro:'A "manual" about a person, written together by the person and their family. Hand it to school, day services, hospitals or relatives, adjusted for each.',
       write:'Write (answer 11 sections)',
       give:'Hand over (choose what to show)',
@@ -453,7 +453,8 @@ function mergeDeep(t, s){ for(var k in s){ if(s[k] && typeof s[k] === 'object' &
 /* ---- de: 翻訳 ---- */
 TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Unterstützungsbuch - SOYOGI (Entwurf)",
+    "name": "Gut-zu-wissen-Buch - SOYOGI",
+    "short": "Gut-zu-wissen-Buch",
     "tagline": "Keine Forderungen, sondern ein Leitfaden."
   },
   "nav": {
@@ -537,7 +538,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Unterstützungsbuch - SOYOGI (Entwurf)",
+      "title": "Gut-zu-wissen-Buch",
       "intro": "Ein „Leitfaden“ über die Person, geschrieben von der Person selbst und ihrer Familie. Sie können ihn passend für Schule, Betreuung, Krankenhaus oder Familie weitergeben.",
       "write": "Schreiben (11 Abschnitte beantworten)",
       "give": "Weitergeben (je nach Empfänger)",
@@ -907,7 +908,8 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- fr: 翻訳 ---- */
 TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Carnet de soutien SOYOGI (provisoire)",
+    "name": "Livret bon à savoir - SOYOGI",
+    "short": "Livret bon à savoir",
     "tagline": "Pas des exigences, un mode d'emploi."
   },
   "nav": {
@@ -991,7 +993,7 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Carnet de soutien SOYOGI (provisoire)",
+      "title": "Livret bon à savoir",
       "intro": "Le \"mode d'emploi\" de la personne, écrit par elle et sa famille. Vous pouvez le remettre à l'école, au lieu d'accueil, à l'hôpital ou à la famille, en l'adaptant à chacun.",
       "write": "Écrire (répondre aux 11 sections)",
       "give": "Remettre (adapter au destinataire)",
@@ -1361,7 +1363,8 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- es: 翻訳 ---- */
 TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Libro de apoyo - SOYOGI (provisional)",
+    "name": "Libro para conocerme - SOYOGI",
+    "short": "Libro para conocerme",
     "tagline": "No es una lista de exigencias, sino un manual."
   },
   "nav": {
@@ -1445,7 +1448,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Libro de apoyo - SOYOGI (provisional)",
+      "title": "Libro para conocerme",
       "intro": "Un «manual» sobre la persona, escrito por ella misma y su familia. Se puede entregar a la escuela, al centro de día, al hospital o a la familia, adaptado a cada uno.",
       "write": "Escribir (responder 11 secciones)",
       "give": "Entregar (adaptado a quien lo recibe)",
@@ -1815,7 +1818,8 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- it: 翻訳 ---- */
 TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Libretto di supporto - SOYOGI (bozza)",
+    "name": "Libro per conoscermi - SOYOGI",
+    "short": "Libro per conoscermi",
     "tagline": "Non è una richiesta, è una guida."
   },
   "nav": {
@@ -1899,7 +1903,7 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Libretto di supporto - SOYOGI (bozza)",
+      "title": "Libro per conoscermi",
       "intro": "Una «guida» sulla persona, scritta insieme dalla persona e dalla sua famiglia. Si può consegnare a scuola, al centro diurno, in ospedale o ai familiari, adattandola a chi la riceve.",
       "write": "Scrivere (rispondere alle 11 sezioni)",
       "give": "Consegnare (adattato a chi lo riceve)",
@@ -2269,7 +2273,8 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- pt: 翻訳 ---- */
 TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Livro de Apoio - SOYOGI (provisório)",
+    "name": "Para me conhecer - SOYOGI",
+    "short": "Para me conhecer",
     "tagline": "Não é uma lista de exigências. É um manual."
   },
   "nav": {
@@ -2353,7 +2358,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Livro de Apoio - SOYOGI (provisório)",
+      "title": "Para me conhecer",
       "intro": "O \"manual\" da pessoa, escrito pela própria pessoa e pela família. Pode ser mostrado à escola, ao centro de dia, ao hospital ou à família, de acordo com quem vai ler.",
       "write": "Escrever (responder às 11 partes)",
       "give": "Entregar (mostrar conforme quem vai ler)",
@@ -2723,7 +2728,8 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- nl: 翻訳 ---- */
 TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Ondersteuningsboek - SOYOGI (concept)",
+    "name": "Goed om te weten - SOYOGI",
+    "short": "Goed om te weten",
     "tagline": "Geen lijst met eisen, maar een handleiding."
   },
   "nav": {
@@ -2807,7 +2813,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Ondersteuningsboek - SOYOGI (concept)",
+      "title": "Goed om te weten",
       "intro": "Een “handleiding” over de persoon, geschreven door de persoon zelf en de familie. U kunt deze per ontvanger aanpassen en meegeven aan school, opvang, ziekenhuis of familie.",
       "write": "Schrijven (11 onderdelen beantwoorden)",
       "give": "Meegeven (aangepast aan de ontvanger)",
@@ -3177,7 +3183,8 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- sv: 翻訳 ---- */
 TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Stödbok - SOYOGI (utkast)",
+    "name": "Bra att veta-boken - SOYOGI",
+    "short": "Bra att veta-boken",
     "tagline": "Det här är inga krav. Det är en bruksanvisning."
   },
   "nav": {
@@ -3261,7 +3268,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Stödbok - SOYOGI (utkast)",
+      "title": "Bra att veta-boken",
       "intro": "En ”bruksanvisning” om personen, som personen själv och familjen skriver tillsammans. Du kan visa den för skola, omsorg, sjukvård och familj, anpassad efter vem som ska läsa.",
       "write": "Skriv (svara på 11 avsnitt)",
       "give": "Lämna över (anpassa efter mottagaren)",
@@ -3631,7 +3638,8 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- ko: 翻訳 ---- */
 TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "서포트북 - SOYOGI (가칭)",
+    "name": "알아 두셨으면 하는 것 - SOYOGI",
+    "short": "알아 두셨으면 하는 것",
     "tagline": "요구가 아니라, 설명서예요."
   },
   "nav": {
@@ -3715,7 +3723,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "서포트북 - SOYOGI (가칭)",
+      "title": "알아 두셨으면 하는 것",
       "intro": "본인과 가족이 함께 쓰는, 본인의 “설명서”예요. 학교·돌봄 기관·병원·가족에게 상대에 맞춰 보여 줄 수 있어요.",
       "write": "쓰기 (11개 항목에 답하기)",
       "give": "건네기 (상대에 맞춰 보여 주기)",
@@ -4085,7 +4093,8 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- zh: 翻訳 ---- */
 TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "SOYOGI 支援手册（暂定）",
+    "name": "希望您了解的事 - SOYOGI",
+    "short": "希望您了解的事",
     "tagline": "不是要求，而是一份说明书。"
   },
   "nav": {
@@ -4169,7 +4178,7 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "SOYOGI 支援手册（暂定）",
+      "title": "希望您了解的事",
       "intro": "由本人和家人一起写的、关于本人的“说明书”。可以按照对方的需要，交给学校、托管机构、医院或家人。",
       "write": "填写（回答11个部分）",
       "give": "交给（按对方调整内容）",
@@ -4539,7 +4548,8 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- ar: 翻訳 ---- */
 TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "كتيّب الدعم - SOYOGI (مسودة)",
+    "name": "ما نود أن تعرفوه - SOYOGI",
+    "short": "ما نود أن تعرفوه",
     "tagline": "ليس قائمة مطالب، بل دليل تعريفي."
   },
   "nav": {
@@ -4623,7 +4633,7 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "كتيّب الدعم - SOYOGI (مسودة)",
+      "title": "ما نود أن تعرفوه",
       "intro": "«دليل» عن الشخص، يكتبه الشخص نفسه مع عائلته. يمكن تقديمه للمدرسة ومكان الرعاية والمستشفى والعائلة، بما يناسب كل جهة.",
       "write": "كتابة (الإجابة عن 11 قسمًا)",
       "give": "تسليم (اختيار ما يُعرض حسب الجهة)",
