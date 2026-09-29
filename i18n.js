@@ -47,6 +47,32 @@ var ja = {
     privacy:'プライバシーポリシー',
     credit:'アプリ開発：介護と支援の相談どころ そよぎ'
   },
+  /* はじめての つかいかた(app.js openGuide・初回に必ず出す・2026-09-30)。heads と bodies は同じ数。
+     ボタン名は画面の文字と同じにする(変えたら ここも)。「いんさつ」は Web版だけのボタンなので書かない。
+     隠れた入口は無い=GUIDE_AGAIN true(せっていから もう一度 見られる) */
+  guide: {
+    title:'つかいかた', step:'{n} / {m}', start:'はじめる', again:'もういちど 見る',
+    heads:[
+      '知って欲しい事ブック・そよぎ へ ようこそ',
+      'まず「1まいめ」から',
+      'せつを ひとつずつ 書く',
+      '「わたす」は 相手に あわせて',
+      'きょう いちばん 大事な 3つ',
+      '「説明書です」の ページ',
+      '書いた ことは この 端末の 中だけ',
+      '見やすく する'
+    ],
+    bodies:[
+      'このアプリは、本人と 家族で いっしょに 書く、本人の「説明書」です。要求では なく、説明書です。\n学校・あずけ先・びょういん・家族など、本人と かかわる 人に、知っていると たすかる ことを 相手に あわせて わたせます。\nわたすか どうか、何を 出すかは、いつでも 自分たちで きめられます。',
+      '下の「かく」を おすと、11の せつが ならびます。\nまず いちばん 上の「1まいめ(いちばん さきに よんでほしいこと)」に、「ぜったいに しないでほしいこと」と「こうなったら れんらくを」を みじかく 書きます。ここは 相手に いちばん さきに、大きな 字で 出ます。\nぜんぶ 書かなくても だいじょうぶです。',
+      '「かく」で せつを えらぶと、質問が 出ます。書くと 自動で ほぞんされ、あとから いつでも なおせます。\nほとんどの せつの 上に「書き方の 手がかり」が 出ます。「まえ」「つぎ」で となりの せつへ うつり、書きおわったら「せつの いちらんへ」を おします。\nもしもカードで かきだした ファイルが あれば、「かく」の 下の「もしもカードの ファイルを よみこむ」で 空いている らんに 入れられます。',
+      '下の「わたす」で 相手(学校・あずけ先・びょういん・家族)を えらび、「出す せつ(タップで 切りかえ)」で 出す せつを えらびます。はじめは 1まいめ・つたえ方・パニックの ときの たいおう だけです。\n「みせる(大きな字)」で 画面を そのまま 見せられます。「1まいめを がぞうで ほぞん」も できます。\n出したものは 本人の 大切な 情報です。わたす 相手と 場所を きめてから 出してください。',
+      '下の「きょうの3つ」は、引率する 人や きょう だけ 会う 人に 見せる、いちばん みじかい カードです。\n3行 だけ 書いて「大きく みせる」を おします。もどるときは「とじる」を おします。',
+      'ホームに『「説明書です」の ページ』という ボタンが あります。おすと、相手に そのまま 見せる 文が 読めます。\n「この ページを 大きく みせる」で 見せられます。\n「わたす」で 見せるときも、いつも いちばん さきに みじかい 文が つきます。',
+      '書いた ことは すべて この 端末の 中だけに ほぞんされ、どこにも 送られません。登録も いりません。\nスマホを かえるときは、「せってい」の「かきだす」で ファイルを のこし、あたらしい スマホで「よみこむ」を おします。\n見せた ものや がぞうに した ものは、あつかいに 気をつけて ください。',
+      '「せってい」で「もじの大きさ」(ふつう・大きい・とても大きい)や「いろ」(みどり・みずいろ・しろ・くろ)を かえられます。\nことばは 右上の「Language」で えらべます。\nこの 案内は「せってい」の「つかいかた」の「もういちど 見る」で、いつでも もう一度 見られます。'
+    ]
+  },
   screen: {
     home: {
       title:'知って欲しい事ブック',
@@ -265,6 +291,29 @@ var en = {
     note:'Everything you write is stored only on this device. Nothing is sent anywhere.',
     privacy:'Privacy policy',
     credit:'Developed by SOYOGI, a care and support consultation service'
+  },
+  guide: {
+    title:'How to use', step:'{n} / {m}', start:'Start', again:'Show again',
+    heads:[
+      'Welcome to Good-to-Know Book - SOYOGI',
+      'Start with page one',
+      'Write one section at a time',
+      'Hand over: adjusted for each reader',
+      'Today\'s 3 most important things',
+      'The "this is a manual" page',
+      'What you write stays on this device',
+      'Make it easier to read'
+    ],
+    bodies:[
+      'This app is a "manual" about a person, written together by the person and their family. It is not a list of demands.\nYou can hand it to people who spend time with the person, such as a school, a day service, a hospital or relatives, showing each of them what helps to know.\nWhether to hand it over, and what to show, is always up to you.',
+      'Tap "Write" at the bottom to see the 11 sections.\nStart at the top with "Page one (read this first)" and briefly write "Please never do this" and "Contact us if this happens". This part is shown first, in large text.\nYou do not have to fill in everything.',
+      'In "Write", choose a section to see its questions. What you type is saved automatically, and you can change it at any time.\nMost sections show "How to write it" hints at the top. Use "Previous" and "Next" to move between sections, and tap "Back to the sections" when you are done.\nIf you have a file exported from Moshimo Card, "Load a Moshimo Card file" at the bottom of "Write" fills in the empty fields.',
+      'In "Hand over" at the bottom, choose the reader (School, Day service, Hospital or Family), then choose sections under "Sections to include (tap to toggle)". At first only the minimum is included: page one, communication and panic.\nTap "Show (large text)" to show the screen as it is. You can also use "Save page one as image".\nWhat you output is private information. Decide who gets it and where before you output it.',
+      '"Today\'s 3" at the bottom is the shortest card, for someone who accompanies the person or meets them only today.\nWrite just three lines and tap "Show large". To go back, tap "Close".',
+      'On Home, tap ‘The "this is a manual" page’ to read a text that you show to the reader as it is.\nTap "Show this page large" to show it.\nWhen you hand over, a short version of it always comes first.',
+      'Everything you write is stored only on this device. Nothing is sent anywhere, and no sign-up is needed.\nWhen you change phones, tap "Export" in "Settings" to save a file, then tap "Import" on the new phone.\nTake care with anything you have shown or saved as an image.',
+      'In "Settings" you can change "Text size" (Normal, Large, Very large) and "Color" (Green, Light blue, White, Black).\nChoose the language with "Language" at the top right.\nYou can see this guide again at any time with "Show again" next to "How to use" in "Settings".'
+    ]
   },
   screen: {
     home: {
@@ -541,6 +590,32 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "note": "Alles, was Sie schreiben, wird nur auf diesem Gerät gespeichert. Nichts wird irgendwohin gesendet.",
     "privacy": "Datenschutzerklärung",
     "credit": "App-Entwicklung: SOYOGI, Beratungsstelle für Pflege und Unterstützung"
+  },
+  "guide": {
+    "title": "Anleitung",
+    "step": "{n} / {m}",
+    "start": "Loslegen",
+    "again": "Noch einmal ansehen",
+    "heads": [
+      "Willkommen beim Gut-zu-wissen-Buch - SOYOGI",
+      "Zuerst: Seite 1",
+      "Einen Abschnitt nach dem anderen",
+      "„Teilen“: passend für jeden Empfänger",
+      "Die 3 wichtigsten Dinge für heute",
+      "Die Seite „Das ist ein Leitfaden“",
+      "Was Sie schreiben, bleibt auf diesem Gerät",
+      "Besser lesbar machen"
+    ],
+    "bodies": [
+      "Diese App ist ein „Leitfaden“ über eine Person, den die Person selbst und ihre Familie zusammen schreiben. Keine Forderungen, sondern ein Leitfaden.\nSie können ihn Menschen geben, die mit der Person zu tun haben, etwa Schule, Betreuung, Krankenhaus oder Familie, jeweils mit dem, was hilfreich zu wissen ist.\nOb Sie ihn weitergeben und was Sie zeigen, entscheiden immer Sie selbst.",
+      "Tippen Sie unten auf „Schreiben“. Dann sehen Sie 11 Abschnitte.\nBeginnen Sie oben mit „Seite 1 (bitte zuerst lesen)“ und schreiben Sie kurz „Was bitte niemals getan werden soll“ und „In diesen Fällen bitte Kontakt aufnehmen“. Dieser Teil wird zuerst und in großer Schrift gezeigt.\nSie müssen nicht alles ausfüllen.",
+      "Wählen Sie unter „Schreiben“ einen Abschnitt, dann erscheinen die Fragen. Was Sie schreiben, wird automatisch gespeichert und lässt sich jederzeit ändern.\nDie meisten Abschnitte zeigen oben „Hinweise zum Schreiben“. Mit „Zurück“ und „Weiter“ wechseln Sie zum Nachbarabschnitt, und wenn Sie fertig sind, tippen Sie auf „Zur Liste der Abschnitte“.\nWenn Sie eine aus der Moshimo-Karte exportierte Datei haben, füllt „Datei der Moshimo-Karte laden“ unten unter „Schreiben“ die leeren Felder aus.",
+      "Wählen Sie unten unter „Teilen“ den Empfänger (Schule, Betreuung, Krankenhaus oder Familie) und bei „Abschnitte zum Mitgeben (zum Umschalten tippen)“ die Abschnitte. Zu Beginn ist nur das Nötigste dabei: Seite 1, Verständigung und Bei Panik.\nMit „Zeigen (große Schrift)“ zeigen Sie den Bildschirm direkt. Auch „Seite 1 als Bild speichern“ ist möglich.\nWas Sie weitergeben, sind wichtige Informationen über die Person. Legen Sie vorher fest, an wen und wo Sie es weitergeben.",
+      "„3 für heute“ unten ist die kürzeste Karte, für Begleitpersonen oder Menschen, die die Person nur heute treffen.\nSchreiben Sie nur drei Zeilen und tippen Sie auf „Groß zeigen“. Zurück geht es mit „Schließen“.",
+      "Unter „Start“ gibt es eine Schaltfläche mit der Aufschrift: Die Seite „Das ist ein Leitfaden“. Sie öffnet einen Text, den Sie dem Gegenüber direkt zeigen.\nMit „Diese Seite groß zeigen“ zeigen Sie ihn.\nWenn Sie etwas unter „Teilen“ zeigen, steht immer eine kurze Fassung davon am Anfang.",
+      "Alles, was Sie schreiben, wird nur auf diesem Gerät gespeichert. Nichts wird irgendwohin gesendet, und Sie brauchen keine Anmeldung.\nWenn Sie das Telefon wechseln, tippen Sie unter „Optionen“ auf „Exportieren“, um eine Datei zu sichern, und auf dem neuen Telefon auf „Importieren“.\nGehen Sie mit dem, was Sie gezeigt oder als Bild gespeichert haben, sorgfältig um.",
+      "Unter „Optionen“ ändern Sie die „Schriftgröße“ (Normal, Groß, Sehr groß) und die „Farbe“ (Grün, Hellblau, Weiß, Schwarz).\nDie Sprache wählen Sie oben rechts bei „Language“.\nDiese Anleitung sehen Sie jederzeit wieder: unter „Optionen“ bei „Anleitung“ mit „Noch einmal ansehen“."
+    ]
   },
   "screen": {
     "home": {
@@ -1000,6 +1075,32 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "privacy": "Politique de confidentialité",
     "credit": "Application développée par SOYOGI, espace de conseil en aide et accompagnement"
   },
+  "guide": {
+    "title": "Guide d'utilisation",
+    "step": "{n} / {m}",
+    "start": "Commencer",
+    "again": "Revoir",
+    "heads": [
+      "Bienvenue dans Livret bon à savoir - SOYOGI",
+      "Commencez par la page 1",
+      "Une section à la fois",
+      "« Remettre » : adapté à chaque destinataire",
+      "Les 3 choses les plus importantes aujourd'hui",
+      "La page \"C'est un mode d'emploi\"",
+      "Ce que vous écrivez reste sur cet appareil",
+      "Rendre la lecture plus facile"
+    ],
+    "bodies": [
+      "Cette application est le « mode d'emploi » d'une personne, écrit par elle et sa famille. Pas des exigences, un mode d'emploi.\nVous pouvez le remettre aux personnes qui l'accompagnent, comme l'école, le lieu d'accueil, l'hôpital ou la famille, avec ce qu'il est utile de savoir pour chacun.\nLe remettre ou non, et ce que vous montrez, c'est toujours vous qui décidez.",
+      "Touchez « Écrire » en bas pour voir les 11 sections.\nCommencez en haut par « Page 1 (à lire en premier) » et écrivez brièvement « Merci de ne jamais faire cela » et « Si cela arrive, contactez-nous ». Cette partie s'affiche en premier, en grands caractères.\nPas besoin de tout remplir.",
+      "Dans « Écrire », choisissez une section pour voir ses questions. Tout est enregistré automatiquement et reste modifiable à tout moment.\nLa plupart des sections affichent en haut des « Pistes pour écrire ». « Précédent » et « Suivant » mènent à la section voisine ; à la fin, touchez « Vers la liste des sections ».\nSi vous avez un fichier exporté depuis la carte Moshimo, « Charger un fichier de la carte Moshimo », en bas de « Écrire », remplit les champs vides.",
+      "Dans « Remettre » en bas, choisissez le destinataire (École, Lieu d'accueil, Hôpital ou Famille), puis les sections sous « Sections à inclure (appuyez pour changer) ». Au début, seul le minimum est inclus : page 1, communication et panique.\n« Afficher (grands caractères) » montre l'écran tel quel. Vous pouvez aussi « Enregistrer la page 1 en image ».\nCe que vous affichez contient des informations importantes sur la personne. Décidez d'abord à qui et où vous le remettez.",
+      "« Les 3 du jour » en bas est la carte la plus courte, pour une personne qui accompagne ou que l'on voit seulement aujourd'hui.\nÉcrivez seulement trois lignes et touchez « Afficher en grand ». Pour revenir, touchez « Fermer ».",
+      "Dans Accueil, il y a un bouton intitulé : La page \"C'est un mode d'emploi\". Il ouvre un texte à montrer tel quel à votre interlocuteur.\nTouchez « Afficher cette page en grand » pour le montrer.\nQuand vous remettez le livret, une version courte de ce texte vient toujours en premier.",
+      "Tout ce que vous écrivez reste uniquement sur cet appareil. Rien n'est envoyé ailleurs et aucune inscription n'est nécessaire.\nPour changer de téléphone, touchez « Exporter » dans « Réglages » pour enregistrer un fichier, puis « Importer » sur le nouveau téléphone.\nFaites attention à ce que vous avez montré ou enregistré en image.",
+      "Dans « Réglages », vous pouvez changer la « Taille du texte » (Normale, Grande, Très grande) et la « Couleur » (Vert, Bleu clair, Blanc, Noir).\nChoisissez la langue avec « Language » en haut à droite.\nVous pouvez revoir ce guide à tout moment avec « Revoir », à la ligne « Guide d'utilisation » des « Réglages »."
+    ]
+  },
   "screen": {
     "home": {
       "title": "Livret bon à savoir",
@@ -1457,6 +1558,32 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "note": "Todo lo escrito se guarda solo en este dispositivo. No se envía a ninguna parte.",
     "privacy": "Política de privacidad",
     "credit": "App desarrollada por SOYOGI, servicio de consulta sobre cuidados y apoyo"
+  },
+  "guide": {
+    "title": "Cómo se usa",
+    "step": "{n} / {m}",
+    "start": "Empezar",
+    "again": "Ver de nuevo",
+    "heads": [
+      "Esto es Libro para conocerme - SOYOGI",
+      "Empezar por la primera página",
+      "Una sección cada vez",
+      "«Entregar»: adaptado a quien lo recibe",
+      "Las 3 cosas más importantes de hoy",
+      "La página «Esto es un manual»",
+      "Lo que se escribe queda en este dispositivo",
+      "Más fácil de leer"
+    ],
+    "bodies": [
+      "Esta aplicación es un «manual» sobre la persona, escrito por ella misma y su familia. No es una lista de exigencias, sino un manual.\nSe puede entregar a quienes pasan tiempo con la persona, como la escuela, el centro de día, el hospital o la familia, con lo que conviene saber en cada caso.\nEntregarlo o no, y qué mostrar, siempre lo decide la propia persona con su familia.",
+      "Al tocar «Escribir» abajo, aparecen 11 secciones.\nEmpezar arriba por «Primera página (para leer antes que nada)» y escribir brevemente «Por favor, no hacer nunca» y «Si pasa esto, avisar». Esta parte se muestra la primera, en letra grande.\nNo hace falta rellenarlo todo.",
+      "En «Escribir», al elegir una sección aparecen sus preguntas. Lo escrito se guarda automáticamente y se puede cambiar en cualquier momento.\nLa mayoría de las secciones muestran arriba «Pistas para escribir». Con «Anterior» y «Siguiente» se pasa a la sección de al lado; al terminar, tocar «A la lista de secciones».\nSi hay un archivo exportado desde MOSHIMO Card, «Cargar un archivo de MOSHIMO Card», abajo en «Escribir», rellena los campos vacíos.",
+      "En «Entregar», abajo, elegir a quién va (Escuela, Centro de día, Hospital o Familia) y las secciones en «Secciones que incluir (tocar para cambiar)». Al principio solo va lo mínimo: primera página, comunicación y crisis.\n«Mostrar (letra grande)» muestra la pantalla tal cual. También se puede «Guardar la primera página como imagen».\nLo que se muestra es información importante de la persona. Conviene decidir antes a quién se entrega y en qué lugar.",
+      "«Las 3 de hoy», abajo, es la tarjeta más corta, para quien acompaña a la persona o la ve solo hoy.\nEscribir solo tres líneas y tocar «Mostrar en grande». Para volver, tocar «Cerrar».",
+      "En Inicio hay un botón con el texto: La página «Esto es un manual». Abre un texto para mostrar tal cual a la otra persona.\nCon «Mostrar esta página en grande» se muestra.\nAl entregar, siempre va primero una versión corta de ese texto.",
+      "Todo lo que se escribe se guarda solo en este dispositivo. No se envía a ningún lugar y no hace falta registrarse.\nAl cambiar de teléfono, tocar «Exportar» en «Ajustes» para guardar un archivo y luego «Importar» en el teléfono nuevo.\nConviene cuidar lo que se ha mostrado o guardado como imagen.",
+      "En «Ajustes» se puede cambiar el «Tamaño de letra» (Normal, Grande, Muy grande) y el «Color» (Verde, Azul claro, Blanco, Negro).\nEl idioma se elige en «Language», arriba a la derecha.\nEsta guía se puede ver de nuevo en cualquier momento con «Ver de nuevo», en la fila «Cómo se usa» de «Ajustes»."
+    ]
   },
   "screen": {
     "home": {
@@ -1916,6 +2043,32 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "privacy": "Informativa sulla privacy",
     "credit": "App sviluppata da SOYOGI, servizio di consulenza su assistenza e sostegno"
   },
+  "guide": {
+    "title": "Come si usa",
+    "step": "{n} / {m}",
+    "start": "Inizia",
+    "again": "Rivedi",
+    "heads": [
+      "Questo è Libro per conoscermi - SOYOGI",
+      "Cominci dalla prima pagina",
+      "Una sezione alla volta",
+      "«Consegnare»: adattato a chi lo riceve",
+      "Le 3 cose più importanti di oggi",
+      "La pagina «Questa è una guida»",
+      "Ciò che scrive resta su questo dispositivo",
+      "Più facile da leggere"
+    ],
+    "bodies": [
+      "Questa app è una «guida» sulla persona, scritta insieme dalla persona e dalla sua famiglia. Non è una richiesta, è una guida.\nSi può consegnare a chi passa del tempo con la persona, come la scuola, il centro diurno, l'ospedale o i familiari, con ciò che è utile sapere per ciascuno.\nSe consegnarla e cosa mostrare, lo decidete sempre voi.",
+      "Tocchi «Scrivere» in basso per vedere le 11 sezioni.\nCominci in alto da «Prima pagina (da leggere prima di tutto)» e scriva in breve «Cose da non fare mai» e «Quando contattarci». Questa parte compare per prima, in caratteri grandi.\nNon serve compilare tutto.",
+      "In «Scrivere», scelga una sezione per vedere le domande. Mentre scrive, viene salvato in automatico e può cambiarlo quando vuole.\nQuasi tutte le sezioni mostrano in alto dei «Suggerimenti per scrivere». Con «Precedente» e «Avanti» passa alla sezione accanto; alla fine tocchi «Torna all'elenco delle sezioni».\nSe ha un file esportato da Moshimo Card, «Carica un file di Moshimo Card», in fondo a «Scrivere», riempie i campi vuoti.",
+      "In «Consegnare», in basso, scelga a chi va (Scuola, Centro diurno, Ospedale o Famiglia) e le sezioni in «Sezioni da includere (toccare per cambiare)». All'inizio c'è solo il minimo: prima pagina, comunicazione e crisi.\n«Mostra (caratteri grandi)» mostra lo schermo così com'è. Può anche usare «Salva la prima pagina come immagine».\nCiò che mostra contiene informazioni importanti della persona. Decida prima a chi darlo e in quale luogo.",
+      "«Le 3 di oggi», in basso, è la scheda più breve, per chi accompagna la persona o la incontra solo oggi.\nScriva solo tre righe e tocchi «Mostra in grande». Per tornare, tocchi «Chiudi».",
+      "In Home c'è un pulsante con la scritta: La pagina «Questa è una guida». Apre un testo da mostrare così com'è all'altra persona.\nCon «Mostra questa pagina in grande» lo mostra.\nQuando consegna, una versione breve di questo testo viene sempre per prima.",
+      "Tutto ciò che scrive resta solo su questo dispositivo. Non viene inviato da nessuna parte e non serve registrarsi.\nQuando cambia telefono, tocchi «Esporta» in «Opzioni» per salvare un file, poi «Importa» sul nuovo telefono.\nFaccia attenzione a ciò che ha mostrato o salvato come immagine.",
+      "In «Opzioni» può cambiare la «Dimensione del testo» (Normale, Grande, Molto grande) e il «Colore» (Verde, Azzurro, Bianco, Nero).\nLa lingua si sceglie con «Language» in alto a destra.\nPuò rivedere queste istruzioni in qualsiasi momento con «Rivedi», nella riga «Come si usa» delle «Opzioni»."
+    ]
+  },
   "screen": {
     "home": {
       "title": "Libro per conoscermi",
@@ -2373,6 +2526,32 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "note": "Tudo o que for escrito fica guardado apenas neste aparelho. Nada é enviado.",
     "privacy": "Política de privacidade",
     "credit": "Desenvolvimento: SOYOGI, serviço de consulta sobre cuidados e apoio"
+  },
+  "guide": {
+    "title": "Como usar",
+    "step": "{n} / {m}",
+    "start": "Começar",
+    "again": "Ver de novo",
+    "heads": [
+      "Isto é o Para me conhecer - SOYOGI",
+      "Começar pela primeira página",
+      "Uma parte de cada vez",
+      "«Entregar»: conforme quem vai ler",
+      "As 3 coisas mais importantes de hoje",
+      "A página \"Isto é um manual\"",
+      "O que se escreve fica neste aparelho",
+      "Mais fácil de ler"
+    ],
+    "bodies": [
+      "Esta aplicação é o «manual» da pessoa, escrito pela própria pessoa e pela família. Não é uma lista de exigências. É um manual.\nPode ser mostrado a quem convive com a pessoa, como a escola, o centro de dia, o hospital ou a família, com o que é útil saber em cada caso.\nEntregar ou não, e o que mostrar, é sempre a pessoa e a família que decidem.",
+      "Ao tocar em «Escrever», em baixo, aparecem 11 partes.\nComeçar no topo por «Primeira página (o que ler antes de tudo)» e escrever em poucas palavras «O que pedimos que nunca se faça» e «Avisar se isto acontecer». Esta parte aparece primeiro, em letra grande.\nNão é preciso preencher tudo.",
+      "Em «Escrever», ao escolher uma parte, aparecem as perguntas. O que se escreve fica guardado automaticamente e pode ser mudado a qualquer momento.\nA maioria das partes mostra em cima «Dicas para escrever». Com «Anterior» e «Próximo» passa-se à parte ao lado; no fim, tocar em «Voltar à lista de partes».\nSe houver um arquivo exportado do Moshimo Card, «Importar dados do Moshimo Card», em baixo em «Escrever», preenche os campos vazios.",
+      "Em «Entregar», em baixo, escolher para quem é (Escola, Centro de dia, Hospital ou Família) e as partes em «Partes a incluir (tocar para alternar)». No início vai só o mínimo: primeira página, comunicação e crise.\n«Mostrar (letra grande)» mostra a página tal como está. Também se pode «Guardar a primeira página como imagem».\nO material gerado contém informações importantes da pessoa. Antes de gerar, decidir a quem entregar e onde.",
+      "«3 de hoje», em baixo, é o cartão mais curto, para quem acompanha a pessoa ou a vê só hoje.\nEscrever só três linhas e tocar em «Mostrar em tamanho grande». Para voltar, tocar em «Fechar».",
+      "No Início há um botão com o texto: A página \"Isto é um manual\". Abre um texto para mostrar tal como está à outra pessoa.\nCom «Mostrar esta página em tamanho grande» mostra-se.\nAo entregar, uma versão curta desse texto vem sempre primeiro.",
+      "Tudo o que se escreve fica guardado só neste aparelho. Nada é enviado para fora e não é preciso criar conta.\nAo mudar de aparelho, tocar em «Exportar» nos «Ajustes» para guardar um arquivo e depois em «Importar» no aparelho novo.\nConvém ter cuidado com o que se mostrou ou guardou como imagem.",
+      "Nos «Ajustes» pode-se mudar o «Tamanho do texto» (Normal, Grande, Muito grande) e a «Cor» (Verde, Azul-claro, Branco, Preto).\nO idioma escolhe-se em «Language», no canto superior direito.\nEste guia pode ser visto de novo a qualquer momento com «Ver de novo», na linha «Como usar» dos «Ajustes»."
+    ]
   },
   "screen": {
     "home": {
@@ -2832,6 +3011,32 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "privacy": "Privacybeleid",
     "credit": "App ontwikkeld door SOYOGI, adviespunt voor zorg en ondersteuning"
   },
+  "guide": {
+    "title": "Zo werkt het",
+    "step": "{n} / {m}",
+    "start": "Beginnen",
+    "again": "Nog eens bekijken",
+    "heads": [
+      "Welkom bij Goed om te weten - SOYOGI",
+      "Begin met pagina 1",
+      "Eén onderdeel tegelijk",
+      "\"Meegeven\": aangepast aan de ontvanger",
+      "De 3 belangrijkste dingen van vandaag",
+      "De pagina “Dit is een handleiding”",
+      "Wat u schrijft, blijft op dit apparaat",
+      "Makkelijker lezen"
+    ],
+    "bodies": [
+      "Deze app is een “handleiding” over de persoon, geschreven door de persoon zelf en de familie. Geen lijst met eisen, maar een handleiding.\nU kunt hem meegeven aan mensen die met de persoon omgaan, zoals school, opvang, ziekenhuis of familie, met wat voor ieder handig is om te weten.\nOf u hem meegeeft en wat u laat zien, beslist u altijd zelf.",
+      "Tik onderaan op \"Schrijven\" om de 11 onderdelen te zien.\nBegin bovenaan met \"Pagina 1 (graag als eerste lezen)\" en schrijf kort \"Doe dit alstublieft nooit\" en \"Neem contact op als dit gebeurt\". Dit deel wordt als eerste getoond, in grote letters.\nU hoeft niet alles in te vullen.",
+      "Kies bij \"Schrijven\" een onderdeel om de vragen te zien. Wat u schrijft, wordt automatisch opgeslagen en kunt u altijd aanpassen.\nDe meeste onderdelen tonen bovenaan \"Tips voor het schrijven\". Met \"Vorige\" en \"Volgende\" gaat u naar het onderdeel ernaast; tik als u klaar bent op \"Naar de lijst met onderdelen\".\nHebt u een bestand dat uit Moshimo Card is geëxporteerd, dan vult \"Moshimo Card-bestand laden\" onderaan bij \"Schrijven\" de lege vakken in.",
+      "Kies onderaan bij \"Meegeven\" de ontvanger (School, Opvang, Ziekenhuis of Familie) en de onderdelen bij \"Onderdelen die u meegeeft (tik om aan/uit te zetten)\". In het begin gaat alleen het minimum mee: pagina 1, communicatie en paniek.\nMet \"Tonen (grote letters)\" laat u het scherm meteen zien. U kunt ook \"Pagina 1 als afbeelding opslaan\".\nWat u meegeeft, is belangrijke informatie over de persoon. Bepaal eerst aan wie en op welke plek u het geeft.",
+      "\"3 voor vandaag\" onderaan is de kortste kaart, voor wie de persoon begeleidt of alleen vandaag ziet.\nSchrijf maar drie regels en tik op \"Groot tonen\". Terug gaat met \"Sluiten\".",
+      "Op Start staat een knop met de tekst: De pagina “Dit is een handleiding”. Die opent een tekst die u de ander zo kunt laten zien.\nMet \"Deze pagina groot tonen\" laat u hem zien.\nBij meegeven staat er altijd een korte versie van deze tekst vooraan.",
+      "Alles wat u schrijft, wordt alleen op dit apparaat bewaard. Er wordt niets verstuurd en u hoeft zich niet aan te melden.\nBij een andere telefoon tikt u in \"Instellingen\" op \"Exporteren\" om een bestand te bewaren, en op de nieuwe telefoon op \"Importeren\".\nGa zorgvuldig om met wat u hebt laten zien of als afbeelding hebt opgeslagen.",
+      "In \"Instellingen\" kunt u de \"Tekstgrootte\" (Normaal, Groot, Heel groot) en de \"Kleur\" (Groen, Lichtblauw, Wit, Zwart) veranderen.\nDe taal kiest u rechtsboven bij \"Language\".\nDeze uitleg ziet u altijd opnieuw via \"Nog eens bekijken\" bij \"Zo werkt het\" in \"Instellingen\"."
+    ]
+  },
   "screen": {
     "home": {
       "title": "Goed om te weten",
@@ -3289,6 +3494,32 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "note": "Allt du skriver sparas bara i den här enheten. Inget skickas någonstans.",
     "privacy": "Integritetspolicy",
     "credit": "Utvecklad av SOYOGI, en rådgivning om omsorg och stöd"
+  },
+  "guide": {
+    "title": "Så används appen",
+    "step": "{n} / {m}",
+    "start": "Börja",
+    "again": "Visa igen",
+    "heads": [
+      "Välkommen till Bra att veta-boken - SOYOGI",
+      "Börja med första sidan",
+      "Ett avsnitt i taget",
+      "”Lämna över”: anpassat efter mottagaren",
+      "Dagens 3 viktigaste saker",
+      "Sidan ”Det här är en bruksanvisning”",
+      "Det du skriver stannar på den här enheten",
+      "Lättare att läsa"
+    ],
+    "bodies": [
+      "Appen är en ”bruksanvisning” om personen, som personen själv och familjen skriver tillsammans. Det här är inga krav. Det är en bruksanvisning.\nDu kan lämna den till dem som umgås med personen, till exempel skola, omsorg, sjukvård eller familj, med det som är bra för var och en att veta.\nOm ni lämnar över den och vad ni visar bestämmer ni alltid själva.",
+      "Tryck på ”Skriv” längst ner så visas 11 avsnitt.\nBörja överst med ”Första sidan (det vi vill att du läser först)” och skriv kort under ”Detta ber vi dig att aldrig göra” och ”Kontakta oss om detta händer”. Den delen visas först, med stor text.\nDu behöver inte fylla i allt.",
+      "Välj ett avsnitt under ”Skriv” så visas frågorna. Det du skriver sparas automatiskt och kan ändras när som helst.\nDe flesta avsnitt har ”Tips för att skriva” överst. Med ”Föregående” och ”Nästa” går du till avsnittet bredvid, och när du är klar trycker du på ”Till listan med avsnitt”.\nOm du har en fil som exporterats från Moshimo Card fyller ”Läs in en fil från Moshimo Card” längst ner under ”Skriv” i de tomma fälten.",
+      "Välj mottagare under ”Lämna över” längst ner (Skola, Omsorg, Sjukvård eller Familj) och avsnitt under ”Avsnitt som visas (tryck för att växla)”. Från början är bara det minsta med: första sidan, kommunikation och panik.\nMed ”Visa (stor text)” visar du skärmen som den är. Du kan också välja ”Spara första sidan som bild”.\nDet du visar är personens viktiga uppgifter. Bestäm först vem som ska få dem och var.",
+      "”Dagens 3” längst ner är det kortaste kortet, för den som följer med personen eller bara träffar hen i dag.\nSkriv bara tre rader och tryck på ”Visa stort”. Tillbaka kommer du med ”Stäng”.",
+      "På Hem finns en knapp med texten: Sidan ”Det här är en bruksanvisning”. Den öppnar en text som du visar för mottagaren som den är.\nMed ”Visa den här sidan stort” visar du den.\nNär du lämnar över kommer alltid en kort version av texten först.",
+      "Allt du skriver sparas bara på den här enheten. Inget skickas någonstans och du behöver inget konto.\nNär du byter telefon trycker du på ”Exportera” under ”Alternativ” för att spara en fil och sedan på ”Importera” i den nya telefonen.\nVar rädd om det du har visat eller sparat som bild.",
+      "Under ”Alternativ” kan du ändra ”Textstorlek” (Normal, Stor, Mycket stor) och ”Färg” (Grön, Ljusblå, Vit, Svart).\nSpråket väljer du uppe till höger under ”Language”.\nDen här guiden kan du se igen när som helst med ”Visa igen” vid ”Så används appen” under ”Alternativ”."
+    ]
   },
   "screen": {
     "home": {
@@ -3748,6 +3979,32 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "privacy": "개인정보 처리방침",
     "credit": "앱 개발: 돌봄과 지원 상담소 SOYOGI"
   },
+  "guide": {
+    "title": "사용 방법",
+    "step": "{n} / {m}",
+    "start": "시작하기",
+    "again": "다시 보기",
+    "heads": [
+      "알아 두셨으면 하는 것 - SOYOGI에 오신 것을 환영해요",
+      "먼저 \"첫 장\"부터",
+      "항목을 하나씩 쓰기",
+      "\"건네기\"는 상대에 맞춰",
+      "오늘 가장 중요한 3가지",
+      "“설명서예요” 페이지",
+      "적은 내용은 이 기기 안에만",
+      "보기 편하게 하기"
+    ],
+    "bodies": [
+      "이 앱은 본인과 가족이 함께 쓰는, 본인의 “설명서”예요. 요구가 아니라, 설명서예요.\n학교·돌봄 기관·병원·가족 등 본인과 함께 지내는 사람에게, 알아 두면 도움이 되는 것을 상대에 맞춰 건넬 수 있어요.\n건넬지 말지, 무엇을 보여 줄지는 언제나 스스로 정할 수 있어요.",
+      "아래의 \"쓰기\"를 누르면 11개 항목이 나와요.\n먼저 맨 위 \"첫 장 (가장 먼저 읽어 주었으면 하는 것)\"에 \"절대로 하지 않았으면 하는 것\"과 \"이럴 때는 연락해 주세요\"를 짧게 적어요. 이 부분은 상대에게 가장 먼저, 큰 글씨로 나와요.\n다 적지 않아도 괜찮아요.",
+      "\"쓰기\"에서 항목을 고르면 질문이 나와요. 적으면 자동으로 저장되고, 나중에 언제든 고칠 수 있어요.\n대부분의 항목 위에는 \"쓰는 요령\"이 나와요. \"이전\" \"다음\"으로 옆 항목으로 옮기고, 다 적으면 \"항목 목록으로\"를 눌러요.\n모시모 카드에서 내보낸 파일이 있으면, \"쓰기\" 아래쪽의 \"모시모 카드 파일 불러오기\"로 빈칸을 채울 수 있어요.",
+      "아래의 \"건네기\"에서 상대(학교·돌봄 기관·병원·가족)를 고르고, \"보여 줄 항목 (탭해서 바꾸기)\"에서 항목을 골라요. 처음에는 첫 장·소통 방법·패닉일 때의 대응만 들어 있어요.\n\"보여 주기 (큰 글씨)\"로 화면을 그대로 보여 줄 수 있어요. \"첫 장을 이미지로 저장\"도 할 수 있어요.\n보여 주는 내용은 본인의 소중한 정보예요. 건넬 상대와 장소를 정한 다음에 보여 주세요.",
+      "아래의 \"오늘의 3가지\"는 함께 다니는 사람이나 오늘만 만나는 사람에게 보여 주는, 가장 짧은 카드예요.\n세 줄만 적고 \"크게 보여 주기\"를 눌러요. 돌아갈 때는 \"닫기\"를 눌러요.",
+      "홈의 “설명서예요” 페이지 버튼을 누르면, 상대에게 그대로 보여 주는 글을 읽을 수 있어요.\n\"이 페이지를 크게 보여 주기\"로 보여 줄 수 있어요.\n\"건네기\"로 보여 줄 때도 언제나 맨 앞에 짧은 글이 붙어요.",
+      "적은 내용은 모두 이 기기 안에만 저장되고, 어디에도 보내지 않아요. 가입도 필요 없어요.\n휴대폰을 바꿀 때는 \"설정\"의 \"내보내기\"로 파일을 남기고, 새 휴대폰에서 \"불러오기\"를 눌러요.\n보여 준 것이나 이미지로 저장한 것은 조심해서 다뤄 주세요.",
+      "\"설정\"에서 \"글자 크기\"(보통 · 크게 · 아주 크게)와 \"색\"(초록 · 하늘색 · 흰색 · 검정)을 바꿀 수 있어요.\n언어는 오른쪽 위의 \"Language\"에서 골라요.\n이 안내는 \"설정\"의 \"사용 방법\"에서 \"다시 보기\"를 누르면 언제든 다시 볼 수 있어요."
+    ]
+  },
   "screen": {
     "home": {
       "title": "알아 두셨으면 하는 것",
@@ -4206,6 +4463,32 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "privacy": "隐私政策",
     "credit": "应用开发：护理与支援咨询处 SOYOGI"
   },
+  "guide": {
+    "title": "使用方法",
+    "step": "{n} / {m}",
+    "start": "开始",
+    "again": "再看一次",
+    "heads": [
+      "欢迎使用 希望您了解的事 - SOYOGI",
+      "先从“第1页”开始",
+      "一个部分一个部分地填写",
+      "“交给”：按对方调整",
+      "今天最重要的3件事",
+      "“这是说明书”页面",
+      "写下的内容只留在这台设备里",
+      "让画面更容易看"
+    ],
+    "bodies": [
+      "这个应用是由本人和家人一起写的、关于本人的“说明书”。不是要求，而是一份说明书。\n可以按照对方的需要，把了解后会有帮助的事交给学校、托管机构、医院、家人等与本人相处的人。\n交不交、给对方看什么，始终由你们自己决定。",
+      "点下方的“填写”，会列出11个部分。\n先在最上面的“第1页（最希望先读的内容）”里，简短地写下“请绝对不要做的事”和“出现这些情况时请联系”。这部分会最先用大字给对方看。\n不必全部填写。",
+      "在“填写”里选一个部分，就会出现问题。写下的内容会自动保存，以后随时可以修改。\n大多数部分的上方都有“填写提示”。用“上一个”“下一个”可以切换到相邻的部分，写完后点“返回部分列表”。\n如果有从 MOSHIMO Card 导出的文件，可以用“填写”下方的“读取 MOSHIMO Card 的文件”填入空着的栏。",
+      "在下方的“交给”里选择对象（学校、托管机构、医院或家人），再在“出示的部分（点按切换）”里选择部分。一开始只有最少的内容：第1页、沟通方式和恐慌时的应对。\n点“展示（大字）”可以直接给对方看画面。也可以“把第1页存为图片”。\n输出的内容是本人的重要信息。请先决定交给谁、在什么场合使用，再输出。",
+      "下方的“今天的3件”是最短的卡片，给陪同的人或只在今天见面的人看。\n只写三行，然后点“放大展示”。返回时点“关闭”。",
+      "点首页上的“这是说明书”页面按钮，可以读到直接给对方看的文字。\n点“放大展示这一页”就能给对方看。\n用“交给”出示时，最前面也总会附上一段简短的文字。",
+      "写下的内容全部只保存在这台设备里，不会发送到任何地方，也不需要注册。\n换手机时，在“设置”里点“导出”保存文件，然后在新手机上点“导入”。\n给别人看过或存成图片的内容，请注意妥善处理。",
+      "在“设置”里可以更改“文字大小”（普通、大、特大）和“颜色”（绿色、浅蓝色、白色、黑色）。\n语言在右上角的“Language”中选择。\n在“设置”的“使用方法”里点“再看一次”，随时可以再看一遍这份介绍。"
+    ]
+  },
   "screen": {
     "home": {
       "title": "希望您了解的事",
@@ -4663,6 +4946,32 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "note": "كل ما تكتبه يُحفظ على هذا الجهاز فقط، ولا يُرسل إلى أي مكان.",
     "privacy": "سياسة الخصوصية",
     "credit": "تطوير التطبيق: SOYOGI، خدمة استشارات في الرعاية والدعم"
+  },
+  "guide": {
+    "title": "طريقة الاستخدام",
+    "step": "{n} / {m}",
+    "start": "ابدأ",
+    "again": "عرض مرة أخرى",
+    "heads": [
+      "مرحبًا بك في ما نود أن تعرفوه - SOYOGI",
+      "ابدأ بالصفحة الأولى",
+      "قسم واحد في كل مرة",
+      "«تسليم»: بما يناسب كل جهة",
+      "أهم 3 أشياء اليوم",
+      "صفحة «هذا دليل»",
+      "ما تكتبه يبقى على هذا الجهاز",
+      "قراءة أسهل"
+    ],
+    "bodies": [
+      "هذا التطبيق «دليل» عن الشخص، يكتبه الشخص نفسه مع عائلته. ليس قائمة مطالب، بل دليل تعريفي.\nيمكنك تقديمه لمن يقضون وقتًا مع الشخص، مثل المدرسة ومكان الرعاية والمستشفى والعائلة، مع ما يفيد كل جهة أن تعرفه.\nتقديمه من عدمه، وما يُعرض منه، قرارٌ يعود إليكم دائمًا.",
+      "اضغط «كتابة» في الأسفل لتظهر 11 قسمًا.\nابدأ من الأعلى بـ«الصفحة الأولى (أهم ما نرجو قراءته أولًا)»، واكتب باختصار في «أمور نرجو ألّا تفعلوها أبدًا» و«تواصلوا معنا إذا حدث هذا». يظهر هذا الجزء أولًا وبخط كبير.\nلا يلزم ملء كل شيء.",
+      "في «كتابة» اختر قسمًا لتظهر أسئلته. يُحفظ ما تكتبه تلقائيًا، ويمكنك تعديله في أي وقت.\nفي أعلى معظم الأقسام توجد «إرشادات للكتابة». انتقل إلى القسم المجاور بـ«السابق» و«التالي»، وعند الانتهاء اضغط «إلى قائمة الأقسام».\nإذا كان لديك ملف مُصدَّر من Moshimo Card، فاستخدم «استيراد ملف Moshimo Card» في أسفل «كتابة» لملء الخانات الفارغة.",
+      "في «تسليم» في الأسفل، اختر الجهة (المدرسة أو مكان الرعاية أو المستشفى أو العائلة)، ثم اختر الأقسام في «الأقسام المعروضة (اضغط للتبديل)». في البداية يُعرض الحد الأدنى فقط: الصفحة الأولى وطرق التواصل والتعامل عند الانفعال الشديد.\nاضغط «عرض (خط كبير)» لعرض الشاشة كما هي. ويمكنك أيضًا «حفظ الصفحة الأولى كصورة».\nما تُخرجه معلومات مهمة تخص الشخص. يُرجى تحديد الجهة التي ستتسلّمه والمكان قبل إخراجه.",
+      "«أهم 3 لليوم» في الأسفل هي أقصر بطاقة، لمن يرافق الشخص أو يلقاه اليوم فقط.\nاكتب ثلاثة أسطر فقط ثم اضغط «عرض بحجم كبير». للرجوع اضغط «إغلاق».",
+      "في «الرئيسية»، يفتح زر صفحة «هذا دليل» نصًا تعرضه على الشخص الآخر كما هو.\nاضغط «عرض هذه الصفحة بحجم كبير» لعرضه.\nوعند التسليم، تأتي نسخة قصيرة من هذا النص في البداية دائمًا.",
+      "كل ما تكتبه يُحفظ على هذا الجهاز فقط، ولا يُرسل إلى أي مكان، ولا حاجة إلى تسجيل.\nعند تغيير الهاتف، اضغط «تصدير» في «الإعدادات» لحفظ ملف، ثم اضغط «استيراد» على الهاتف الجديد.\nتعامل بحذر مع ما عرضته أو حفظته كصورة.",
+      "في «الإعدادات» يمكنك تغيير «حجم الخط» (عادي، كبير، كبير جدًا) و«اللون» (أخضر، أزرق فاتح، أبيض، أسود).\nاختر اللغة من «Language» في أعلى الشاشة.\nيمكنك رؤية هذا الشرح مرة أخرى في أي وقت بالضغط على «عرض مرة أخرى» في سطر «طريقة الاستخدام» داخل «الإعدادات»."
+    ]
   },
   "screen": {
     "home": {
