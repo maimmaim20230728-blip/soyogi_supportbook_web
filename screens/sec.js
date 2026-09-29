@@ -2,7 +2,8 @@
 /* 画面: 節の入力(1節ずつ)
    ・window.SBOOK.cur の節を描く。質問ごとに textarea(記入例は placeholder)。書くと自動保存(input はフォーム部品のネイティブイベント)
    ・「書き方の手がかり」(見えている行動→本当の理由→してほしいこと 等)は i18n の screen.secs.<id>.h
-   ・まえ/つぎ で節を渡り歩く。ナビには置かず、book から来る */
+   ・まえ/つぎ で節を渡り歩く。ナビには置かず、book から来る
+   ・Android の戻るボタン(Play版)は「せつの いちらんへ」と同じ=節の一覧(book)へ。まえ/つぎ で渡った節を1つずつは戻らない(2026-09-29) */
 (function(){
   window.SCREENS.register('sec', {
     nav: 'book',            // 下ナビは「かく」を光らせる
@@ -32,6 +33,7 @@
       for(var i = 0; i < s.qs.length; i++){
         (function(q){
           var f = api.el('div', 'field sb-q');
+          f.setAttribute('data-nodirty', '');   // 書くたびに保存される欄=戻るボタンで「まだ保存していません」を出さない(2026-09-29)
           var id = 'sb-q-' + s.id + '-' + q;
           var lab = api.el('label', null, T(base + '.q.' + q + '.l'));
           lab.setAttribute('for', id);

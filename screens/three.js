@@ -18,6 +18,7 @@
       for(var i = 0; i < 3; i++){
         (function(n){
           var f = api.el('div', 'field');
+          f.setAttribute('data-nodirty', '');   // 書くたびに保存される欄=戻るボタンで「まだ保存していません」を出さない(2026-09-29)
           var id = 'sb-three-' + (n + 1);
           var lab = api.el('label', null, T('screen.three.line').replace('{n}', String(n + 1)));
           lab.setAttribute('for', id);
