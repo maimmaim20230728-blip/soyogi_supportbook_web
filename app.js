@@ -10,7 +10,7 @@
      変えたら README の「シェルの変更点」に書く */
 (function(){
 
-var VER = '0.4.4';               // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
+var VER = '0.4.5';               // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
 var APP_KEY = 'soyogi_supportbook';        // バックアップの識別(別アプリのファイルを読まない)
 var LS = 'sbook.';
 var LS_PREF = LS + 'pref.v1';
