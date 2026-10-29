@@ -10,7 +10,7 @@
      変えたら README の「シェルの変更点」に書く */
 (function(){
 
-var VER = '0.4.8';               // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
+var VER = '0.4.9';               // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
 var APP_KEY = 'soyogi_supportbook';        // バックアップの識別(別アプリのファイルを読まない)
 var LS = 'sbook.';
 var LS_PREF = LS + 'pref.v1';
@@ -552,7 +552,8 @@ function replaceData(data){
   var keep = {}, has = Object.prototype.hasOwnProperty;
   try{ ownKeys().forEach(function(k){ keep[k] = localStorage.getItem(k); }); }catch(_){ return false; }
   try{
-    for(var k in keep){ if(k !== LS_PREF && !has.call(data, k.slice(LS.length))) localStorage.removeItem(k); }
+    /* 「つかいかた」を読み終えた印(guide.v1)は書いたものではないので消さない(消すと次の起動で案内がまた出る・2026-10-30) */
+    for(var k in keep){ if(k !== LS_PREF && k !== LS_GUIDE && !has.call(data, k.slice(LS.length))) localStorage.removeItem(k); }
     for(var d in data){ if(has.call(data, d) && !saveJSON(LS + d, data[d])) throw new Error('save'); }
     return true;
   }catch(_){
