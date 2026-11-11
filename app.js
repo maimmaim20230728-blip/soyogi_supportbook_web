@@ -596,7 +596,10 @@ function importBackup(e){
     askConfirm(importSummary(d) + T('set.importConfirm'), function(ok){
       if(!ok) return;
       if(!replaceData(d.data)){ toast(T('set.importFail')); return; }
+      var keepBkAt = pref.extra && pref.extra.bkAt;
       pref = sanitizePref(d.pref);
+      /* よみこんだファイルそのものが かきだした控え。かきだせた印(bkAt)は消さない(初めてのかきだしのファイルには印が入っていないため・知らせが戻らないように) */
+      if(!pref.extra.bkAt) pref.extra.bkAt = keepBkAt || ((typeof d.exported === 'number' && isFinite(d.exported) && d.exported > 0) ? d.exported : Date.now());
       savePref();
       applyAll(true);
       toast(T('set.imported'));

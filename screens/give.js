@@ -1,6 +1,6 @@
 'use strict';
 /* 画面: わたす(相手に あわせて 出す)
-   ・相手プリセット4つ(学校/預け先/医療/家族)ごとに「出す節」を選ぶ(初期値=1枚目+伝え方+パニックの対応の最小限)
+   ・相手プリセット4つ(学校/預け先/医療/家族)ごとに「出す節」を選ぶ(初期値は相手ごと=common.js の DEFAULT_OUT_BY・0.5.0)
    ・みせる(.ov・漢字・大きな字) / いんさつ(window.print・印刷用CSSは style.css の @media print) / 1枚目を PNG(canvas)
    ・いんさつ は Web版だけ(Play版の WebView では window.print が何もしないので、api.native のときはボタンを作らない)
    ・出すたびに取り扱い注意の文を出す
