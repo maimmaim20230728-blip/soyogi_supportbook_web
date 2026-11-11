@@ -24,6 +24,37 @@
       }
       c.appendChild(api.el('p', 'hint', T('screen.sec.autosave')));
 
+      /* れいを みる(0.5.0): この節の記入例を一覧で。入力欄の記入例は書き始めると消えるので、書きかけでも見られる */
+      var exs = [];
+      for(var e = 0; e < s.qs.length; e++){
+        var ep = T(base + '.q.' + s.qs[e] + '.p');
+        if(ep && typeof ep === 'string' && ep.trim()) exs.push({ l:T(base + '.q.' + s.qs[e] + '.l'), p:ep });
+      }
+      if(exs.length){
+        var exb = api.el('button', 'btn sb-ex-btn', T('screen.sec.examples')); exb.id = 'sb-sec-examples'; exb.type = 'button';
+        api.Tap.bind(exb, function(){
+          var ov = api.el('div', 'ov sb-show');
+          ov.setAttribute('data-sb', 'examples');
+          ov.setAttribute('role', 'dialog');
+          ov.setAttribute('aria-modal', 'true');
+          ov.appendChild(api.el('div', 'show-head', s.ico + ' ' + T(base + '.t')));
+          ov.appendChild(api.el('p', 'hint sb-rv-hint', T('screen.sec.examples')));
+          for(var k = 0; k < exs.length; k++){
+            var bx = api.el('div', 'show-block');
+            bx.appendChild(api.el('div', 'show-label', exs[k].l));
+            var ev = api.el('div', 'sb-rv-val sb-pre', exs[k].p);
+            ev.setAttribute('dir', 'auto');
+            bx.appendChild(ev);
+            ov.appendChild(bx);
+          }
+          var cl = api.el('button', 'ov-close', T('common.close')); cl.type = 'button';
+          api.Tap.bind(cl, function(){ S.closeOv(); });
+          ov.appendChild(cl);
+          S.openOv(ov);
+        });
+        c.appendChild(exb);
+      }
+
       /* 書くたびに同期で保存(小さなJSONなので軽い。画面を閉じられても消えない) */
       var warned = false;
       function persist(){

@@ -254,6 +254,21 @@ body[data-theme="dark"] .ov-close, body[data-theme="dark"] .three-num{ color:#10
 .sb-presets .chip, .sb-outsecs .chip{ flex:1 1 auto; }
 .sb-presets{ margin:6px 0 4px; }
 .sb-caution{ margin-top:14px; }
+/* よみかえす・プレビュー: 下に2つのボタンを固定(もどる/すすむ) */
+.sb-ovbar{
+  position:fixed; z-index:301; display:flex; gap:10px;
+  bottom:calc(16px + env(safe-area-inset-bottom));
+  left:max(16px, env(safe-area-inset-left)); right:max(16px, env(safe-area-inset-right));
+}
+.sb-ovbar .btn{ flex:1 1 0; min-width:0; min-height:64px; font-size:1.1em; font-weight:700; }
+.sb-rv-hint{ margin:12px 0 0; }
+.sb-rv-val{ font-size:1.05em; line-height:1.45; background:var(--card); border-radius:10px; padding:8px 10px; overflow-wrap:anywhere; }
+.sb-pv-img{ display:block; width:100%; max-width:420px; height:auto; margin:14px auto 0; border:2px solid var(--line); background:#fff; }
+.sb-pv-small{ margin:12px 0 0; }
+.sb-date{ margin:8px 0 0; text-align:center; font-weight:700; }
+.sb-bknudge{ margin-top:14px; }
+.sb-bknudge .btn-row{ margin:8px 0 0; }
+.sb-ex-btn{ margin:0 0 12px; }
 .sb-progress{ margin:0 0 12px; }
 .sb-about p{ margin:0 0 12px; }
 .sb-about-head{ font-weight:800; font-size:1.15em; }

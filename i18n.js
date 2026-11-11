@@ -43,6 +43,7 @@ var ja = {
     bkExport:'かきだす', bkImport:'よみこむ',
     exported:'かきだしました ✓', imported:'よみこみました ✓', importFail:'よみこめませんでした',
     importConfirm:'いまの ないようは、ファイルの ないように おきかわります。よみこみますか?',
+    importSummary:'ファイルの ないよう: 書いた らん {n} こ(かきだした日 {date})\nいまの ないよう: 書いた らん {now} こ', importNoDate:'ひづけ なし',
     note:'書いたことは すべて この端末の中だけに ほぞんされます。どこにも 送られません。',
     privacy:'プライバシーポリシー',
     credit:'アプリ開発：介護と支援の相談どころ そよぎ'
@@ -66,7 +67,7 @@ var ja = {
       'このアプリは、本人と 家族で いっしょに 書く、本人の「説明書」です。要求では なく、説明書です。\n学校・あずけ先・びょういん・家族など、本人と かかわる 人に、知っていると たすかる ことを 相手に あわせて わたせます。\nわたすか どうか、何を 出すかは、いつでも 自分たちで きめられます。',
       '下の「かく」を おすと、11の せつが ならびます。\nまず いちばん 上の「1まいめ(いちばん さきに よんでほしいこと)」に、「ぜったいに しないでほしいこと」と「こうなったら れんらくを」を みじかく 書きます。ここは 相手に いちばん さきに、大きな 字で 出ます。\nぜんぶ 書かなくても だいじょうぶです。',
       '「かく」で せつを えらぶと、質問が 出ます。書くと 自動で ほぞんされ、あとから いつでも なおせます。\nほとんどの せつの 上に「書き方の 手がかり」が 出ます。「まえ」「つぎ」で となりの せつへ うつり、書きおわったら「せつの いちらんへ」を おします。\nもしもカードで かきだした ファイルが あれば、「かく」の 下の「もしもカードの ファイルを よみこむ」で 空いている らんに 入れられます。',
-      '下の「わたす」で 相手(学校・あずけ先・びょういん・家族)を えらび、「出す せつ(タップで 切りかえ)」で 出す せつを えらびます。はじめは 1まいめ・つたえ方・パニックの ときの たいおう だけです。\n「みせる(大きな字)」で 画面を そのまま 見せられます。「1まいめを がぞうで ほぞん」も できます。\n出したものは 本人の 大切な 情報です。わたす 相手と 場所を きめてから 出してください。',
+      '下の「わたす」で 相手(学校・あずけ先・びょういん・家族)を えらび、「出す せつ(タップで 切りかえ)」で 出す せつを えらびます。はじめは 相手に あわせた せつが えらんで あります。出す まえに、中身を よみかえせます。\n「みせる(大きな字)」で 画面を そのまま 見せられます。「1まいめを がぞうで ほぞん」も できます。\n出したものは 本人の 大切な 情報です。わたす 相手と 場所を きめてから 出してください。',
       '下の「きょうの3つ」は、引率する 人や きょう だけ 会う 人に 見せる、いちばん みじかい カードです。\n3行 だけ 書いて「大きく みせる」を おします。もどるときは「とじる」を おします。',
       'ホームに『「説明書です」の ページ』という ボタンが あります。おすと、相手に そのまま 見せる 文が 読めます。\n「この ページを 大きく みせる」で 見せられます。\n「わたす」で 見せるときも、いつも いちばん さきに みじかい 文が つきます。',
       '書いた ことは すべて この 端末の 中だけに ほぞんされ、どこにも 送られません。登録も いりません。\nスマホを かえるときは、「せってい」の「かきだす」で ファイルを のこし、あたらしい スマホで「よみこむ」を おします。\n見せた ものや がぞうに した ものは、あつかいに 気をつけて ください。',
@@ -84,7 +85,9 @@ var ja = {
       progress:'書いた らん: {n}',
       firstEmpty:'まず「1まいめ」から どうぞ。ぜんぶ 書かなくて だいじょうぶです。',
       firstHead:'1まいめ(いちばん さきに 読んでほしいこと)',
-      privacyNote:'書いたことは この端末の中だけに あります。渡すときは 取り扱いに 気をつけてください。'
+      privacyNote:'書いたことは この端末の中だけに あります。渡すときは 取り扱いに 気をつけてください。',
+      bkNudge:'きしゅへんこうや こしょうに そなえて、「せってい」の「かきだす」で ファイルに ほぞんして おけます。',
+      bkOpen:'せっていを ひらく'
     },
     book: {
       title:'かく',
@@ -99,7 +102,8 @@ var ja = {
     sec: {
       hintHead:'書き方の 手がかり',
       goBook:'せつの いちらんへ',
-      autosave:'書くと 自動で ほぞんされます。'
+      autosave:'書くと 自動で ほぞんされます。',
+      examples:'れいを みる'
     },
     secs: {
       first: {
@@ -213,7 +217,7 @@ var ja = {
     },
     give: {
       title:'わたす',
-      intro:'相手を えらんで、出す せつを えらびます。はじめは さいしょうげん(1まいめ・つたえ方・パニックの ときの たいおう)だけが 出ます。',
+      intro:'相手を えらんで、出す せつを えらびます。はじめは 相手に あわせた せつが えらんで あります(かえるのは じゆうです)。',
       presets:{ school:'学校', daycare:'あずけ先', medical:'びょういん', family:'家族' },
       secsHead:'出す せつ(タップで 切りかえ)',
       show:'みせる(大きな字)',
@@ -223,7 +227,10 @@ var ja = {
       nothing:'まだ 書いた らんが ありません。「かく」から どうぞ。',
       nothingInSecs:'えらんだ せつには まだ 書いた らんが ありません。出す せつを ふやすか、「かく」から どうぞ。',
       printHint:'いんさつは ブラウザの いんさつ画面が ひらきます。',
-      pngDone:'がぞうを ほぞんしました ✓'
+      pngDone:'がぞうを ほぞんしました ✓',
+      pvTitle:'しあがりを たしかめる', pvSmall:'書いた ことが 長いので、字を 小さくして います。', pvSave:'このまま ほぞん', pvRewrite:'書きなおす',
+      rvTitle:'出す まえに よみかえす', rvHint:'相手に 出る ないようです。見せたく ない ことが まざって いないか たしかめて ください。いちばん さきに「説明書です」の みじかい ぶんが つきます。',
+      rvGo:'このまま みせる', rvGoPrint:'このまま いんさつ', rvBack:'もどって なおす'
     },
     show: {
       title:'{name} のサポートブック',
@@ -241,7 +248,8 @@ var ja = {
       p3:'れい: おにぎりは のり なし',
       show:'大きく みせる',
       head:'今日いちばん大事な3つ',
-      empty:'まだ 書いて いません。'
+      empty:'まだ 書いて いません。',
+      written:'書いた 日: {date}'
     },
     about: {
       title:'「説明書です」の ページ',
@@ -288,6 +296,7 @@ var en = {
     bkExport:'Export', bkImport:'Import',
     exported:'Exported ✓', imported:'Imported ✓', importFail:'Could not import',
     importConfirm:'Your current entries will be replaced with the file\'s contents. Import it?',
+    importSummary:'In the file: {n} fields written (exported {date})\nOn this device now: {now} fields written', importNoDate:'date unknown',
     note:'Everything you write is stored only on this device. Nothing is sent anywhere.',
     privacy:'Privacy policy',
     credit:'Developed by SOYOGI, a care and support consultation service'
@@ -308,7 +317,7 @@ var en = {
       'This app is a "manual" about a person, written together by the person and their family. It is not a list of demands.\nYou can hand it to people who spend time with the person, such as a school, a day service, a hospital or relatives, showing each of them what helps to know.\nWhether to hand it over, and what to show, is always up to you.',
       'Tap "Write" at the bottom to see the 11 sections.\nStart at the top with "Page one (read this first)" and briefly write "Please never do this" and "Contact us if this happens". This part is shown first, in large text.\nYou do not have to fill in everything.',
       'In "Write", choose a section to see its questions. What you type is saved automatically, and you can change it at any time.\nMost sections show "How to write it" hints at the top. Use "Previous" and "Next" to move between sections, and tap "Back to the sections" when you are done.\nIf you have a file exported from Moshimo Card, "Load a Moshimo Card file" at the bottom of "Write" fills in the empty fields.',
-      'In "Hand over" at the bottom, choose the reader (School, Day service, Hospital or Family), then choose sections under "Sections to include (tap to toggle)". At first only the minimum is included: page one, communication and panic.\nTap "Show (large text)" to show the screen as it is. You can also use "Save page one as image".\nWhat you output is private information. Decide who gets it and where before you output it.',
+      'In "Hand over" at the bottom, choose the reader (School, Day service, Hospital or Family), then choose sections under "Sections to include (tap to toggle)". At first, sections that suit each reader are already selected. Before you show it, you can read the contents over.\nTap "Show (large text)" to show the screen as it is. You can also use "Save page one as image".\nWhat you output is private information. Decide who gets it and where before you output it.',
       '"Today\'s 3" at the bottom is the shortest card, for someone who accompanies the person or meets them only today.\nWrite just three lines and tap "Show large". To go back, tap "Close".',
       'On Home, tap ‘The "this is a manual" page’ to read a text that you show to the reader as it is.\nTap "Show this page large" to show it.\nWhen you hand over, a short version of it always comes first.',
       'Everything you write is stored only on this device. Nothing is sent anywhere, and no sign-up is needed.\nWhen you change phones, tap "Export" in "Settings" to save a file, then tap "Import" on the new phone.\nTake care with anything you have shown or saved as an image.',
@@ -326,7 +335,9 @@ var en = {
       progress:'Fields written: {n}',
       firstEmpty:'Start with "Page one". You do not have to fill in everything.',
       firstHead:'Page one (read this first)',
-      privacyNote:'Everything stays on this device. Take care when you hand it over.'
+      privacyNote:'Everything stays on this device. Take care when you hand it over.',
+      bkNudge:'In case you change or break your phone, you can save everything as a file with "Export" in Settings.',
+      bkOpen:'Open Settings'
     },
     book: {
       title:'Write',
@@ -341,7 +352,8 @@ var en = {
     sec: {
       hintHead:'How to write it',
       goBook:'Back to the sections',
-      autosave:'Saved automatically as you type.'
+      autosave:'Saved automatically as you type.',
+      examples:'See examples'
     },
     secs: {
       first: {
@@ -455,7 +467,7 @@ var en = {
     },
     give: {
       title:'Hand over',
-      intro:'Choose the reader, then choose which sections to include. The default is the minimum (page one, communication, panic).',
+      intro:'Choose the reader, then choose which sections to include. Sections that suit each reader are selected at first. You can change them freely.',
       presets:{ school:'School', daycare:'Day service', medical:'Hospital', family:'Family' },
       secsHead:'Sections to include (tap to toggle)',
       show:'Show (large text)',
@@ -465,7 +477,10 @@ var en = {
       nothing:'Nothing written yet. Start from "Write".',
       nothingInSecs:'Nothing is written in the selected sections yet. Add sections, or start from "Write".',
       printHint:'Printing opens the browser print dialog.',
-      pngDone:'Image saved ✓'
+      pngDone:'Image saved ✓',
+      pvTitle:'Check how page one looks', pvSmall:'The text is long, so it is shown in smaller letters.', pvSave:'Save as is', pvRewrite:'Rewrite',
+      rvTitle:'Read it over before you show it', rvHint:'This is what the other person will see. Check that nothing you do not want to share is mixed in. The short "this is a manual" text always comes first.',
+      rvGo:'Show as is', rvGoPrint:'Print as is', rvBack:'Go back and edit'
     },
     show: {
       title:'Support Book of {name}',
@@ -483,7 +498,8 @@ var en = {
       p3:'e.g. Rice balls without seaweed',
       show:'Show large',
       head:'Today\'s 3 most important things',
-      empty:'Nothing written yet.'
+      empty:'Nothing written yet.',
+      written:'Written on: {date}'
     },
     about: {
       title:'The "this is a manual" page',
@@ -589,7 +605,9 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importConfirm": "Ihre aktuellen Einträge werden durch den Inhalt der Datei ersetzt. Jetzt importieren?",
     "note": "Alles, was Sie schreiben, wird nur auf diesem Gerät gespeichert. Nichts wird irgendwohin gesendet.",
     "privacy": "Datenschutzerklärung",
-    "credit": "App-Entwicklung: SOYOGI, Beratungsstelle für Pflege und Unterstützung"
+    "credit": "App-Entwicklung: SOYOGI, Beratungsstelle für Pflege und Unterstützung",
+    "importSummary": "In der Datei: {n} ausgefüllte Felder (exportiert am {date})\nJetzt auf diesem Gerät: {now} ausgefüllte Felder",
+    "importNoDate": "Datum unbekannt"
   },
   "guide": {
     "title": "Anleitung",
@@ -610,7 +628,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "Diese App ist ein „Leitfaden“ über eine Person, den die Person selbst und ihre Familie zusammen schreiben. Keine Forderungen, sondern ein Leitfaden.\nSie können ihn Menschen geben, die mit der Person zu tun haben, etwa Schule, Betreuung, Krankenhaus oder Familie, jeweils mit dem, was hilfreich zu wissen ist.\nOb Sie ihn weitergeben und was Sie zeigen, entscheiden immer Sie selbst.",
       "Tippen Sie unten auf „Schreiben“. Dann sehen Sie 11 Abschnitte.\nBeginnen Sie oben mit „Seite 1 (bitte zuerst lesen)“ und schreiben Sie kurz „Was bitte niemals getan werden soll“ und „In diesen Fällen bitte Kontakt aufnehmen“. Dieser Teil wird zuerst und in großer Schrift gezeigt.\nSie müssen nicht alles ausfüllen.",
       "Wählen Sie unter „Schreiben“ einen Abschnitt, dann erscheinen die Fragen. Was Sie schreiben, wird automatisch gespeichert und lässt sich jederzeit ändern.\nDie meisten Abschnitte zeigen oben „Hinweise zum Schreiben“. Mit „Zurück“ und „Weiter“ wechseln Sie zum Nachbarabschnitt, und wenn Sie fertig sind, tippen Sie auf „Zur Liste der Abschnitte“.\nWenn Sie eine aus der Moshimo-Karte exportierte Datei haben, füllt „Datei der Moshimo-Karte laden“ unten unter „Schreiben“ die leeren Felder aus.",
-      "Wählen Sie unten unter „Teilen“ den Empfänger (Schule, Betreuung, Krankenhaus oder Familie) und bei „Abschnitte zum Mitgeben (zum Umschalten tippen)“ die Abschnitte. Zu Beginn ist nur das Nötigste dabei: Seite 1, Verständigung und Bei Panik.\nMit „Zeigen (große Schrift)“ zeigen Sie den Bildschirm direkt. Auch „Seite 1 als Bild speichern“ ist möglich.\nWas Sie weitergeben, sind wichtige Informationen über die Person. Legen Sie vorher fest, an wen und wo Sie es weitergeben.",
+      "Wählen Sie unten unter „Teilen“ den Empfänger (Schule, Betreuung, Krankenhaus oder Familie) und bei „Abschnitte zum Mitgeben (zum Umschalten tippen)“ die Abschnitte. Zu Beginn sind für jeden Empfänger schon passende Abschnitte ausgewählt. Vor dem Zeigen können Sie den Inhalt noch einmal durchlesen.\nMit „Zeigen (große Schrift)“ zeigen Sie den Bildschirm direkt. Auch „Seite 1 als Bild speichern“ ist möglich.\nWas Sie weitergeben, sind wichtige Informationen über die Person. Legen Sie vorher fest, an wen und wo Sie es weitergeben.",
       "„3 für heute“ unten ist die kürzeste Karte, für Begleitpersonen oder Menschen, die die Person nur heute treffen.\nSchreiben Sie nur drei Zeilen und tippen Sie auf „Groß zeigen“. Zurück geht es mit „Schließen“.",
       "Unter „Start“ gibt es eine Schaltfläche mit der Aufschrift: Die Seite „Das ist ein Leitfaden“. Sie öffnet einen Text, den Sie dem Gegenüber direkt zeigen.\nMit „Diese Seite groß zeigen“ zeigen Sie ihn.\nWenn Sie etwas unter „Teilen“ zeigen, steht immer eine kurze Fassung davon am Anfang.",
       "Alles, was Sie schreiben, wird nur auf diesem Gerät gespeichert. Nichts wird irgendwohin gesendet, und Sie brauchen keine Anmeldung.\nWenn Sie das Telefon wechseln, tippen Sie unter „Optionen“ auf „Exportieren“, um eine Datei zu sichern, und auf dem neuen Telefon auf „Importieren“.\nGehen Sie mit dem, was Sie gezeigt oder als Bild gespeichert haben, sorgfältig um.",
@@ -628,7 +646,9 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "progress": "Ausgefüllte Felder: {n}",
       "firstEmpty": "Beginnen Sie gern mit „Seite 1“. Sie müssen nicht alles ausfüllen.",
       "firstHead": "Seite 1 (bitte zuerst lesen)",
-      "privacyNote": "Was Sie schreiben, bleibt nur auf diesem Gerät. Bitte gehen Sie beim Weitergeben sorgsam damit um."
+      "privacyNote": "Was Sie schreiben, bleibt nur auf diesem Gerät. Bitte gehen Sie beim Weitergeben sorgsam damit um.",
+      "bkNudge": "Falls Sie das Handy wechseln oder es kaputtgeht: Unter „Optionen“ können Sie mit „Exportieren“ alles als Datei sichern.",
+      "bkOpen": "Optionen öffnen"
     },
     "book": {
       "title": "Schreiben",
@@ -644,7 +664,8 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "sec": {
       "hintHead": "Hinweise zum Schreiben",
       "goBook": "Zur Liste der Abschnitte",
-      "autosave": "Beim Schreiben wird automatisch gespeichert."
+      "autosave": "Beim Schreiben wird automatisch gespeichert.",
+      "examples": "Beispiele ansehen"
     },
     "secs": {
       "first": {
@@ -937,7 +958,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "give": {
       "title": "Weitergeben",
-      "intro": "Wählen Sie den Empfänger und dann die Abschnitte. Zu Beginn ist nur das Nötigste ausgewählt (Seite 1, Verständigung, Bei Panik).",
+      "intro": "Wählen Sie den Empfänger und dann die Abschnitte. Zu Beginn sind schon passende Abschnitte ausgewählt. Sie können sie jederzeit ändern.",
       "presets": {
         "school": "Schule",
         "daycare": "Betreuung",
@@ -952,7 +973,16 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "nothing": "Noch keine Felder ausgefüllt. Beginnen Sie gern bei „Schreiben“.",
       "nothingInSecs": "In den gewählten Abschnitten ist noch nichts ausgefüllt. Wählen Sie mehr Abschnitte oder beginnen Sie bei „Schreiben“.",
       "printHint": "Zum Drucken öffnet sich das Druckfenster des Browsers.",
-      "pngDone": "Bild gespeichert ✓"
+      "pngDone": "Bild gespeichert ✓",
+      "pvTitle": "So sieht Seite 1 aus",
+      "pvSmall": "Der Text ist lang, deshalb wird er in kleinerer Schrift gezeigt.",
+      "pvSave": "So speichern",
+      "pvRewrite": "Neu schreiben",
+      "rvTitle": "Vor dem Zeigen noch einmal lesen",
+      "rvHint": "Das sehen die anderen. Prüfen Sie, ob nichts dabei ist, was nicht gezeigt werden soll. Ganz vorn steht immer der kurze Text „Das ist ein Leitfaden“.",
+      "rvGo": "So zeigen",
+      "rvGoPrint": "So drucken",
+      "rvBack": "Zurück und ändern"
     },
     "show": {
       "title": "Unterstützungsbuch von {name}",
@@ -970,7 +1000,8 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "p3": "z. B. Reisbällchen ohne Algenblatt",
       "show": "Groß zeigen",
       "head": "Die 3 wichtigsten Dinge für heute",
-      "empty": "Noch nichts geschrieben."
+      "empty": "Noch nichts geschrieben.",
+      "written": "Geschrieben am: {date}"
     },
     "about": {
       "title": "Die Seite „Das ist ein Leitfaden“",
@@ -1073,7 +1104,9 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importConfirm": "Ce que vous avez écrit sera remplacé par le contenu du fichier. Importer ?",
     "note": "Tout ce que vous écrivez reste uniquement sur cet appareil. Rien n'est envoyé nulle part.",
     "privacy": "Politique de confidentialité",
-    "credit": "Application développée par SOYOGI, espace de conseil en aide et accompagnement"
+    "credit": "Application développée par SOYOGI, espace de conseil en aide et accompagnement",
+    "importSummary": "Dans le fichier : {n} champs remplis (exporté le {date})\nActuellement ici : {now} champs remplis",
+    "importNoDate": "date inconnue"
   },
   "guide": {
     "title": "Guide d'utilisation",
@@ -1094,7 +1127,7 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "Cette application est le « mode d'emploi » d'une personne, écrit par elle et sa famille. Pas des exigences, un mode d'emploi.\nVous pouvez le remettre aux personnes qui l'accompagnent, comme l'école, le lieu d'accueil, l'hôpital ou la famille, avec ce qu'il est utile de savoir pour chacun.\nLe remettre ou non, et ce que vous montrez, c'est toujours vous qui décidez.",
       "Touchez « Écrire » en bas pour voir les 11 sections.\nCommencez en haut par « Page 1 (à lire en premier) » et écrivez brièvement « Merci de ne jamais faire cela » et « Si cela arrive, contactez-nous ». Cette partie s'affiche en premier, en grands caractères.\nPas besoin de tout remplir.",
       "Dans « Écrire », choisissez une section pour voir ses questions. Tout est enregistré automatiquement et reste modifiable à tout moment.\nLa plupart des sections affichent en haut des « Pistes pour écrire ». « Précédent » et « Suivant » mènent à la section voisine ; à la fin, touchez « Vers la liste des sections ».\nSi vous avez un fichier exporté depuis la carte Moshimo, « Charger un fichier de la carte Moshimo », en bas de « Écrire », remplit les champs vides.",
-      "Dans « Remettre » en bas, choisissez le destinataire (École, Lieu d'accueil, Hôpital ou Famille), puis les sections sous « Sections à inclure (appuyez pour changer) ». Au début, seul le minimum est inclus : page 1, communication et panique.\n« Afficher (grands caractères) » montre l'écran tel quel. Vous pouvez aussi « Enregistrer la page 1 en image ».\nCe que vous affichez contient des informations importantes sur la personne. Décidez d'abord à qui et où vous le remettez.",
+      "Dans « Remettre » en bas, choisissez le destinataire (École, Lieu d'accueil, Hôpital ou Famille), puis les sections sous « Sections à inclure (appuyez pour changer) ». Au début, des sections adaptées à chaque destinataire sont déjà choisies. Avant d'afficher, vous pouvez relire le contenu.\n« Afficher (grands caractères) » montre l'écran tel quel. Vous pouvez aussi « Enregistrer la page 1 en image ».\nCe que vous affichez contient des informations importantes sur la personne. Décidez d'abord à qui et où vous le remettez.",
       "« Les 3 du jour » en bas est la carte la plus courte, pour une personne qui accompagne ou que l'on voit seulement aujourd'hui.\nÉcrivez seulement trois lignes et touchez « Afficher en grand ». Pour revenir, touchez « Fermer ».",
       "Dans Accueil, il y a un bouton intitulé : La page \"C'est un mode d'emploi\". Il ouvre un texte à montrer tel quel à votre interlocuteur.\nTouchez « Afficher cette page en grand » pour le montrer.\nQuand vous remettez le livret, une version courte de ce texte vient toujours en premier.",
       "Tout ce que vous écrivez reste uniquement sur cet appareil. Rien n'est envoyé ailleurs et aucune inscription n'est nécessaire.\nPour changer de téléphone, touchez « Exporter » dans « Réglages » pour enregistrer un fichier, puis « Importer » sur le nouveau téléphone.\nFaites attention à ce que vous avez montré ou enregistré en image.",
@@ -1112,7 +1145,9 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "progress": "Champs remplis : {n}",
       "firstEmpty": "Commencez par la \"Page 1\". Pas besoin de tout remplir.",
       "firstHead": "Page 1 (à lire en premier)",
-      "privacyNote": "Ce que vous écrivez reste uniquement sur cet appareil. Quand vous le remettez, prenez soin de ces informations."
+      "privacyNote": "Ce que vous écrivez reste uniquement sur cet appareil. Quand vous le remettez, prenez soin de ces informations.",
+      "bkNudge": "En cas de changement ou de panne de téléphone, vous pouvez tout enregistrer dans un fichier avec « Exporter », dans « Réglages ».",
+      "bkOpen": "Ouvrir les réglages"
     },
     "book": {
       "title": "Écrire",
@@ -1128,7 +1163,8 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "sec": {
       "hintHead": "Pistes pour écrire",
       "goBook": "Vers la liste des sections",
-      "autosave": "Tout est enregistré automatiquement pendant que vous écrivez."
+      "autosave": "Tout est enregistré automatiquement pendant que vous écrivez.",
+      "examples": "Voir des exemples"
     },
     "secs": {
       "first": {
@@ -1421,7 +1457,7 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "give": {
       "title": "Remettre",
-      "intro": "Choisissez le destinataire, puis les sections à inclure. Au départ, seul le minimum s'affiche (Page 1, Communication, Que faire en cas de panique).",
+      "intro": "Choisissez le destinataire, puis les sections à inclure. Au départ, des sections adaptées à chaque destinataire sont déjà choisies. Vous pouvez les changer à tout moment.",
       "presets": {
         "school": "École",
         "daycare": "Lieu d'accueil",
@@ -1436,7 +1472,16 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "nothing": "Aucun champ rempli pour l'instant. Commencez par \"Écrire\".",
       "nothingInSecs": "Les sections choisies n'ont encore aucun champ rempli. Ajoutez des sections ou commencez par \"Écrire\".",
       "printHint": "Pour imprimer, la fenêtre d'impression du navigateur s'ouvre.",
-      "pngDone": "Image enregistrée ✓"
+      "pngDone": "Image enregistrée ✓",
+      "pvTitle": "Aperçu de la page 1",
+      "pvSmall": "Le texte est long, il est donc affiché en plus petits caractères.",
+      "pvSave": "Enregistrer tel quel",
+      "pvRewrite": "Réécrire",
+      "rvTitle": "Relire avant d'afficher",
+      "rvHint": "Voici ce que verra l'autre personne. Vérifiez qu'il n'y a rien que vous ne vouliez pas montrer. Le court texte « C'est un mode d'emploi » vient toujours en premier.",
+      "rvGo": "Afficher tel quel",
+      "rvGoPrint": "Imprimer tel quel",
+      "rvBack": "Retour pour modifier"
     },
     "show": {
       "title": "Carnet de soutien de {name}",
@@ -1454,7 +1499,8 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "p3": "Ex. : Onigiri sans algue nori",
       "show": "Afficher en grand",
       "head": "Les 3 choses les plus importantes aujourd'hui",
-      "empty": "Rien d'écrit pour l'instant."
+      "empty": "Rien d'écrit pour l'instant.",
+      "written": "Écrit le : {date}"
     },
     "about": {
       "title": "La page \"C'est un mode d'emploi\"",
@@ -1557,7 +1603,9 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importConfirm": "Lo que está escrito ahora se sustituirá por el contenido del archivo. ¿Importar?",
     "note": "Todo lo escrito se guarda solo en este dispositivo. No se envía a ninguna parte.",
     "privacy": "Política de privacidad",
-    "credit": "App desarrollada por SOYOGI, servicio de consulta sobre cuidados y apoyo"
+    "credit": "App desarrollada por SOYOGI, servicio de consulta sobre cuidados y apoyo",
+    "importSummary": "En el archivo: {n} campos escritos (exportado el {date})\nAhora en este teléfono: {now} campos escritos",
+    "importNoDate": "fecha desconocida"
   },
   "guide": {
     "title": "Cómo se usa",
@@ -1578,7 +1626,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "Esta aplicación es un «manual» sobre la persona, escrito por ella misma y su familia. No es una lista de exigencias, sino un manual.\nSe puede entregar a quienes pasan tiempo con la persona, como la escuela, el centro de día, el hospital o la familia, con lo que conviene saber en cada caso.\nEntregarlo o no, y qué mostrar, siempre lo decide la propia persona con su familia.",
       "Al tocar «Escribir» abajo, aparecen 11 secciones.\nEmpezar arriba por «Primera página (para leer antes que nada)» y escribir brevemente «Por favor, no hacer nunca» y «Si pasa esto, avisar». Esta parte se muestra la primera, en letra grande.\nNo hace falta rellenarlo todo.",
       "En «Escribir», al elegir una sección aparecen sus preguntas. Lo escrito se guarda automáticamente y se puede cambiar en cualquier momento.\nLa mayoría de las secciones muestran arriba «Pistas para escribir». Con «Anterior» y «Siguiente» se pasa a la sección de al lado; al terminar, tocar «A la lista de secciones».\nSi hay un archivo exportado desde MOSHIMO Card, «Cargar un archivo de MOSHIMO Card», abajo en «Escribir», rellena los campos vacíos.",
-      "En «Entregar», abajo, elegir a quién va (Escuela, Centro de día, Hospital o Familia) y las secciones en «Secciones que incluir (tocar para cambiar)». Al principio solo va lo mínimo: primera página, comunicación y crisis.\n«Mostrar (letra grande)» muestra la pantalla tal cual. También se puede «Guardar la primera página como imagen».\nLo que se muestra es información importante de la persona. Conviene decidir antes a quién se entrega y en qué lugar.",
+      "En «Entregar», abajo, elegir a quién va (Escuela, Centro de día, Hospital o Familia) y las secciones en «Secciones que incluir (tocar para cambiar)». Al principio ya están elegidas las secciones que convienen a cada persona. Antes de mostrar, se puede releer el contenido.\n«Mostrar (letra grande)» muestra la pantalla tal cual. También se puede «Guardar la primera página como imagen».\nLo que se muestra es información importante de la persona. Conviene decidir antes a quién se entrega y en qué lugar.",
       "«Las 3 de hoy», abajo, es la tarjeta más corta, para quien acompaña a la persona o la ve solo hoy.\nEscribir solo tres líneas y tocar «Mostrar en grande». Para volver, tocar «Cerrar».",
       "En Inicio hay un botón con el texto: La página «Esto es un manual». Abre un texto para mostrar tal cual a la otra persona.\nCon «Mostrar esta página en grande» se muestra.\nAl entregar, siempre va primero una versión corta de ese texto.",
       "Todo lo que se escribe se guarda solo en este dispositivo. No se envía a ningún lugar y no hace falta registrarse.\nAl cambiar de teléfono, tocar «Exportar» en «Ajustes» para guardar un archivo y luego «Importar» en el teléfono nuevo.\nConviene cuidar lo que se ha mostrado o guardado como imagen.",
@@ -1596,7 +1644,9 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "progress": "Campos escritos: {n}",
       "firstEmpty": "Para empezar, la «Primera página». No hace falta escribirlo todo.",
       "firstHead": "Primera página (para leer antes que nada)",
-      "privacyNote": "Lo escrito está solo en este dispositivo. Al entregarlo, conviene tratarlo con cuidado."
+      "privacyNote": "Lo escrito está solo en este dispositivo. Al entregarlo, conviene tratarlo con cuidado.",
+      "bkNudge": "Por si se cambia de teléfono o se estropea, se puede guardar todo en un archivo con «Exportar», en «Ajustes».",
+      "bkOpen": "Abrir Ajustes"
     },
     "book": {
       "title": "Escribir",
@@ -1612,7 +1662,8 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "sec": {
       "hintHead": "Pistas para escribir",
       "goBook": "A la lista de secciones",
-      "autosave": "Se guarda automáticamente al escribir."
+      "autosave": "Se guarda automáticamente al escribir.",
+      "examples": "Ver ejemplos"
     },
     "secs": {
       "first": {
@@ -1905,7 +1956,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "give": {
       "title": "Entregar",
-      "intro": "Elegir a quién se entrega y qué secciones incluir. Al principio solo sale lo mínimo (Primera página, Comunicación y Cómo actuar en una crisis).",
+      "intro": "Elegir a quién se entrega y qué secciones incluir. Al principio ya están elegidas las que convienen a cada persona. Se pueden cambiar con libertad.",
       "presets": {
         "school": "Escuela",
         "daycare": "Centro de día",
@@ -1920,7 +1971,16 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "nothing": "Todavía no hay nada escrito. Se puede empezar desde «Escribir».",
       "nothingInSecs": "Las secciones elegidas aún no tienen nada escrito. Se pueden añadir más secciones o empezar desde «Escribir».",
       "printHint": "Al imprimir se abre la pantalla de impresión del navegador.",
-      "pngDone": "Imagen guardada ✓"
+      "pngDone": "Imagen guardada ✓",
+      "pvTitle": "Así queda la primera página",
+      "pvSmall": "El texto es largo, así que se muestra con letra más pequeña.",
+      "pvSave": "Guardar así",
+      "pvRewrite": "Volver a escribir",
+      "rvTitle": "Releer antes de mostrar",
+      "rvHint": "Esto es lo que verá la otra persona. Conviene comprobar que no haya nada que no se quiera enseñar. Siempre va primero el texto breve «Esto es un manual».",
+      "rvGo": "Mostrar así",
+      "rvGoPrint": "Imprimir así",
+      "rvBack": "Volver y corregir"
     },
     "show": {
       "title": "Libro de apoyo de {name}",
@@ -1938,7 +1998,8 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "p3": "Ej.: Las bolas de arroz, sin alga",
       "show": "Mostrar en grande",
       "head": "Las 3 cosas más importantes de hoy",
-      "empty": "Todavía no hay nada escrito."
+      "empty": "Todavía no hay nada escrito.",
+      "written": "Escrito el: {date}"
     },
     "about": {
       "title": "La página «Esto es un manual»",
@@ -2041,7 +2102,9 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importConfirm": "Il contenuto attuale verrà sostituito da quello del file. Importare?",
     "note": "Tutto ciò che scrive viene salvato solo su questo dispositivo. Non viene inviato da nessuna parte.",
     "privacy": "Informativa sulla privacy",
-    "credit": "App sviluppata da SOYOGI, servizio di consulenza su assistenza e sostegno"
+    "credit": "App sviluppata da SOYOGI, servizio di consulenza su assistenza e sostegno",
+    "importSummary": "Nel file: {n} campi compilati (esportato il {date})\nOra su questo telefono: {now} campi compilati",
+    "importNoDate": "data sconosciuta"
   },
   "guide": {
     "title": "Come si usa",
@@ -2062,7 +2125,7 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "Questa app è una «guida» sulla persona, scritta insieme dalla persona e dalla sua famiglia. Non è una richiesta, è una guida.\nSi può consegnare a chi passa del tempo con la persona, come la scuola, il centro diurno, l'ospedale o i familiari, con ciò che è utile sapere per ciascuno.\nSe consegnarla e cosa mostrare, lo decidete sempre voi.",
       "Tocchi «Scrivere» in basso per vedere le 11 sezioni.\nCominci in alto da «Prima pagina (da leggere prima di tutto)» e scriva in breve «Cose da non fare mai» e «Quando contattarci». Questa parte compare per prima, in caratteri grandi.\nNon serve compilare tutto.",
       "In «Scrivere», scelga una sezione per vedere le domande. Mentre scrive, viene salvato in automatico e può cambiarlo quando vuole.\nQuasi tutte le sezioni mostrano in alto dei «Suggerimenti per scrivere». Con «Precedente» e «Avanti» passa alla sezione accanto; alla fine tocchi «Torna all'elenco delle sezioni».\nSe ha un file esportato da Moshimo Card, «Carica un file di Moshimo Card», in fondo a «Scrivere», riempie i campi vuoti.",
-      "In «Consegnare», in basso, scelga a chi va (Scuola, Centro diurno, Ospedale o Famiglia) e le sezioni in «Sezioni da includere (toccare per cambiare)». All'inizio c'è solo il minimo: prima pagina, comunicazione e crisi.\n«Mostra (caratteri grandi)» mostra lo schermo così com'è. Può anche usare «Salva la prima pagina come immagine».\nCiò che mostra contiene informazioni importanti della persona. Decida prima a chi darlo e in quale luogo.",
+      "In «Consegnare», in basso, scelga a chi va (Scuola, Centro diurno, Ospedale o Famiglia) e le sezioni in «Sezioni da includere (toccare per cambiare)». All'inizio sono già selezionate le sezioni adatte a ciascun destinatario. Prima di mostrare, può rileggere il contenuto.\n«Mostra (caratteri grandi)» mostra lo schermo così com'è. Può anche usare «Salva la prima pagina come immagine».\nCiò che mostra contiene informazioni importanti della persona. Decida prima a chi darlo e in quale luogo.",
       "«Le 3 di oggi», in basso, è la scheda più breve, per chi accompagna la persona o la incontra solo oggi.\nScriva solo tre righe e tocchi «Mostra in grande». Per tornare, tocchi «Chiudi».",
       "In Home c'è un pulsante con la scritta: La pagina «Questa è una guida». Apre un testo da mostrare così com'è all'altra persona.\nCon «Mostra questa pagina in grande» lo mostra.\nQuando consegna, una versione breve di questo testo viene sempre per prima.",
       "Tutto ciò che scrive resta solo su questo dispositivo. Non viene inviato da nessuna parte e non serve registrarsi.\nQuando cambia telefono, tocchi «Esporta» in «Opzioni» per salvare un file, poi «Importa» sul nuovo telefono.\nFaccia attenzione a ciò che ha mostrato o salvato come immagine.",
@@ -2080,7 +2143,9 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "progress": "Campi compilati: {n}",
       "firstEmpty": "Cominci dalla «Prima pagina». Non è necessario compilare tutto.",
       "firstHead": "Prima pagina (da leggere prima di tutto)",
-      "privacyNote": "Ciò che scrive resta solo su questo dispositivo. Quando lo consegna, lo tratti con cura."
+      "privacyNote": "Ciò che scrive resta solo su questo dispositivo. Quando lo consegna, lo tratti con cura.",
+      "bkNudge": "Se cambia telefono o si guasta, può salvare tutto in un file con «Esporta», in «Opzioni».",
+      "bkOpen": "Apri le opzioni"
     },
     "book": {
       "title": "Scrivere",
@@ -2096,7 +2161,8 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "sec": {
       "hintHead": "Suggerimenti per scrivere",
       "goBook": "Torna all'elenco delle sezioni",
-      "autosave": "Mentre scrive, viene salvato in automatico."
+      "autosave": "Mentre scrive, viene salvato in automatico.",
+      "examples": "Vedi esempi"
     },
     "secs": {
       "first": {
@@ -2389,7 +2455,7 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "give": {
       "title": "Consegnare",
-      "intro": "Scelga il destinatario, poi le sezioni da includere. All'inizio compare solo il minimo (prima pagina, comunicazione, in caso di crisi).",
+      "intro": "Scelga il destinatario, poi le sezioni da includere. All'inizio sono già selezionate quelle adatte a ciascun destinatario. Può cambiarle liberamente.",
       "presets": {
         "school": "Scuola",
         "daycare": "Centro diurno",
@@ -2404,7 +2470,16 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "nothing": "Non c'è ancora nessun campo compilato. Cominci da «Scrivere».",
       "nothingInSecs": "Nelle sezioni scelte non c'è ancora nessun campo compilato. Aggiunga altre sezioni o cominci da «Scrivere».",
       "printHint": "La stampa apre la finestra di stampa del browser.",
-      "pngDone": "Immagine salvata ✓"
+      "pngDone": "Immagine salvata ✓",
+      "pvTitle": "Anteprima della prima pagina",
+      "pvSmall": "Il testo è lungo, quindi è mostrato con caratteri più piccoli.",
+      "pvSave": "Salva così",
+      "pvRewrite": "Riscrivi",
+      "rvTitle": "Rilegga prima di mostrare",
+      "rvHint": "Questo è ciò che vedrà l'altra persona. Controlli che non ci sia nulla che non vuole far vedere. In testa c'è sempre il breve testo «Questa è una guida».",
+      "rvGo": "Mostra così",
+      "rvGoPrint": "Stampa così",
+      "rvBack": "Torna e modifica"
     },
     "show": {
       "title": "Libretto di supporto di {name}",
@@ -2422,7 +2497,8 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "p3": "Es.: Onigiri senza alga",
       "show": "Mostra in grande",
       "head": "Le 3 cose più importanti di oggi",
-      "empty": "Non è ancora stato scritto niente."
+      "empty": "Non è ancora stato scritto niente.",
+      "written": "Scritto il: {date}"
     },
     "about": {
       "title": "La pagina «Questa è una guida»",
@@ -2525,7 +2601,9 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importConfirm": "O que está escrito agora será substituído pelo conteúdo da cópia. Importar?",
     "note": "Tudo o que for escrito fica guardado apenas neste aparelho. Nada é enviado.",
     "privacy": "Política de privacidade",
-    "credit": "Desenvolvimento: SOYOGI, serviço de consulta sobre cuidados e apoio"
+    "credit": "Desenvolvimento: SOYOGI, serviço de consulta sobre cuidados e apoio",
+    "importSummary": "No arquivo: {n} campos escritos (exportado em {date})\nAgora neste telefone: {now} campos escritos",
+    "importNoDate": "data desconhecida"
   },
   "guide": {
     "title": "Como usar",
@@ -2546,7 +2624,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "Esta aplicação é o «manual» da pessoa, escrito pela própria pessoa e pela família. Não é uma lista de exigências. É um manual.\nPode ser mostrado a quem convive com a pessoa, como a escola, o centro de dia, o hospital ou a família, com o que é útil saber em cada caso.\nEntregar ou não, e o que mostrar, é sempre a pessoa e a família que decidem.",
       "Ao tocar em «Escrever», em baixo, aparecem 11 partes.\nComeçar no topo por «Primeira página (o que ler antes de tudo)» e escrever em poucas palavras «O que pedimos que nunca se faça» e «Avisar se isto acontecer». Esta parte aparece primeiro, em letra grande.\nNão é preciso preencher tudo.",
       "Em «Escrever», ao escolher uma parte, aparecem as perguntas. O que se escreve fica guardado automaticamente e pode ser mudado a qualquer momento.\nA maioria das partes mostra em cima «Dicas para escrever». Com «Anterior» e «Próximo» passa-se à parte ao lado; no fim, tocar em «Voltar à lista de partes».\nSe houver um arquivo exportado do Moshimo Card, «Importar dados do Moshimo Card», em baixo em «Escrever», preenche os campos vazios.",
-      "Em «Entregar», em baixo, escolher para quem é (Escola, Centro de dia, Hospital ou Família) e as partes em «Partes a incluir (tocar para alternar)». No início vai só o mínimo: primeira página, comunicação e crise.\n«Mostrar (letra grande)» mostra a página tal como está. Também se pode «Guardar a primeira página como imagem».\nO material gerado contém informações importantes da pessoa. Antes de gerar, decidir a quem entregar e onde.",
+      "Em «Entregar», em baixo, escolher para quem é (Escola, Centro de dia, Hospital ou Família) e as partes em «Partes a incluir (tocar para alternar)». No início já estão escolhidas as partes adequadas a cada pessoa. Antes de mostrar, é possível reler o conteúdo.\n«Mostrar (letra grande)» mostra a página tal como está. Também se pode «Guardar a primeira página como imagem».\nO material gerado contém informações importantes da pessoa. Antes de gerar, decidir a quem entregar e onde.",
       "«3 de hoje», em baixo, é o cartão mais curto, para quem acompanha a pessoa ou a vê só hoje.\nEscrever só três linhas e tocar em «Mostrar em tamanho grande». Para voltar, tocar em «Fechar».",
       "No Início há um botão com o texto: A página \"Isto é um manual\". Abre um texto para mostrar tal como está à outra pessoa.\nCom «Mostrar esta página em tamanho grande» mostra-se.\nAo entregar, uma versão curta desse texto vem sempre primeiro.",
       "Tudo o que se escreve fica guardado só neste aparelho. Nada é enviado para fora e não é preciso criar conta.\nAo mudar de aparelho, tocar em «Exportar» nos «Ajustes» para guardar um arquivo e depois em «Importar» no aparelho novo.\nConvém ter cuidado com o que se mostrou ou guardou como imagem.",
@@ -2564,7 +2642,9 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "progress": "Campos escritos: {n}",
       "firstEmpty": "Começar pela \"Primeira página\". Não é preciso preencher tudo.",
       "firstHead": "Primeira página (o que ler antes de tudo)",
-      "privacyNote": "O que for escrito fica apenas neste aparelho. Ao entregar, tratar estas informações com cuidado."
+      "privacyNote": "O que for escrito fica apenas neste aparelho. Ao entregar, tratar estas informações com cuidado.",
+      "bkNudge": "Para o caso de mudar de telefone ou de ele avariar, é possível guardar tudo num arquivo com «Exportar», em «Ajustes».",
+      "bkOpen": "Abrir Ajustes"
     },
     "book": {
       "title": "Escrever",
@@ -2580,7 +2660,8 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "sec": {
       "hintHead": "Dicas para escrever",
       "goBook": "Voltar à lista de partes",
-      "autosave": "O que se escreve fica guardado automaticamente."
+      "autosave": "O que se escreve fica guardado automaticamente.",
+      "examples": "Ver exemplos"
     },
     "secs": {
       "first": {
@@ -2873,7 +2954,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "give": {
       "title": "Entregar",
-      "intro": "Escolher o leitor e depois as partes a incluir. No início, só aparece o mínimo (primeira página, comunicação e momentos de crise).",
+      "intro": "Escolher o leitor e depois as partes a incluir. No início já estão escolhidas as adequadas a cada leitor. Podem ser alteradas livremente.",
       "presets": {
         "school": "Escola",
         "daycare": "Centro de dia",
@@ -2888,7 +2969,16 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "nothing": "Ainda não há campos escritos. Começar por \"Escrever\".",
       "nothingInSecs": "As partes escolhidas ainda não têm campos escritos. Incluir mais partes ou começar por \"Escrever\".",
       "printHint": "Para imprimir, o navegador abre a janela de impressão.",
-      "pngDone": "Imagem guardada ✓"
+      "pngDone": "Imagem guardada ✓",
+      "pvTitle": "Pré-visualização da primeira página",
+      "pvSmall": "O texto é longo, por isso aparece com letra mais pequena.",
+      "pvSave": "Guardar assim",
+      "pvRewrite": "Escrever de novo",
+      "rvTitle": "Reler antes de mostrar",
+      "rvHint": "É isto que a outra pessoa vai ver. Convém confirmar que não há nada que não se queira mostrar. O texto curto «Isto é um manual» vem sempre em primeiro lugar.",
+      "rvGo": "Mostrar assim",
+      "rvGoPrint": "Imprimir assim",
+      "rvBack": "Voltar e corrigir"
     },
     "show": {
       "title": "Livro de apoio de {name}",
@@ -2906,7 +2996,8 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "p3": "ex.: Bolinhos de arroz sem alga",
       "show": "Mostrar em tamanho grande",
       "head": "As 3 coisas mais importantes de hoje",
-      "empty": "Ainda não foi escrito nada."
+      "empty": "Ainda não foi escrito nada.",
+      "written": "Escrito em: {date}"
     },
     "about": {
       "title": "A página \"Isto é um manual\"",
@@ -3009,7 +3100,9 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importConfirm": "Wat u nu hebt ingevuld, wordt vervangen door de inhoud van het bestand. Wilt u importeren?",
     "note": "Alles wat u schrijft, wordt alleen op dit apparaat bewaard. Er wordt niets verstuurd.",
     "privacy": "Privacybeleid",
-    "credit": "App ontwikkeld door SOYOGI, adviespunt voor zorg en ondersteuning"
+    "credit": "App ontwikkeld door SOYOGI, adviespunt voor zorg en ondersteuning",
+    "importSummary": "In het bestand: {n} ingevulde velden (geëxporteerd op {date})\nNu op deze telefoon: {now} ingevulde velden",
+    "importNoDate": "datum onbekend"
   },
   "guide": {
     "title": "Zo werkt het",
@@ -3030,7 +3123,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "Deze app is een “handleiding” over de persoon, geschreven door de persoon zelf en de familie. Geen lijst met eisen, maar een handleiding.\nU kunt hem meegeven aan mensen die met de persoon omgaan, zoals school, opvang, ziekenhuis of familie, met wat voor ieder handig is om te weten.\nOf u hem meegeeft en wat u laat zien, beslist u altijd zelf.",
       "Tik onderaan op \"Schrijven\" om de 11 onderdelen te zien.\nBegin bovenaan met \"Pagina 1 (graag als eerste lezen)\" en schrijf kort \"Doe dit alstublieft nooit\" en \"Neem contact op als dit gebeurt\". Dit deel wordt als eerste getoond, in grote letters.\nU hoeft niet alles in te vullen.",
       "Kies bij \"Schrijven\" een onderdeel om de vragen te zien. Wat u schrijft, wordt automatisch opgeslagen en kunt u altijd aanpassen.\nDe meeste onderdelen tonen bovenaan \"Tips voor het schrijven\". Met \"Vorige\" en \"Volgende\" gaat u naar het onderdeel ernaast; tik als u klaar bent op \"Naar de lijst met onderdelen\".\nHebt u een bestand dat uit Moshimo Card is geëxporteerd, dan vult \"Moshimo Card-bestand laden\" onderaan bij \"Schrijven\" de lege vakken in.",
-      "Kies onderaan bij \"Meegeven\" de ontvanger (School, Opvang, Ziekenhuis of Familie) en de onderdelen bij \"Onderdelen die u meegeeft (tik om aan/uit te zetten)\". In het begin gaat alleen het minimum mee: pagina 1, communicatie en paniek.\nMet \"Tonen (grote letters)\" laat u het scherm meteen zien. U kunt ook \"Pagina 1 als afbeelding opslaan\".\nWat u meegeeft, is belangrijke informatie over de persoon. Bepaal eerst aan wie en op welke plek u het geeft.",
+      "Kies onderaan bij \"Meegeven\" de ontvanger (School, Opvang, Ziekenhuis of Familie) en de onderdelen bij \"Onderdelen die u meegeeft (tik om aan/uit te zetten)\". In het begin zijn er al onderdelen gekozen die bij elke ontvanger passen. Voordat u iets toont, kunt u de inhoud nog eens nalezen.\nMet \"Tonen (grote letters)\" laat u het scherm meteen zien. U kunt ook \"Pagina 1 als afbeelding opslaan\".\nWat u meegeeft, is belangrijke informatie over de persoon. Bepaal eerst aan wie en op welke plek u het geeft.",
       "\"3 voor vandaag\" onderaan is de kortste kaart, voor wie de persoon begeleidt of alleen vandaag ziet.\nSchrijf maar drie regels en tik op \"Groot tonen\". Terug gaat met \"Sluiten\".",
       "Op Start staat een knop met de tekst: De pagina “Dit is een handleiding”. Die opent een tekst die u de ander zo kunt laten zien.\nMet \"Deze pagina groot tonen\" laat u hem zien.\nBij meegeven staat er altijd een korte versie van deze tekst vooraan.",
       "Alles wat u schrijft, wordt alleen op dit apparaat bewaard. Er wordt niets verstuurd en u hoeft zich niet aan te melden.\nBij een andere telefoon tikt u in \"Instellingen\" op \"Exporteren\" om een bestand te bewaren, en op de nieuwe telefoon op \"Importeren\".\nGa zorgvuldig om met wat u hebt laten zien of als afbeelding hebt opgeslagen.",
@@ -3048,7 +3141,9 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "progress": "Ingevulde velden: {n}",
       "firstEmpty": "Begin gerust met “Pagina 1”. U hoeft niet alles in te vullen.",
       "firstHead": "Pagina 1 (graag als eerste lezen)",
-      "privacyNote": "Wat u schrijft, staat alleen op dit apparaat. Ga zorgvuldig om met wat u meegeeft."
+      "privacyNote": "Wat u schrijft, staat alleen op dit apparaat. Ga zorgvuldig om met wat u meegeeft.",
+      "bkNudge": "Voor als u van telefoon wisselt of die kapotgaat: bij “Instellingen” kunt u alles met “Exporteren” als bestand bewaren.",
+      "bkOpen": "Instellingen openen"
     },
     "book": {
       "title": "Schrijven",
@@ -3064,7 +3159,8 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "sec": {
       "hintHead": "Tips voor het schrijven",
       "goBook": "Naar de lijst met onderdelen",
-      "autosave": "Wat u schrijft, wordt automatisch opgeslagen."
+      "autosave": "Wat u schrijft, wordt automatisch opgeslagen.",
+      "examples": "Voorbeelden bekijken"
     },
     "secs": {
       "first": {
@@ -3357,7 +3453,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "give": {
       "title": "Meegeven",
-      "intro": "Kies de ontvanger en daarna de onderdelen die u meegeeft. In het begin staat alleen het minimum aan (Pagina 1, Communicatie en Wat te doen bij paniek).",
+      "intro": "Kies de ontvanger en daarna de onderdelen die u meegeeft. In het begin staan al onderdelen aan die bij de ontvanger passen. U kunt ze vrij aanpassen.",
       "presets": {
         "school": "School",
         "daycare": "Opvang",
@@ -3372,7 +3468,16 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "nothing": "Er zijn nog geen velden ingevuld. Begin gerust bij “Schrijven”.",
       "nothingInSecs": "In de gekozen onderdelen is nog niets ingevuld. Kies meer onderdelen, of begin bij “Schrijven”.",
       "printHint": "Bij afdrukken opent het afdrukvenster van de browser.",
-      "pngDone": "Afbeelding opgeslagen ✓"
+      "pngDone": "Afbeelding opgeslagen ✓",
+      "pvTitle": "Zo ziet pagina 1 eruit",
+      "pvSmall": "De tekst is lang, daarom staat hij in kleinere letters.",
+      "pvSave": "Zo opslaan",
+      "pvRewrite": "Opnieuw schrijven",
+      "rvTitle": "Eerst nog eens nalezen",
+      "rvHint": "Dit ziet de ander. Controleer of er niets bij staat wat u niet wilt laten zien. De korte tekst “Dit is een handleiding” staat altijd vooraan.",
+      "rvGo": "Zo tonen",
+      "rvGoPrint": "Zo afdrukken",
+      "rvBack": "Terug en aanpassen"
     },
     "show": {
       "title": "Ondersteuningsboek van {name}",
@@ -3390,7 +3495,8 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "p3": "bijv. Rijstballen zonder zeewier",
       "show": "Groot tonen",
       "head": "De 3 belangrijkste dingen van vandaag",
-      "empty": "Nog niets geschreven."
+      "empty": "Nog niets geschreven.",
+      "written": "Geschreven op: {date}"
     },
     "about": {
       "title": "De pagina “Dit is een handleiding”",
@@ -3493,7 +3599,9 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importConfirm": "Det du har skrivit nu ersätts med innehållet i filen. Vill du importera?",
     "note": "Allt du skriver sparas bara i den här enheten. Inget skickas någonstans.",
     "privacy": "Integritetspolicy",
-    "credit": "Utvecklad av SOYOGI, en rådgivning om omsorg och stöd"
+    "credit": "Utvecklad av SOYOGI, en rådgivning om omsorg och stöd",
+    "importSummary": "I filen: {n} ifyllda fält (exporterad {date})\nNu på den här enheten: {now} ifyllda fält",
+    "importNoDate": "okänt datum"
   },
   "guide": {
     "title": "Så används appen",
@@ -3514,7 +3622,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "Appen är en ”bruksanvisning” om personen, som personen själv och familjen skriver tillsammans. Det här är inga krav. Det är en bruksanvisning.\nDu kan lämna den till dem som umgås med personen, till exempel skola, omsorg, sjukvård eller familj, med det som är bra för var och en att veta.\nOm ni lämnar över den och vad ni visar bestämmer ni alltid själva.",
       "Tryck på ”Skriv” längst ner så visas 11 avsnitt.\nBörja överst med ”Första sidan (det vi vill att du läser först)” och skriv kort under ”Detta ber vi dig att aldrig göra” och ”Kontakta oss om detta händer”. Den delen visas först, med stor text.\nDu behöver inte fylla i allt.",
       "Välj ett avsnitt under ”Skriv” så visas frågorna. Det du skriver sparas automatiskt och kan ändras när som helst.\nDe flesta avsnitt har ”Tips för att skriva” överst. Med ”Föregående” och ”Nästa” går du till avsnittet bredvid, och när du är klar trycker du på ”Till listan med avsnitt”.\nOm du har en fil som exporterats från Moshimo Card fyller ”Läs in en fil från Moshimo Card” längst ner under ”Skriv” i de tomma fälten.",
-      "Välj mottagare under ”Lämna över” längst ner (Skola, Omsorg, Sjukvård eller Familj) och avsnitt under ”Avsnitt som visas (tryck för att växla)”. Från början är bara det minsta med: första sidan, kommunikation och panik.\nMed ”Visa (stor text)” visar du skärmen som den är. Du kan också välja ”Spara första sidan som bild”.\nDet du visar är personens viktiga uppgifter. Bestäm först vem som ska få dem och var.",
+      "Välj mottagare under ”Lämna över” längst ner (Skola, Omsorg, Sjukvård eller Familj) och avsnitt under ”Avsnitt som visas (tryck för att växla)”. Från början är avsnitt som passar varje mottagare redan valda. Innan du visar kan du läsa igenom innehållet.\nMed ”Visa (stor text)” visar du skärmen som den är. Du kan också välja ”Spara första sidan som bild”.\nDet du visar är personens viktiga uppgifter. Bestäm först vem som ska få dem och var.",
       "”Dagens 3” längst ner är det kortaste kortet, för den som följer med personen eller bara träffar hen i dag.\nSkriv bara tre rader och tryck på ”Visa stort”. Tillbaka kommer du med ”Stäng”.",
       "På Hem finns en knapp med texten: Sidan ”Det här är en bruksanvisning”. Den öppnar en text som du visar för mottagaren som den är.\nMed ”Visa den här sidan stort” visar du den.\nNär du lämnar över kommer alltid en kort version av texten först.",
       "Allt du skriver sparas bara på den här enheten. Inget skickas någonstans och du behöver inget konto.\nNär du byter telefon trycker du på ”Exportera” under ”Alternativ” för att spara en fil och sedan på ”Importera” i den nya telefonen.\nVar rädd om det du har visat eller sparat som bild.",
@@ -3532,7 +3640,9 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "progress": "Ifyllda fält: {n}",
       "firstEmpty": "Börja gärna med ”Första sidan”. Du behöver inte fylla i allt.",
       "firstHead": "Första sidan (det vi vill att du läser först)",
-      "privacyNote": "Det du skriver finns bara i den här enheten. Var försiktig när du lämnar över det."
+      "privacyNote": "Det du skriver finns bara i den här enheten. Var försiktig när du lämnar över det.",
+      "bkNudge": "Om du byter telefon eller den går sönder kan du spara allt som en fil med ”Exportera” under ”Alternativ”.",
+      "bkOpen": "Öppna Alternativ"
     },
     "book": {
       "title": "Skriv",
@@ -3548,7 +3658,8 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "sec": {
       "hintHead": "Tips för att skriva",
       "goBook": "Till listan med avsnitt",
-      "autosave": "Det du skriver sparas automatiskt."
+      "autosave": "Det du skriver sparas automatiskt.",
+      "examples": "Se exempel"
     },
     "secs": {
       "first": {
@@ -3841,7 +3952,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "give": {
       "title": "Lämna över",
-      "intro": "Välj mottagare och sedan vilka avsnitt som ska visas. Från början visas bara det minsta (första sidan, kommunikation och bemötande vid panik).",
+      "intro": "Välj mottagare och sedan vilka avsnitt som ska visas. Från början är avsnitt som passar mottagaren redan valda. Du kan ändra dem fritt.",
       "presets": {
         "school": "Skola",
         "daycare": "Omsorg",
@@ -3856,7 +3967,16 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "nothing": "Inget är ifyllt ännu. Börja gärna under ”Skriv”.",
       "nothingInSecs": "Inget är ifyllt i de valda avsnitten ännu. Välj fler avsnitt eller börja under ”Skriv”.",
       "printHint": "Vid utskrift öppnas webbläsarens utskriftsfönster.",
-      "pngDone": "Bilden har sparats ✓"
+      "pngDone": "Bilden har sparats ✓",
+      "pvTitle": "Så ser första sidan ut",
+      "pvSmall": "Texten är lång, så den visas med mindre bokstäver.",
+      "pvSave": "Spara som den är",
+      "pvRewrite": "Skriv om",
+      "rvTitle": "Läs igenom innan du visar",
+      "rvHint": "Det här är vad den andra personen ser. Kontrollera att inget du inte vill visa är med. Den korta texten ”Det här är en bruksanvisning” kommer alltid först.",
+      "rvGo": "Visa som den är",
+      "rvGoPrint": "Skriv ut som den är",
+      "rvBack": "Tillbaka och ändra"
     },
     "show": {
       "title": "Stödbok för {name}",
@@ -3874,7 +3994,8 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "p3": "t.ex. Risbollar utan sjögräs",
       "show": "Visa stort",
       "head": "Dagens 3 viktigaste saker",
-      "empty": "Inget skrivet ännu."
+      "empty": "Inget skrivet ännu.",
+      "written": "Skrivet: {date}"
     },
     "about": {
       "title": "Sidan ”Det här är en bruksanvisning”",
@@ -3977,7 +4098,9 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importConfirm": "지금 적은 내용이 파일의 내용으로 바뀌어요. 불러올까요?",
     "note": "적은 내용은 모두 이 기기 안에만 저장돼요. 어디에도 보내지지 않아요.",
     "privacy": "개인정보 처리방침",
-    "credit": "앱 개발: 돌봄과 지원 상담소 SOYOGI"
+    "credit": "앱 개발: 돌봄과 지원 상담소 SOYOGI",
+    "importSummary": "파일 안: 적은 칸 {n}개 (내보낸 날 {date})\n지금 이 기기: 적은 칸 {now}개",
+    "importNoDate": "날짜 모름"
   },
   "guide": {
     "title": "사용 방법",
@@ -3998,7 +4121,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "이 앱은 본인과 가족이 함께 쓰는, 본인의 “설명서”예요. 요구가 아니라, 설명서예요.\n학교·돌봄 기관·병원·가족 등 본인과 함께 지내는 사람에게, 알아 두면 도움이 되는 것을 상대에 맞춰 건넬 수 있어요.\n건넬지 말지, 무엇을 보여 줄지는 언제나 스스로 정할 수 있어요.",
       "아래의 \"쓰기\"를 누르면 11개 항목이 나와요.\n먼저 맨 위 \"첫 장 (가장 먼저 읽어 주었으면 하는 것)\"에 \"절대로 하지 않았으면 하는 것\"과 \"이럴 때는 연락해 주세요\"를 짧게 적어요. 이 부분은 상대에게 가장 먼저, 큰 글씨로 나와요.\n다 적지 않아도 괜찮아요.",
       "\"쓰기\"에서 항목을 고르면 질문이 나와요. 적으면 자동으로 저장되고, 나중에 언제든 고칠 수 있어요.\n대부분의 항목 위에는 \"쓰는 요령\"이 나와요. \"이전\" \"다음\"으로 옆 항목으로 옮기고, 다 적으면 \"항목 목록으로\"를 눌러요.\n모시모 카드에서 내보낸 파일이 있으면, \"쓰기\" 아래쪽의 \"모시모 카드 파일 불러오기\"로 빈칸을 채울 수 있어요.",
-      "아래의 \"건네기\"에서 상대(학교·돌봄 기관·병원·가족)를 고르고, \"보여 줄 항목 (탭해서 바꾸기)\"에서 항목을 골라요. 처음에는 첫 장·소통 방법·패닉일 때의 대응만 들어 있어요.\n\"보여 주기 (큰 글씨)\"로 화면을 그대로 보여 줄 수 있어요. \"첫 장을 이미지로 저장\"도 할 수 있어요.\n보여 주는 내용은 본인의 소중한 정보예요. 건넬 상대와 장소를 정한 다음에 보여 주세요.",
+      "아래의 \"건네기\"에서 상대(학교·돌봄 기관·병원·가족)를 고르고, \"보여 줄 항목 (탭해서 바꾸기)\"에서 항목을 골라요. 처음에는 상대에 맞는 항목이 미리 골라져 있어요. 보여 주기 전에 내용을 다시 읽어 볼 수 있어요.\n\"보여 주기 (큰 글씨)\"로 화면을 그대로 보여 줄 수 있어요. \"첫 장을 이미지로 저장\"도 할 수 있어요.\n보여 주는 내용은 본인의 소중한 정보예요. 건넬 상대와 장소를 정한 다음에 보여 주세요.",
       "아래의 \"오늘의 3가지\"는 함께 다니는 사람이나 오늘만 만나는 사람에게 보여 주는, 가장 짧은 카드예요.\n세 줄만 적고 \"크게 보여 주기\"를 눌러요. 돌아갈 때는 \"닫기\"를 눌러요.",
       "홈의 “설명서예요” 페이지 버튼을 누르면, 상대에게 그대로 보여 주는 글을 읽을 수 있어요.\n\"이 페이지를 크게 보여 주기\"로 보여 줄 수 있어요.\n\"건네기\"로 보여 줄 때도 언제나 맨 앞에 짧은 글이 붙어요.",
       "적은 내용은 모두 이 기기 안에만 저장되고, 어디에도 보내지 않아요. 가입도 필요 없어요.\n휴대폰을 바꿀 때는 \"설정\"의 \"내보내기\"로 파일을 남기고, 새 휴대폰에서 \"불러오기\"를 눌러요.\n보여 준 것이나 이미지로 저장한 것은 조심해서 다뤄 주세요.",
@@ -4016,7 +4139,9 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "progress": "적은 칸: {n}",
       "firstEmpty": "먼저 “첫 장”부터 시작해 보세요. 모두 적지 않아도 괜찮아요.",
       "firstHead": "첫 장 (가장 먼저 읽어 주었으면 하는 것)",
-      "privacyNote": "적은 내용은 이 기기 안에만 있어요. 건넬 때는 취급에 주의해 주세요."
+      "privacyNote": "적은 내용은 이 기기 안에만 있어요. 건넬 때는 취급에 주의해 주세요.",
+      "bkNudge": "휴대폰을 바꾸거나 고장 났을 때를 위해, “설정”의 “내보내기”로 파일에 저장해 둘 수 있어요.",
+      "bkOpen": "설정 열기"
     },
     "book": {
       "title": "쓰기",
@@ -4032,7 +4157,8 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "sec": {
       "hintHead": "쓰는 요령",
       "goBook": "항목 목록으로",
-      "autosave": "적으면 자동으로 저장돼요."
+      "autosave": "적으면 자동으로 저장돼요.",
+      "examples": "예시 보기"
     },
     "secs": {
       "first": {
@@ -4325,7 +4451,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "give": {
       "title": "건네기",
-      "intro": "상대를 고르고, 보여 줄 항목을 골라요. 처음에는 최소한(첫 장·소통 방법·패닉일 때의 대응)만 나와요.",
+      "intro": "상대를 고르고, 보여 줄 항목을 골라요. 처음에는 상대에 맞는 항목이 미리 골라져 있어요. 마음대로 바꿀 수 있어요.",
       "presets": {
         "school": "학교",
         "daycare": "돌봄 기관",
@@ -4340,7 +4466,16 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "nothing": "아직 적은 칸이 없어요. “쓰기”에서 시작해 보세요.",
       "nothingInSecs": "고른 항목에는 아직 적은 칸이 없어요. 보여 줄 항목을 늘리거나 “쓰기”에서 시작해 보세요.",
       "printHint": "인쇄를 누르면 브라우저의 인쇄 화면이 열려요.",
-      "pngDone": "이미지를 저장했어요 ✓"
+      "pngDone": "이미지를 저장했어요 ✓",
+      "pvTitle": "첫 장 미리 보기",
+      "pvSmall": "내용이 길어서 글씨를 작게 했어요.",
+      "pvSave": "이대로 저장",
+      "pvRewrite": "다시 쓰기",
+      "rvTitle": "보여 주기 전에 다시 읽기",
+      "rvHint": "상대에게 보이는 내용이에요. 보여 주고 싶지 않은 내용이 섞여 있지 않은지 확인해요. 맨 앞에는 늘 “설명서예요” 짧은 글이 붙어요.",
+      "rvGo": "이대로 보여 주기",
+      "rvGoPrint": "이대로 인쇄",
+      "rvBack": "돌아가서 고치기"
     },
     "show": {
       "title": "{name}의 서포트북",
@@ -4358,7 +4493,8 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "p3": "예: 주먹밥은 김 없이",
       "show": "크게 보여 주기",
       "head": "오늘 가장 중요한 3가지",
-      "empty": "아직 적지 않았어요."
+      "empty": "아직 적지 않았어요.",
+      "written": "적은 날: {date}"
     },
     "about": {
       "title": "“설명서예요” 페이지",
@@ -4461,7 +4597,9 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importConfirm": "现在的内容会被文件里的内容替换。要导入吗？",
     "note": "写下的内容全部只保存在这台设备里，不会发送到任何地方。",
     "privacy": "隐私政策",
-    "credit": "应用开发：护理与支援咨询处 SOYOGI"
+    "credit": "应用开发：护理与支援咨询处 SOYOGI",
+    "importSummary": "文件里：已填写 {n} 栏（导出日期 {date}）\n当前设备：已填写 {now} 栏",
+    "importNoDate": "日期不明"
   },
   "guide": {
     "title": "使用方法",
@@ -4482,7 +4620,7 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "这个应用是由本人和家人一起写的、关于本人的“说明书”。不是要求，而是一份说明书。\n可以按照对方的需要，把了解后会有帮助的事交给学校、托管机构、医院、家人等与本人相处的人。\n交不交、给对方看什么，始终由你们自己决定。",
       "点下方的“填写”，会列出11个部分。\n先在最上面的“第1页（最希望先读的内容）”里，简短地写下“请绝对不要做的事”和“出现这些情况时请联系”。这部分会最先用大字给对方看。\n不必全部填写。",
       "在“填写”里选一个部分，就会出现问题。写下的内容会自动保存，以后随时可以修改。\n大多数部分的上方都有“填写提示”。用“上一个”“下一个”可以切换到相邻的部分，写完后点“返回部分列表”。\n如果有从 MOSHIMO Card 导出的文件，可以用“填写”下方的“读取 MOSHIMO Card 的文件”填入空着的栏。",
-      "在下方的“交给”里选择对象（学校、托管机构、医院或家人），再在“出示的部分（点按切换）”里选择部分。一开始只有最少的内容：第1页、沟通方式和恐慌时的应对。\n点“展示（大字）”可以直接给对方看画面。也可以“把第1页存为图片”。\n输出的内容是本人的重要信息。请先决定交给谁、在什么场合使用，再输出。",
+      "在下方的“交给”里选择对象（学校、托管机构、医院或家人），再在“出示的部分（点按切换）”里选择部分。一开始会按对象预先选好合适的部分。出示之前，可以再读一遍内容。\n点“展示（大字）”可以直接给对方看画面。也可以“把第1页存为图片”。\n输出的内容是本人的重要信息。请先决定交给谁、在什么场合使用，再输出。",
       "下方的“今天的3件”是最短的卡片，给陪同的人或只在今天见面的人看。\n只写三行，然后点“放大展示”。返回时点“关闭”。",
       "点首页上的“这是说明书”页面按钮，可以读到直接给对方看的文字。\n点“放大展示这一页”就能给对方看。\n用“交给”出示时，最前面也总会附上一段简短的文字。",
       "写下的内容全部只保存在这台设备里，不会发送到任何地方，也不需要注册。\n换手机时，在“设置”里点“导出”保存文件，然后在新手机上点“导入”。\n给别人看过或存成图片的内容，请注意妥善处理。",
@@ -4500,7 +4638,9 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "progress": "已填写的栏：{n}",
       "firstEmpty": "请先从“第1页”开始。不必全部填写，也没关系。",
       "firstHead": "第1页（最希望先读的内容）",
-      "privacyNote": "写下的内容只在这台设备里。交给别人时，请注意妥善处理。"
+      "privacyNote": "写下的内容只在这台设备里。交给别人时，请注意妥善处理。",
+      "bkNudge": "为防换手机或手机损坏，可以在“设置”里用“导出”把内容保存成文件。",
+      "bkOpen": "打开设置"
     },
     "book": {
       "title": "填写",
@@ -4516,7 +4656,8 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "sec": {
       "hintHead": "填写提示",
       "goBook": "返回部分列表",
-      "autosave": "填写后会自动保存。"
+      "autosave": "填写后会自动保存。",
+      "examples": "查看示例"
     },
     "secs": {
       "first": {
@@ -4809,7 +4950,7 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "give": {
       "title": "交给",
-      "intro": "选择对象，再选择要出示的部分。一开始只出示最少的内容（第1页、沟通方式、恐慌时的应对）。",
+      "intro": "选择对象，再选择要出示的部分。一开始会按对象预先选好合适的部分，也可以自由更改。",
       "presets": {
         "school": "学校",
         "daycare": "托管机构",
@@ -4824,7 +4965,16 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "nothing": "还没有填写任何栏。请从“填写”开始。",
       "nothingInSecs": "选中的部分里还没有填写的栏。请增加要出示的部分，或从“填写”开始。",
       "printHint": "打印时会打开浏览器的打印画面。",
-      "pngDone": "图片已保存 ✓"
+      "pngDone": "图片已保存 ✓",
+      "pvTitle": "第1页预览",
+      "pvSmall": "内容较长，所以字号缩小了。",
+      "pvSave": "就这样保存",
+      "pvRewrite": "重新写",
+      "rvTitle": "出示前再读一遍",
+      "rvHint": "这是对方会看到的内容。请确认没有混入不想让对方看到的内容。最前面总会附上简短的“这是说明书”。",
+      "rvGo": "就这样出示",
+      "rvGoPrint": "就这样打印",
+      "rvBack": "返回修改"
     },
     "show": {
       "title": "{name} 的支援手册",
@@ -4842,7 +4992,8 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "p3": "例：饭团不要海苔",
       "show": "放大展示",
       "head": "今天最重要的3件事",
-      "empty": "还没有写。"
+      "empty": "还没有写。",
+      "written": "填写日期：{date}"
     },
     "about": {
       "title": "“这是说明书”页面",
@@ -4945,7 +5096,9 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importConfirm": "سيُستبدل المحتوى الحالي بمحتوى الملف. هل تريد الاستيراد؟",
     "note": "كل ما تكتبه يُحفظ على هذا الجهاز فقط، ولا يُرسل إلى أي مكان.",
     "privacy": "سياسة الخصوصية",
-    "credit": "تطوير التطبيق: SOYOGI، خدمة استشارات في الرعاية والدعم"
+    "credit": "تطوير التطبيق: SOYOGI، خدمة استشارات في الرعاية والدعم",
+    "importSummary": "في الملف: {n} من الخانات المكتوبة (تاريخ التصدير {date})\nالآن على هذا الجهاز: {now} من الخانات المكتوبة",
+    "importNoDate": "التاريخ غير معروف"
   },
   "guide": {
     "title": "طريقة الاستخدام",
@@ -4966,7 +5119,7 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "هذا التطبيق «دليل» عن الشخص، يكتبه الشخص نفسه مع عائلته. ليس قائمة مطالب، بل دليل تعريفي.\nيمكنك تقديمه لمن يقضون وقتًا مع الشخص، مثل المدرسة ومكان الرعاية والمستشفى والعائلة، مع ما يفيد كل جهة أن تعرفه.\nتقديمه من عدمه، وما يُعرض منه، قرارٌ يعود إليكم دائمًا.",
       "اضغط «كتابة» في الأسفل لتظهر 11 قسمًا.\nابدأ من الأعلى بـ«الصفحة الأولى (أهم ما نرجو قراءته أولًا)»، واكتب باختصار في «أمور نرجو ألّا تفعلوها أبدًا» و«تواصلوا معنا إذا حدث هذا». يظهر هذا الجزء أولًا وبخط كبير.\nلا يلزم ملء كل شيء.",
       "في «كتابة» اختر قسمًا لتظهر أسئلته. يُحفظ ما تكتبه تلقائيًا، ويمكنك تعديله في أي وقت.\nفي أعلى معظم الأقسام توجد «إرشادات للكتابة». انتقل إلى القسم المجاور بـ«السابق» و«التالي»، وعند الانتهاء اضغط «إلى قائمة الأقسام».\nإذا كان لديك ملف مُصدَّر من Moshimo Card، فاستخدم «استيراد ملف Moshimo Card» في أسفل «كتابة» لملء الخانات الفارغة.",
-      "في «تسليم» في الأسفل، اختر الجهة (المدرسة أو مكان الرعاية أو المستشفى أو العائلة)، ثم اختر الأقسام في «الأقسام المعروضة (اضغط للتبديل)». في البداية يُعرض الحد الأدنى فقط: الصفحة الأولى وطرق التواصل والتعامل عند الانفعال الشديد.\nاضغط «عرض (خط كبير)» لعرض الشاشة كما هي. ويمكنك أيضًا «حفظ الصفحة الأولى كصورة».\nما تُخرجه معلومات مهمة تخص الشخص. يُرجى تحديد الجهة التي ستتسلّمه والمكان قبل إخراجه.",
+      "في «تسليم» في الأسفل، اختر الجهة (المدرسة أو مكان الرعاية أو المستشفى أو العائلة)، ثم اختر الأقسام في «الأقسام المعروضة (اضغط للتبديل)». في البداية تكون الأقسام المناسبة لكل جهة مختارة مسبقًا. وقبل العرض يمكنك قراءة المحتوى مرة أخرى.\nاضغط «عرض (خط كبير)» لعرض الشاشة كما هي. ويمكنك أيضًا «حفظ الصفحة الأولى كصورة».\nما تُخرجه معلومات مهمة تخص الشخص. يُرجى تحديد الجهة التي ستتسلّمه والمكان قبل إخراجه.",
       "«أهم 3 لليوم» في الأسفل هي أقصر بطاقة، لمن يرافق الشخص أو يلقاه اليوم فقط.\nاكتب ثلاثة أسطر فقط ثم اضغط «عرض بحجم كبير». للرجوع اضغط «إغلاق».",
       "في «الرئيسية»، يفتح زر صفحة «هذا دليل» نصًا تعرضه على الشخص الآخر كما هو.\nاضغط «عرض هذه الصفحة بحجم كبير» لعرضه.\nوعند التسليم، تأتي نسخة قصيرة من هذا النص في البداية دائمًا.",
       "كل ما تكتبه يُحفظ على هذا الجهاز فقط، ولا يُرسل إلى أي مكان، ولا حاجة إلى تسجيل.\nعند تغيير الهاتف، اضغط «تصدير» في «الإعدادات» لحفظ ملف، ثم اضغط «استيراد» على الهاتف الجديد.\nتعامل بحذر مع ما عرضته أو حفظته كصورة.",
@@ -4984,7 +5137,9 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "progress": "الخانات المكتوبة: {n}",
       "firstEmpty": "ابدأ من «الصفحة الأولى». لا داعي لكتابة كل شيء.",
       "firstHead": "الصفحة الأولى (أهم ما نرجو قراءته أولًا)",
-      "privacyNote": "ما تكتبه موجود على هذا الجهاز فقط. عند التسليم، يُرجى الانتباه إلى طريقة التعامل معه."
+      "privacyNote": "ما تكتبه موجود على هذا الجهاز فقط. عند التسليم، يُرجى الانتباه إلى طريقة التعامل معه.",
+      "bkNudge": "تحسبًا لتغيير الهاتف أو تعطله، يمكنك حفظ كل شيء في ملف عبر «تصدير» من «الإعدادات».",
+      "bkOpen": "فتح الإعدادات"
     },
     "book": {
       "title": "كتابة",
@@ -5000,7 +5155,8 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "sec": {
       "hintHead": "إرشادات للكتابة",
       "goBook": "إلى قائمة الأقسام",
-      "autosave": "يُحفظ ما تكتبه تلقائيًا."
+      "autosave": "يُحفظ ما تكتبه تلقائيًا.",
+      "examples": "عرض أمثلة"
     },
     "secs": {
       "first": {
@@ -5293,7 +5449,7 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "give": {
       "title": "تسليم",
-      "intro": "اختر الجهة، ثم اختر الأقسام التي تُعرض. في البداية يُعرض الحد الأدنى فقط (الصفحة الأولى، طرق التواصل، التعامل عند الانفعال الشديد).",
+      "intro": "اختر الجهة، ثم اختر الأقسام التي تُعرض. في البداية تكون الأقسام المناسبة لكل جهة مختارة مسبقًا، ويمكنك تغييرها بحرية.",
       "presets": {
         "school": "المدرسة",
         "daycare": "مكان الرعاية",
@@ -5308,7 +5464,16 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "nothing": "لا توجد خانات مكتوبة بعد. ابدأ من «كتابة».",
       "nothingInSecs": "لا توجد خانات مكتوبة في الأقسام المختارة بعد. أضف أقسامًا أخرى، أو ابدأ من «كتابة».",
       "printHint": "عند الطباعة تُفتح شاشة الطباعة في المتصفح.",
-      "pngDone": "تم حفظ الصورة ✓"
+      "pngDone": "تم حفظ الصورة ✓",
+      "pvTitle": "معاينة الصفحة الأولى",
+      "pvSmall": "النص طويل، لذلك يظهر بحجم خط أصغر.",
+      "pvSave": "حفظ كما هي",
+      "pvRewrite": "إعادة الكتابة",
+      "rvTitle": "اقرأ قبل العرض",
+      "rvHint": "هذا ما سيراه الطرف الآخر. تأكد من عدم وجود ما لا تريد إظهاره. يأتي دائمًا في المقدمة النص القصير «هذا دليل».",
+      "rvGo": "عرض كما هو",
+      "rvGoPrint": "طباعة كما هي",
+      "rvBack": "رجوع وتعديل"
     },
     "show": {
       "title": "كتيّب الدعم الخاص بـ {name}",
@@ -5326,7 +5491,8 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "p3": "مثال: كرة الأرز بدون أعشاب بحرية",
       "show": "عرض بحجم كبير",
       "head": "أهم 3 أشياء اليوم",
-      "empty": "لم يُكتب شيء بعد."
+      "empty": "لم يُكتب شيء بعد.",
+      "written": "كُتب في: {date}"
     },
     "about": {
       "title": "صفحة «هذا دليل»",

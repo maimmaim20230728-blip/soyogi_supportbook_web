@@ -10,7 +10,7 @@
      変えたら README の「シェルの変更点」に書く */
 (function(){
 
-var VER = '0.4.10';               // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
+var VER = '0.5.0';               // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
 var APP_KEY = 'soyogi_supportbook';        // バックアップの識別(別アプリのファイルを読まない)
 var LS = 'sbook.';
 var LS_PREF = LS + 'pref.v1';
@@ -507,6 +507,8 @@ function openGuide(first){
 }
 
 /* ---- 機種変更(バックアップ): このアプリの保存キー全部を1ファイルに ---- */
+/* かきだせた印(0.5.0): ホームの「かきだしておけます」の知らせを止める。端末の中の設定(pref.extra)だけに残す */
+function markBackedUp(){ pref.extra.bkAt = Date.now(); savePref(); }
 function exportBackup(){
   var data = { app: APP_KEY, ver: 1, exported: Date.now(), pref: pref, data: {} };
   try{
@@ -520,7 +522,7 @@ function exportBackup(){
   /* Play版(2026-09-29): 一時フォルダに書いて共有の画面へ。選べたら「かきだしました」・閉じたら何も出さない・書けなければ「ほぞんできませんでした」 */
   if(isNativeApp()){
     nativeSaveFile(fname, JSON.stringify(data), true, T('set.bkExport'), function(r){
-      if(r === 'ok') toast(T('set.exported'));
+      if(r === 'ok'){ markBackedUp(); toast(T('set.exported')); }
       else if(r === 'fail') toast(T('common.saveFail'));
     });
     return;
@@ -531,6 +533,7 @@ function exportBackup(){
   a.download = fname;
   a.click();
   setTimeout(function(){ URL.revokeObjectURL(a.href); }, 3000);
+  markBackedUp();
   toast(T('set.exported'));
 }
 /* よみこむ = 丸ごと入れ替え。置き換える前に askConfirm で確かめる(Play版はアプリの中の はい/いいえ の窓・Web版は window.confirm)
@@ -561,6 +564,24 @@ function replaceData(data){
     return false;
   }
 }
+/* よみこむ前の確かめに添える、ファイルの中身の要約(0.5.0): 書いた欄の数・かきだした日・いまの書いた欄の数。
+   古いファイルで新しい記録を上書きする事故を防ぐ。本の本文(book.v1)の欄数だけ数える */
+function countBookFields(b){
+  try{
+    if(!b || typeof b !== 'object' || !b.sec || typeof b.sec !== 'object' || !window.SBOOK) return 0;
+    return window.SBOOK.countAll(b).n;
+  }catch(_){ return 0; }
+}
+function importSummary(d){
+  var n = countBookFields(d && d.data && d.data['book.v1']);
+  var now = countBookFields(loadJSON(LS + 'book.v1'));
+  var date = T('set.importNoDate');
+  if(d && typeof d.exported === 'number' && isFinite(d.exported)){
+    var x = new Date(d.exported);
+    if(!isNaN(x.getTime())) date = x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0');
+  }
+  return String(T('set.importSummary')).split('{n}').join(String(n)).split('{date}').join(date).split('{now}').join(String(now)) + '\n\n';
+}
 function importBackup(e){
   var f = e.target.files && e.target.files[0];
   if(!f) return;
@@ -572,7 +593,7 @@ function importBackup(e){
       if(!d || d.app !== APP_KEY) throw new Error('different app');
       if(!d.data || typeof d.data !== 'object' || Array.isArray(d.data)) throw new Error('no data');
     }catch(err){ toast(T('set.importFail')); return; }
-    askConfirm(T('set.importConfirm'), function(ok){
+    askConfirm(importSummary(d) + T('set.importConfirm'), function(ok){
       if(!ok) return;
       if(!replaceData(d.data)){ toast(T('set.importFail')); return; }
       pref = sanitizePref(d.pref);

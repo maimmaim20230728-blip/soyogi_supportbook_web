@@ -42,6 +42,16 @@
         var ov = api.el('div', 'ov sb-show');
         ov.setAttribute('data-sb', 'three');
         ov.appendChild(api.el('div', 'show-head', T('screen.three.head')));
+        /* 今日の日付(0.5.0)。書いた日が今日でないときは「書いた日」も添える(古いカードを今日の分と思わせない) */
+        var now = Date.now();
+        var dt = api.el('p', 'hint sb-date', T('common.today') + ': ' + S.fmtDate(api.lang, now));
+        dt.setAttribute('dir', 'auto');
+        ov.appendChild(dt);
+        if(t.updated && !S.sameDay(t.updated, now)){
+          var wr = api.el('p', 'hint sb-date sb-written', T('screen.three.written').split('{date}').join(S.fmtDate(api.lang, t.updated)));
+          wr.setAttribute('dir', 'auto');
+          ov.appendChild(wr);
+        }
         for(var k = 0; k < lines.length; k++){
           var line = api.el('div', 'three-big');
           line.appendChild(api.el('span', 'three-num', String(k + 1)));

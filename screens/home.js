@@ -38,6 +38,20 @@
       var a = bigBtn(api, '📄', T('screen.home.about')); api.Tap.bind(a, function(){ api.go('about'); }); c.appendChild(a);
 
       c.appendChild(api.el('p', 'hint', T('screen.home.privacyNote')));
+
+      /* かきだし(バックアップ)のやさしい知らせ(0.5.0): 書いた欄がたまって、一度もかきだしていないときだけ。閉じたら二度と出さない・責めない言い方・毎回は出さない */
+      if(cnt.n >= 6 && !api.getExtra('bkAt', 0) && !api.getExtra('bkNudgeOff', false)){
+        var nd = api.el('div', 'note sb-bknudge');
+        nd.setAttribute('data-nodirty', '');
+        nd.appendChild(api.el('p', 'sb-bknudge-t', T('screen.home.bkNudge')));
+        var row = api.el('div', 'btn-row');
+        var open = api.el('button', 'btn', T('screen.home.bkOpen')); open.id = 'sb-bknudge-open'; open.type = 'button';
+        var off = api.el('button', 'btn', T('common.close')); off.id = 'sb-bknudge-close'; off.type = 'button';
+        api.Tap.bind(open, function(){ api.go('set'); });
+        api.Tap.bind(off, function(){ api.setExtra('bkNudgeOff', true); if(nd.parentNode) nd.parentNode.removeChild(nd); });
+        row.appendChild(open); row.appendChild(off); nd.appendChild(row);
+        c.appendChild(nd);
+      }
     }
   });
 })();

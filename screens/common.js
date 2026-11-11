@@ -21,7 +21,14 @@
     { id:'free',    ico:'✏️', qs:['text'] }
   ];
   var PRESETS = ['school','daycare','medical','family'];
-  var DEFAULT_OUT = ['first','comm','panic'];   // 出し分けの初期値=最小限
+  var DEFAULT_OUT = ['first','comm','panic'];   // 出し分けの初期値=最小限(学校・家族)
+  /* 相手ごとの初期値(0.5.0): 預け先=毎日のこと・好きなこと / 病院=食べもの・感覚。どれも1枚目つき。選び直しは自由 */
+  var DEFAULT_OUT_BY = {
+    school:  ['first','comm','panic'],
+    daycare: ['first','likes','daily'],
+    medical: ['first','sense','food'],
+    family:  ['first','comm','panic']
+  };
   var KEY_BOOK = 'book.v1', KEY_OUT = 'out.v1', KEY_THREE = 'three.v1';
 
   function secById(id){ for(var i = 0; i < SECS.length; i++) if(SECS[i].id === id) return SECS[i]; return null; }
@@ -53,7 +60,7 @@
     var out = {};
     for(var i = 0; i < PRESETS.length; i++){
       var p = PRESETS[i];
-      var arr = (o && Array.isArray(o[p])) ? o[p] : DEFAULT_OUT;
+      var arr = (o && Array.isArray(o[p])) ? o[p] : (DEFAULT_OUT_BY[p] || DEFAULT_OUT);
       out[p] = arr.filter(function(id){ return !!secById(id); });
     }
     return out;
@@ -64,9 +71,26 @@
   function loadThree(api){
     var t = api.load(KEY_THREE, null);
     var lines = (t && Array.isArray(t.lines)) ? t.lines : [];
-    return { lines:[String(lines[0] || ''), String(lines[1] || ''), String(lines[2] || '')] };
+    return { lines:[String(lines[0] || ''), String(lines[1] || ''), String(lines[2] || '')], updated:(t && typeof t.updated === 'number') ? t.updated : 0 };
   }
-  function saveThree(api, t){ return api.save(KEY_THREE, { v:1, lines:t.lines, updated:Date.now() }); }
+  /* 書いた日(updated)は、3行の中身が変わったときだけ新しくする(見せるだけでは変えない・「書いた日」を正しく出すため) */
+  function saveThree(api, t){
+    var old = api.load(KEY_THREE, null), upd = Date.now();
+    if(old && Array.isArray(old.lines) && typeof old.updated === 'number' && old.lines.join('\n') === t.lines.join('\n')) upd = old.updated;
+    t.updated = upd;
+    return api.save(KEY_THREE, { v:1, lines:t.lines, updated:upd });
+  }
+
+  /* ---- 日付(画面の言葉で・年月日と曜日)。同じ日かどうかは端末の日付で ---- */
+  function fmtDate(lang, ts){
+    var d = new Date(ts);
+    try{ return d.toLocaleDateString(lang, { year:'numeric', month:'long', day:'numeric', weekday:'short' }); }
+    catch(_){ return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  }
+  function sameDay(a, b){
+    var x = new Date(a), y = new Date(b);
+    return x.getFullYear() === y.getFullYear() && x.getMonth() === y.getMonth() && x.getDate() === y.getDate();
+  }
 
   /* ---- もしもカードのバックアップJSON({app:'moshimo_card', card:{fields:{...}}})を空いている欄に前埋め ----
      戻り値: 入れた数。-1=もしもカードのファイルでない */
@@ -184,15 +208,16 @@
   }
   /* done(r)(2026-09-29): r = 'ok'(ほぞんした・送り先を選べた)/ 'quiet'(共有の画面を閉じた)/ 'fail'。知らせは呼ぶ側が出す。
      もどり値は今までどおり(false = 画像にできなかった) */
-  function drawFirstPng(api, done){
-    function fin(r){ if(typeof done === 'function') done(r); return r !== 'fail'; }
+  /* renderFirstPng(api): 1枚目の画像を作るだけ(保存しない)。戻り値 { url, fname, small } / 作れなければ null。
+     small=true は、とても長くて本文の字を 40px より小さくしたとき(プレビューで知らせる) */
+  function renderFirstPng(api){
     var T = api.T, b = loadBook(api);
     var W = 1080, H = 1528, M = 70;
     var MAXH = 15000;               // canvas の高さの上限(iPhone の canvas は約1677万画素まで。1080×15000 はその内側)
     var cv = document.createElement('canvas');
     cv.width = W; cv.height = H;
     var ctx = cv.getContext('2d');
-    if(!ctx) return fin('fail');
+    if(!ctx) return null;
     var font = '"Hiragino Sans","Yu Gothic UI","Noto Sans JP",system-ui,sans-serif';
     var uiDir = api.rtl ? 'rtl' : 'ltr';
     var name = getVal(b, 'profile', 'name').trim();
@@ -263,10 +288,16 @@
     for(var f = 0; f < foot.length; f++) line(foot[f], M, fy + f * 36, uiDir);
     for(var g = 0; g < by.length; g++) line(by[g], M, byY + g * 36, uiDir);
     var url;
-    try{ url = cv.toDataURL('image/png'); }catch(_){ return fin('fail'); }
-    if(!url || url === 'data:,') return fin('fail');       // 'data:,' = 大きすぎて画像にできなかった
+    try{ url = cv.toDataURL('image/png'); }catch(_){ return null; }
+    if(!url || url === 'data:,') return null;       // 'data:,' = 大きすぎて画像にできなかった
     var d = new Date();
     var fname = 'supportbook-page1-' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + '.png';
+    return { url:url, fname:fname, small:bodyPx < 40 };
+  }
+  /* saveFirstPng(api, r, done): renderFirstPng の結果を保存する。done と戻り値は drawFirstPng と同じ */
+  function saveFirstPng(api, r, done){
+    function fin(x){ if(typeof done === 'function') done(x); return x !== 'fail'; }
+    var T = api.T, url = r.url, fname = r.fname;
     /* Play版(2026-09-29): <a download> は WebView では何も保存されない。data URL の base64 を一時フォルダに書いて共有の画面を出し、保存先は利用者が選ぶ */
     if(api.native){
       if(typeof api.saveFile !== 'function') return fin('fail');
@@ -281,16 +312,22 @@
     setTimeout(function(){ if(a.parentNode) a.parentNode.removeChild(a); }, 1000);
     return fin('ok');
   }
+  function drawFirstPng(api, done){
+    var r = renderFirstPng(api);
+    if(!r){ if(typeof done === 'function') done('fail'); return false; }
+    return saveFirstPng(api, r, done);
+  }
 
   window.SBOOK = {
-    SECS: SECS, PRESETS: PRESETS, DEFAULT_OUT: DEFAULT_OUT,
+    SECS: SECS, PRESETS: PRESETS, DEFAULT_OUT: DEFAULT_OUT, DEFAULT_OUT_BY: DEFAULT_OUT_BY,
     secById: secById,
     loadBook: loadBook, saveBook: saveBook, getVal: getVal, setVal: setVal, countSec: countSec, countAll: countAll,
     loadOut: loadOut, saveOut: saveOut,
     loadThree: loadThree, saveThree: saveThree,
     importMoshimo: importMoshimo,
     buildShow: buildShow, openOv: openOv, closeOv: closeOv,
-    drawFirstPng: drawFirstPng,
+    drawFirstPng: drawFirstPng, renderFirstPng: renderFirstPng, saveFirstPng: saveFirstPng,
+    fmtDate: fmtDate, sameDay: sameDay,
     cur: 'first'            // いま開いている節(book → sec の受け渡し)
   };
 })();
